@@ -1,29 +1,25 @@
-﻿using LucAdm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Data.Entity;
 
-namespace TrendsTracker.Infrastructure
+namespace LucAdm
 {
     public class UnitOfWork
     {
-        private PersistenceContext context;
+        private DbContext context;
         private bool canceled = false;
 
         public bool Canceled { get { return canceled; } }
 
-        public UnitOfWork(PersistenceContext context)
+        public UnitOfWork(DbContext context)
         {
             this.context = context;
         }
 
-        public void Do(Action<UnitOfWork> work)
+        public void Do(Action work)
         {
             try
             {
-                work(this);
+                work();
                 if (!canceled)
                 {
                     context.SaveChanges();

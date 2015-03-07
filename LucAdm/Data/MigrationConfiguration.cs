@@ -9,7 +9,8 @@ public sealed class MigrationConfiguration : DbMigrationsConfiguration<Persisten
     public MigrationConfiguration()
     {
         AutomaticMigrationsEnabled = false;
-        ContextKey = "TrendsTracker.Persistence.PersistenceContext";
+        MigrationsDirectory = @"Data\Migrations";
+        ContextKey = "LucAdm.PersistenceContext";
     }
 
     protected override void Seed(PersistenceContext context)
