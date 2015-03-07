@@ -13,6 +13,7 @@ public sealed class MigrationConfiguration : DbMigrationsConfiguration<Persisten
         ContextKey = "LucAdm.PersistenceContext";
     }
 
+
     protected override void Seed(PersistenceContext context)
     {
         //  This method will be called after migrating to the latest version.

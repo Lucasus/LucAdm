@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BBD3DD
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucAdm.DataGen", "LucAdm.DataGen\LucAdm.DataGen.csproj", "{00B506AD-E85B-432E-880B-E48E83B3839B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{3BEE0E20-62E9-4F6D-BE5F-48627C56921A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BEE0E20-62E9-4F6D-BE5F-48627C56921A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BEE0E20-62E9-4F6D-BE5F-48627C56921A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00B506AD-E85B-432E-880B-E48E83B3839B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00B506AD-E85B-432E-880B-E48E83B3839B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00B506AD-E85B-432E-880B-E48E83B3839B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00B506AD-E85B-432E-880B-E48E83B3839B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

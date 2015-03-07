@@ -1,11 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
+using LucAdm.DataGen;
 
 namespace LucAdm.Tests
 {
     [TestClass]
-    public class UserRepositoryTests
+    public class UserRepositoryTests : DbTestBase
     {
         // https://github.com/scott-xu/EntityFramework.Testing
         [TestMethod]
@@ -23,7 +24,7 @@ namespace LucAdm.Tests
             };
 
             // act
-            new UnitOfWork(context).Do(() => { userRepository.Add(newUser); });
+            new UnitOfWork(context).Do((work) => { userRepository.Add(newUser); });
 
             // assert
             userRepository.GetById(newUser.Id).ShouldBeEquivalentTo(newUser);

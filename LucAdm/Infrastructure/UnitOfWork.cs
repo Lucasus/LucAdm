@@ -15,11 +15,11 @@ namespace LucAdm
             this.context = context;
         }
 
-        public void Do(Action work)
+        public void Do(Action<UnitOfWork> work)
         {
             try
             {
-                work();
+                work(this);
                 if (!canceled)
                 {
                     context.SaveChanges();

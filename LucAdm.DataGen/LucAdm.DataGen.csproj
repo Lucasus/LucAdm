@@ -4,17 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9B065823-CCDF-406A-8F56-91E06AECF217}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{00B506AD-E85B-432E-880B-E48E83B3839B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LucAdm</RootNamespace>
-    <AssemblyName>LucAdm</AssemblyName>
+    <RootNamespace>LucAdm.DataGen</RootNamespace>
+    <AssemblyName>LucAdm.DataGen</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -48,39 +50,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\FormattedDbEntityValidationException.cs" />
-    <Compile Include="Data\MigrationConfiguration.cs" />
-    <Compile Include="Data\Migrations\201503071318296_InitialCreate.cs" />
-    <Compile Include="Data\Migrations\201503071318296_InitialCreate.Designer.cs">
-      <DependentUpon>201503071318296_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Migrations\201503071338045_UserCustomMap.cs" />
-    <Compile Include="Data\Migrations\201503071338045_UserCustomMap.Designer.cs">
-      <DependentUpon>201503071338045_UserCustomMap.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Data\PersistenceContext.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Infrastructure\Entity.cs" />
-    <Compile Include="Infrastructure\Repository.cs" />
-    <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Data\Mappings\UserMap.cs" />
+    <Compile Include="Data\Users.cs" />
+    <Compile Include="Generators\DataGenerator.cs" />
+    <Compile Include="Infrastructure\Data.cs" />
+    <Compile Include="Infrastructure\DbDataDeleter.cs" />
+    <Compile Include="Infrastructure\EnvironmentAttribute.cs" />
+    <Compile Include="Infrastructure\EnvironmentEnum.cs" />
+    <Compile Include="Infrastructure\GeneratorBase.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Migrations\Readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Migrations\201503071318296_InitialCreate.resx">
-      <DependentUpon>201503071318296_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\201503071338045_UserCustomMap.resx">
-      <DependentUpon>201503071338045_UserCustomMap.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\LucAdm\LucAdm.csproj">
+      <Project>{9b065823-ccdf-406a-8f56-91e06aecf217}</Project>
+      <Name>LucAdm</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
