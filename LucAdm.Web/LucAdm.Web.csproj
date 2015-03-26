@@ -82,9 +82,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bootstrap.css" />
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
     <Content Include="Index.html" />
+    <Content Include="lib\angular.js" />
+    <Content Include="lib\ui-bootstrap.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +111,6 @@
   <ItemGroup>
     <Folder Include="app\" />
     <Folder Include="Controllers\" />
-    <Folder Include="lib\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +151,15 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>cd $(ProjectDir)
+if '$(Configuration)'=='Release' (
+    gulp release
+)
+if '$(Configuration)'=='Debug' (
+    gulp debug
+)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
