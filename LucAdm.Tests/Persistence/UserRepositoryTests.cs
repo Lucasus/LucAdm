@@ -13,8 +13,7 @@ namespace LucAdm.Tests
         public void User_Should_Be_Saved_Correctly()
         {
             // arrange
-            var context = new PersistenceContext();
-            var userRepository = new UserRepository(context);
+            var userRepository = new UserRepository(dbContext);
 
             var newUser = new User()
             {
@@ -24,7 +23,10 @@ namespace LucAdm.Tests
             };
 
             // act
-            new UnitOfWork(context).Do((work) => { userRepository.Add(newUser); });
+            new UnitOfWork(dbContext).Do((work) => 
+            { 
+                userRepository.Add(newUser); 
+            });
 
             // assert
             userRepository.GetById(newUser.Id).ShouldBeEquivalentTo(newUser);

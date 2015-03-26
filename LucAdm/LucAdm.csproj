@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\FormattedDbEntityValidationException.cs" />
+    <Compile Include="Infrastructure\FormattedDbEntityValidationException.cs" />
     <Compile Include="Data\MigrationConfiguration.cs" />
     <Compile Include="Data\Migrations\201503071318296_InitialCreate.cs" />
     <Compile Include="Data\Migrations\201503071318296_InitialCreate.Designer.cs">

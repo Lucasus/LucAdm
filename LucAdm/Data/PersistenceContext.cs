@@ -4,7 +4,6 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Reflection;
-using LucAdm.Data;
 
 namespace LucAdm
 {
