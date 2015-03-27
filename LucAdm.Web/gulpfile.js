@@ -1,5 +1,4 @@
-﻿/// <vs AfterBuild='scripts' />
-
+/// <vs />
 // include plug-ins
 var gulp = require('gulp');
 var concat = require('gulp-concat');
@@ -8,6 +7,8 @@ var del = require('del');
 var inject = require('gulp-inject');
 var series = require('stream-series')
 var debug = require('gulp-debug');
+var less = require('gulp-less');
+var path = require('path');
 
 var config = {
     lib: [
@@ -17,33 +18,42 @@ var config = {
         '!app/**/*.min.js',
         '!app/all.js'],
     css: ['bower_components/bootstrap/dist/css/bootstrap.css',
+          'bower_components/bootstrap/dist/css/bootstrap.css.map',
         '!css/all.css'],
+    fonts: ['bower_components/bootstrap/dist/fonts/*.*'],
+    less: ['bower_components/bootstrap/less/bootstrap.less']
 }
  
+// Common tasks:
 gulp.task('clean', function(){
   del.sync(['app/all.js'])
 });
  
+gulp.task('fonts', function () {
+    return gulp.src(config.fonts)
+    .pipe(gulp.dest('./fonts'));
+});
 
+gulp.task('less-debug', function () {
+    return gulp.src(config.less)
+      .pipe(less({
+          paths: [path.join(__dirname, 'less', 'includes')]
+      }))
+      .pipe(gulp.dest('./css'));
+});
 // Debug tasks:
 gulp.task('scripts-debug', ['clean'], function () {
     return gulp.src(config.lib)
       .pipe(gulp.dest('./lib'));
 });
 
-gulp.task('css-debug', function () {
-    return gulp.src(config.css)
-    .pipe(gulp.dest('./css'));
-});
-
-gulp.task('index-debug', ['css-debug', 'scripts-debug'], function () {
+gulp.task('index-debug', ['less-debug', 'scripts-debug'], function () {
     return gulp.src('index.html')
         .pipe(inject(series(gulp.src(['css/*.css', '!css/all.css']), gulp.src('lib/*.js'), gulp.src(config.src)).pipe(debug())))
         .pipe(gulp.dest('.'));
 });
 
 // Release tasks
-
 gulp.task('scripts-release', ['clean'], function () {
     return gulp.src(config.lib.concat(config.src))
       .pipe(debug())
@@ -67,6 +77,6 @@ gulp.task('index-release', ['css-release', 'scripts-release'], function () {
 });
 
 //Set a default tasks
-gulp.task('debug', ['scripts-debug', 'css-debug', 'index-debug'], function () { });
-gulp.task('release', ['scripts-release', 'css-release', 'index-release'], function () { });
+gulp.task('debug', ['fonts', 'scripts-debug', 'less-debug', 'index-debug'], function () { });
+gulp.task('release', ['fonts', 'scripts-release', 'css-release', 'index-release'], function () { });
 
