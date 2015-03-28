@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<!DOCTYPE html>
+<html ng-app="lucAdm" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,12 +10,46 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     <!-- endinject -->
 
+</head>
+<body ng-controller="UserCtrl">
+    <header role="banner">
+      
+    </header>
+    <main role="main">
+        <h1>LucAdm</h1>
+        <p>Site administration module scaffolding.</p>    
+        <div class="panel">
+            <div class="input-group">
+                <input class="form-control" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default">Add</button>
+                </span>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users.list">
+                    <td>{{user.name}}</td>
+                    <td>{{user.active}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <footer role="contentinfo">
+        <p><small>Copyright 2015 &copy; Łukasz Wiatrak</small></p>
+    </footer>
     <!-- inject:js -->
     <script src="/lib/angular.js"></script>
-    <script src="/lib/ui-bootstrap.js"></script>
+    <script src="/lib/ui-bootstrap-tpls.js"></script>
+    <script src="/app/app.js"></script>
+    <script src="/app/controllers/userCtrl.js"></script>
     <!-- endinject -->
-</head>
-<body>
-    Test page
+   
 </body>
-</html> 
+</html>

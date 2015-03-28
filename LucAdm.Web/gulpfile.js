@@ -13,9 +13,9 @@ var path = require('path');
 var config = {
     lib: [
         'bower_components/angular/angular.js',
-        'bower_components/angular-bootstrap/ui-bootstrap.js'],
-    src: ['app/**/*.js',
-        '!app/**/*.min.js',
+        'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'],
+    src: ['app/app.js',
+        'app/**/*.js',
         '!app/all.js'],
     css: ['bower_components/bootstrap/dist/css/bootstrap.css',
           'bower_components/bootstrap/dist/css/bootstrap.css.map',
@@ -27,6 +27,7 @@ var config = {
 // Common tasks:
 gulp.task('clean', function(){
   del.sync(['app/all.js'])
+  del.sync(['lib/*.*'])
 });
  
 gulp.task('fonts', function () {
