@@ -89,6 +89,8 @@
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
     <Content Include="Index.html" />
+    <Content Include="lib\angular.js" />
+    <Content Include="lib\ui-bootstrap-tpls.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="less\" />
-    <Folder Include="lib\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
