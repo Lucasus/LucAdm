@@ -116,7 +116,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="less\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
