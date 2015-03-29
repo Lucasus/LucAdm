@@ -188,6 +188,7 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
+/LucAdm.Web/lib/
 /LucAdm.Web/css/all.css
-/LucAdm.Web/lib/angular.js
-/LucAdm.Web/lib/ui-bootstrap-tpls.js
+/LucAdm.Web/css/bootstrap.css
+/LucAdm.Web/bower_components
