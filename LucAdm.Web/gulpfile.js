@@ -9,6 +9,7 @@ var series = require('stream-series')
 var debug = require('gulp-debug');
 var less = require('gulp-less');
 var path = require('path');
+var newer = require('gulp-newer');
 
 var config = {
     lib: [
@@ -27,16 +28,18 @@ var config = {
 // Common tasks:
 gulp.task('clean', function(){
   del.sync(['app/all.js'])
-  del.sync(['lib/*.*'])
+//  del.sync(['lib/*.*'])
 });
  
 gulp.task('fonts', function () {
     return gulp.src(config.fonts)
+    .pipe(newer('./fonts'))
     .pipe(gulp.dest('./fonts'));
 });
 
 gulp.task('less-debug', function () {
     return gulp.src(config.less)
+      .pipe(newer('./css'))
       .pipe(less({
           paths: [path.join(__dirname, 'less', 'includes')]
       }))
@@ -45,6 +48,7 @@ gulp.task('less-debug', function () {
 // Debug tasks:
 gulp.task('scripts-debug', ['clean'], function () {
     return gulp.src(config.lib)
+      .pipe(newer('./lib'))
       .pipe(gulp.dest('./lib'));
 });
 
