@@ -2,6 +2,6 @@
 
 add-migration [MigrationName] -projectname LucAdm
 
-To update database:
+To update dev database:
 
 update-database -ProjectName LucAdm -StartupProject LucAdm.Web

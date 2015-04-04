@@ -1,12 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LucAdm.Infrastructure;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentAssertions;
+using LucAdm.Infrastructure;
+using Xunit;
 
 namespace LucAdm.Tests
 {
-    [TestClass]
     public class ValidatedTests
     {
         public class ExampleViewModel
@@ -21,16 +19,11 @@ namespace LucAdm.Tests
             public Validated<int?> NullableIntProperty { get; set; }
         }
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext context)
-        {
-            Mapper.CreateMap<ExampleViewModel, ExampleRequest>();
-        }
-
-        [TestMethod]
+        [Fact]
         public void Should_Map_Valid_String_Int()
         {
             // arrange
+            Mapper.CreateMap<ExampleViewModel, ExampleRequest>();
             var source = new ExampleViewModel() { IntProperty = "5" };
 
             // act
@@ -41,10 +34,11 @@ namespace LucAdm.Tests
             destination.IntProperty.Value.Should().Be(5);
         }
 
-        [TestMethod]
+        [Fact]
         public void Should_Map_Invalid_String_Int_As_Invalid_Value()
         {
             // arrange
+            Mapper.CreateMap<ExampleViewModel, ExampleRequest>();
             var source = new ExampleViewModel() { IntProperty = "fsdfd" };
 
             // act
@@ -55,10 +49,11 @@ namespace LucAdm.Tests
             destination.IntProperty.Value.Should().Be(default(int));
         }
 
-        [TestMethod]
+        [Fact]
         public void Should_Map_Invalid_Null_String_Int_As_Invalid_NonNullable_Value()
         {
             // arrange
+            Mapper.CreateMap<ExampleViewModel, ExampleRequest>();
             var source = new ExampleViewModel() { IntProperty = null };
 
             // act
@@ -69,10 +64,11 @@ namespace LucAdm.Tests
             destination.IntProperty.Value.Should().Be(default(int));
         }
 
-        [TestMethod]
+        [Fact]
         public void Should_Map_Null_String_As_Valid_Nullable_Value()
         {
             // arrange
+            Mapper.CreateMap<ExampleViewModel, ExampleRequest>();
             var source = new ExampleViewModel() { NullableIntProperty = null };
 
             // act

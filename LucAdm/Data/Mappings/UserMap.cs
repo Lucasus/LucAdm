@@ -15,7 +15,7 @@ namespace LucAdm
             Property(t => t.Email).IsRequired();
 
             //table  
-            ToTable("Users");  
+            ToTable("User");  
         }
     }
 }

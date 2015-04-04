@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,15 +10,16 @@ namespace LucAdm.Web
 {
     public class UserController : ApiController
     {
+        private UserRepository userRepository;
+
+        public UserController(UserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+        }
+
         public IList<UserVM> Get()
         {
-            return new List<UserVM>()
-            {
-                new UserVM() { UserName = "Gandalf", Active = true },
-                new UserVM() { UserName = "Gimli", Active = false },
-                new UserVM() { UserName = "Legolas", Active = true },
-                new UserVM() { UserName = "Frodo", Active = false },
-            };
+            return userRepository.GetAll().Select(x => x.ToViewModel<UserVM>()).ToList();
         }
     }
 }

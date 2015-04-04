@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Web;
+﻿using System.Net.Http.Headers;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace LucAdm.Web
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class RoutingConfig
     {
-        protected void Application_Start()
-        {
-            GlobalConfiguration.Configure(WebApiApplication.Register);
-        }
-
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
@@ -28,8 +18,9 @@ namespace LucAdm.Web
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
+            // Other Configuration
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
         }
     }
 }

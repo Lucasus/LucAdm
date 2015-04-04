@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LucAdm</RootNamespace>
     <AssemblyName>LucAdm</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,6 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Migrations\201504041006586_UserNewPropertyActive.cs" />
+    <Compile Include="Data\Migrations\201504041006586_UserNewPropertyActive.Designer.cs">
+      <DependentUpon>201504041006586_UserNewPropertyActive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\Persistence\FormattedDbEntityValidationException.cs" />
     <Compile Include="Data\MigrationConfiguration.cs" />
     <Compile Include="Data\Migrations\201503071318296_InitialCreate.cs" />
@@ -83,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Data\Migrations\201503071338045_UserCustomMap.resx">
       <DependentUpon>201503071338045_UserCustomMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201504041006586_UserNewPropertyActive.resx">
+      <DependentUpon>201504041006586_UserNewPropertyActive.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

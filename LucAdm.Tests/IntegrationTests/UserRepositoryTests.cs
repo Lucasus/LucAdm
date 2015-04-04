@@ -1,19 +1,19 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 using LucAdm.DataGen;
+using Xunit;
 
 namespace LucAdm.Tests
 {
-    [TestClass]
-    public class UserRepositoryTests : DbTestBase
+    public class UserRepositoryTests : IClassFixture<UsesDBFixture>
     {
         // https://github.com/scott-xu/EntityFramework.Testing
-        [TestMethod]
+        [Fact]
         public void User_Should_Be_Saved_Correctly()
         {
             // arrange
-            var userRepository = new UserRepository(dbContext);
+            var context = new PersistenceContext().ResetDbState();
+            var userRepository = new UserRepository(context);
 
             var newUser = new User()
             {
@@ -23,7 +23,7 @@ namespace LucAdm.Tests
             };
 
             // act
-            new UnitOfWork(dbContext).Do((work) => 
+            new UnitOfWork(context).Do((work) => 
             { 
                 userRepository.Add(newUser); 
             });

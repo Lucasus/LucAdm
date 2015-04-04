@@ -15,7 +15,7 @@ namespace LucAdm.DataGen
             new DbDataDeleter(context).DeleteAllData();
             new DbMigrator(new MigrationConfiguration()).Update();
             new DataGenerator(context, EnvironmentEnum.Dev).Generate();
-
+            Console.Out.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
     }
