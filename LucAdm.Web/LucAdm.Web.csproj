@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\controllers\navCtrl.js" />
     <Content Include="app\controllers\userCtrl.js" />
     <Content Include="css\bootstrap.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

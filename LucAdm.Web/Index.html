@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="lucAdm" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
@@ -11,12 +11,35 @@
     <!-- endinject -->
 
 </head>
-<body ng-controller="UserCtrl">
-    <header role="banner"></header>
-    <main role="main" class="container">
-        <div class="col-md-9">
-            <h1>LucAdm</h1>
-            <p>Site administration module scaffolding.</p>
+<body>
+    <header role="banner">
+        <!-- // CSS transitions don't work with height: auto, so we have to manually change the height to a specific value
+        element.css({ height: element[0].offsetHeight + 'px' });-->
+        <nav role="navigation" class="navbar navbar-default" ng-controller="NavCtrl">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Luc Administration</a>
+                </div>
+                <div class="navbar-collapse collapse" collapse="navbarCollapsed">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="#">Users</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>    
+    </header>
+    <main role="main" ng-controller="UserCtrl" class="container">
+        <div class="col-lg-offset-1 col-lg-10">
+            <h1>Luc Administration</h1>
+            <p>Administration module scaffolding.</p>
             <div class="panel">
                 <div class="input-group">
                     <input class="form-control" ng-model="newUserName" />
@@ -45,13 +68,14 @@
             </table>
         </div>
     </main>
-    <footer role="contentinfo" class="container">
-        <p class="col-md-9"><small>Copyright 2015 &copy; Łukasz Wiatrak</small></p>
+    <footer role="contentinfo">
+        <p><small>Copyright 2015 &copy; Łukasz Wiatrak</small></p>
     </footer>
     <!-- inject:js -->
     <script src="/lib/angular.js"></script>
     <script src="/lib/ui-bootstrap-tpls.js"></script>
     <script src="/app/app.js"></script>
+    <script src="/app/controllers/navCtrl.js"></script>
     <script src="/app/controllers/userCtrl.js"></script>
     <!-- endinject -->
 
