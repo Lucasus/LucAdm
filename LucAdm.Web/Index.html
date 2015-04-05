@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="lucAdm" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
@@ -13,8 +13,6 @@
 </head>
 <body>
     <header role="banner">
-        <!-- // CSS transitions don't work with height: auto, so we have to manually change the height to a specific value
-        element.css({ height: element[0].offsetHeight + 'px' });-->
         <nav role="navigation" class="navbar navbar-default" ng-controller="NavCtrl">
             <div class="container">
                 <div class="navbar-header">
@@ -34,12 +32,10 @@
                     </ul>
                 </div>
             </div>
-        </nav>    
+        </nav>
     </header>
-    <main role="main" ng-controller="UserCtrl" class="container">
-        <div class="col-lg-offset-1 col-lg-10">
-            <h1>Luc Administration</h1>
-            <p>Administration module scaffolding.</p>
+    <main role="main" ng-controller="UserCtrl" class="fluid-container">
+        <div class="row col-lg-offset-6 col-lg-3">
             <div class="panel">
                 <div class="input-group">
                     <input class="form-control" ng-model="newUserName" />
@@ -48,28 +44,34 @@
                     </span>
                 </div>
             </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>User Name</th>
-                        <th>Email</th>
-                        <th>Active</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="user in users.list">
-                        <td>{{user.userName}}</td>
-                        <td>{{user.email}}</td>
-                        <td><input type="checkbox" ng-model="user.active" /></td>
-                        <td>{{user.active}}</td>
-                    </tr>
-                </tbody>
-            </table>
+        </div>
+        <div class="row">
+            <div class="col-lg-offset-3 col-lg-6">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Active</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in users.list">
+                            <td>{{user.userName}}</td>
+                            <td>{{user.email}}</td>
+                            <td><input type="checkbox" ng-model="user.active" /></td>
+                            <td>{{user.active}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
-    <footer role="contentinfo">
-        <p><small>Copyright 2015 &copy; Łukasz Wiatrak</small></p>
+    <footer role="contentinfo" class="fluid-container">
+        <div class="row col-lg-offset-3 col-lg-6">
+            <p><small>Copyright 2015 &copy; Łukasz Wiatrak</small></p>
+        </div>
     </footer>
     <!-- inject:js -->
     <script src="/lib/angular.js"></script>
