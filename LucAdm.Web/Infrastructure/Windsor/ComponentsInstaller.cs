@@ -15,6 +15,10 @@ namespace LucAdm.Web
             container.Register(Classes.FromThisAssembly()
                                 .BasedOn<ApiController>()
                                 .LifestyleTransient());
+
+            container.Register(Classes.FromAssemblyContaining<UserService>()
+                .Where(x => x.Name.Contains("Service"))
+                .LifestyleTransient());
         }
     }
 }

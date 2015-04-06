@@ -20,14 +20,6 @@ namespace LucAdm
 			get { return Errors.Count == 0 && GlobalErrors.Count == 0; }
 		}
 
-		public int ErrorCount
-		{
-			get 
-            {
-                return GlobalErrors.Count + (from key in Errors.Keys select Errors[key].Count).Sum();
-            }
-		}
-
 		public void AddError(string key, string message)
 		{
 			if (key.Equals(String.Empty))

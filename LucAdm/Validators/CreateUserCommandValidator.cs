@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LucAdm
 {
@@ -12,6 +7,7 @@ namespace LucAdm
         public CreateUserCommandValidator()
         {
             RuleFor(x => x.UserName).NotNull().NotEmpty().WithMessage("User name is required");
+            RuleFor(x => x.Email).NotNull().NotEmpty().WithMessage("Email is required");
         }
     }
 }
