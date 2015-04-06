@@ -24,12 +24,12 @@ namespace LucAdm
             return context.Set<T>().Find(id);
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             context.Set<T>().Add(entity);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             context.Entry(entity).State = EntityState.Modified;
         }

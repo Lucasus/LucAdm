@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace LucAdm
 {
-    public class CreateUserData
+    public interface IValidatable { }
+
+    public class CreateUserCommand : IValidatable
     {
         public string UserName { get; set; }
         public string Email { get; set; }

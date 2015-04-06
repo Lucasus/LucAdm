@@ -9,6 +9,7 @@ namespace LucAdm.Tests
     {
         // https://github.com/scott-xu/EntityFramework.Testing
         [Fact]
+        [Trait("Category", "Integration")]
         public void User_Should_Be_Saved_Correctly()
         {
             // arrange

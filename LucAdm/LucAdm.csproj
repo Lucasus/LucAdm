@@ -39,6 +39,10 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=5.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -69,11 +73,17 @@
     <Compile Include="Infrastructure\Persistence\Repository.cs" />
     <Compile Include="Infrastructure\Persistence\UnitOfWork.cs" />
     <Compile Include="Data\Mappings\UserMap.cs" />
+    <Compile Include="Infrastructure\OperationResponse.cs" />
     <Compile Include="Infrastructure\Validation\Validated.cs" />
-    <Compile Include="Messages\CreateUserData.cs" />
+    <Compile Include="Infrastructure\Validation\ValidationResult.cs" />
+    <Compile Include="Commands\CreateUserCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Infrastructure\Validation\Rule.cs" />
+    <Compile Include="Rules\UserNameUnique.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Infrastructure\Validation\ValidationExtensions.cs" />
+    <Compile Include="Validators\CreateUserCommandValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

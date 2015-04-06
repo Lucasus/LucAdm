@@ -91,6 +91,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\UsesDBFixture.cs" />
     <Compile Include="UnitTests\Infrastructure\ValidatedTests.cs" />
+    <Compile Include="UnitTests\Services\UserServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LucAdm.DataGen\LucAdm.DataGen.csproj">
@@ -106,6 +107,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

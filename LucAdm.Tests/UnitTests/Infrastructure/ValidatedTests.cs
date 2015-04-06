@@ -20,6 +20,7 @@ namespace LucAdm.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void Should_Map_Valid_String_Int()
         {
             // arrange
@@ -35,6 +36,7 @@ namespace LucAdm.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void Should_Map_Invalid_String_Int_As_Invalid_Value()
         {
             // arrange
@@ -50,6 +52,7 @@ namespace LucAdm.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void Should_Map_Invalid_Null_String_Int_As_Invalid_NonNullable_Value()
         {
             // arrange
@@ -65,6 +68,7 @@ namespace LucAdm.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
         public void Should_Map_Null_String_As_Valid_Nullable_Value()
         {
             // arrange
