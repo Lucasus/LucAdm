@@ -1,6 +1,4 @@
-﻿using System;
-using FluentAssertions;
-using LucAdm.DataGen;
+﻿using FluentAssertions;
 using Xunit;
 
 namespace LucAdm.Tests

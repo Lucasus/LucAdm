@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using LucAdm.Infrastructure;
 using Xunit;
 
 namespace LucAdm.Tests

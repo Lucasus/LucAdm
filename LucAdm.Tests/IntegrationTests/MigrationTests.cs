@@ -1,8 +1,6 @@
-﻿using System;
-using FluentAssertions;
-using LucAdm.DataGen;
-using Xunit;
+﻿using LucAdm.DataGen;
 using System.Data.Entity.Migrations;
+using Xunit;
 
 namespace LucAdm.Tests
 {
