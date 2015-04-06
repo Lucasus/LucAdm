@@ -2,7 +2,7 @@
 {
     public class UserService
     {
-        private UserRepository userRepository;
+        private UserRepository userRepository; 
 
         public UserService(UserRepository userRepository)
         {
