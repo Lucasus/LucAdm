@@ -1,7 +1,5 @@
 ﻿using FluentAssertions;
 using OpenQA.Selenium;
-using System;
-using System.Configuration;
 using Xunit;
 
 namespace LucAdm.Tests

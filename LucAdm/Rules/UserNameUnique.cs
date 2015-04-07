@@ -9,7 +9,7 @@ namespace LucAdm
         public UserNameUnique(UserRepository userRepository)
         {
             this.userRepository = userRepository;
-            this.Name = GetPropertyName((User x) => x.UserName);
+            this.Name = PropertyName.Get((User x) => x.UserName);
             this.Message = "User name must be unique";
         }
 

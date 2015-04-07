@@ -75,6 +75,7 @@
     <Compile Include="Infrastructure\Persistence\UnitOfWork.cs" />
     <Compile Include="Data\Mappings\UserMap.cs" />
     <Compile Include="Infrastructure\OperationResponse.cs" />
+    <Compile Include="Infrastructure\Reflection\PropertyName.cs" />
     <Compile Include="Infrastructure\Validation\Validated.cs" />
     <Compile Include="Infrastructure\Validation\ValidationResult.cs" />
     <Compile Include="Commands\CreateUserCommand.cs" />
