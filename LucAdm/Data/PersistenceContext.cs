@@ -11,7 +11,7 @@ namespace LucAdm
 {
     public class PersistenceContext : DbContext
     {
-        public virtual DbSet<User> Users { get; set; }
+        public virtual IDbSet<User> Users { get; set; }
 
         public PersistenceContext()
             : base()

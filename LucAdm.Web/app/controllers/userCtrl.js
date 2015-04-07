@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    app.controller("UserCtrl", function ($scope, $http) {
+    angular.module('lucAdm').controller("UserCtrl", function ($scope, $http) {
 
         $http.get("api/user").success(function (data) {
             var model = { list: data };

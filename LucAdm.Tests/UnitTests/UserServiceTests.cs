@@ -1,5 +1,8 @@
 ﻿using FluentAssertions;
 using NSubstitute;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Xunit;
 
 namespace LucAdm.Tests
@@ -26,8 +29,8 @@ namespace LucAdm.Tests
         [Trait("Category", "Unit")]
         public void Validation_Error_When_Create_User_With_Duplicated_UserName()
         {
-            var userService = new UserService(Substitute.For<UserRepository>((PersistenceContext)null)
-                .Where(x => x.GetByUserName("existingName").Returns(new User() { Id = 1 })));
+            var userService = new UserService(new UserRepository(Substitute.For<PersistenceContext>()
+                .Where(x => x.Users.Returns(new List<User>() { new User() { Id = 1, UserName = "existingName" } }))));
 
             var response = userService.CreateUser(Some.CreateUserCommand().With(userName: "existingName").Build());
 

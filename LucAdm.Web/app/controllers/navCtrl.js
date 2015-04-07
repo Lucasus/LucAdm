@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    app.controller("NavCtrl", function ($scope) {
+    angular.module('lucAdm').controller("NavCtrl", function ($scope) {
         $scope.navbarCollapsed = true;
     });
 }());
