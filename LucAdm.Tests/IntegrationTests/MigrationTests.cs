@@ -18,7 +18,7 @@ namespace LucAdm.Tests
             new PersistenceContext().ResetDbState(environment);
 
             // back to 0
-            migrator.Update("201503071318296_InitialCreate");
+            migrator.Update("0");
 
             // up to current
             migrator.Update();

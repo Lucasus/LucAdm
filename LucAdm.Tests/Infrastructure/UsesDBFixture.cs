@@ -7,7 +7,7 @@ namespace LucAdm.Tests
     {
         public UsesDBFixture()
         {
-                new DbMigrator(new MigrationConfiguration()).Update();
+            new DbMigrator(new MigrationConfiguration()).Update();
         }
 
         public void Dispose()

@@ -8,6 +8,12 @@ namespace LucAdm.DataGen
         [Environment(EnvironmentEnum.Dev, EnvironmentEnum.Test)]
         public static User Admin = new User { UserName = "admin", HashedPassword = "adminPwd", Email = "admin@admin.com", Active = true };
 
+        [Environment(EnvironmentEnum.Dev, EnvironmentEnum.Test)]
+        public static User User1 = new User { UserName = "Gandalf", HashedPassword = "gandalfPwd", Email = "gandalf@gandalf.com", Active = true };
+
+        [Environment(EnvironmentEnum.Dev, EnvironmentEnum.Test)]
+        public static User User2 = new User { UserName = "Frodo", HashedPassword = "frodo", Email = "frodo@lucadm.com", Active = true };
+
         public override IEnumerable<User> GetData(EnvironmentEnum environment)
         {
             if(environment == EnvironmentEnum.Dev)

@@ -126,6 +126,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Compile Include="Infrastructure\WebApplication.cs" />
+    <None Include="Properties\PublishProfiles\LocalTest.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace LucAdm.Tests
 {
-    public class ValidatedTests
+    public class ValidationTests
     {
         public class ExampleViewModel
         {
