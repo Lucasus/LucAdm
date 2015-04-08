@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="lucAdm" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
@@ -26,8 +26,8 @@
                 </div>
                 <div class="navbar-collapse collapse" collapse="navbarCollapsed">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="#">Users</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li class="active"><a href="/">Users</a></li>
                         <li><a href="#">About</a></li>
                     </ul>
                 </div>
@@ -35,25 +35,28 @@
         </nav>
     </header>
     <main role="main" ng-controller="UserCtrl" class="fluid-container">
-        <div class="row col-lg-offset-6 col-lg-3">
-            <div class="panel">
-                <div class="input-group">
-                    <input class="form-control" ng-model="newUserName" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" ng-click="addUser(newUserName)">Add</button>
-                    </span>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-lg-offset-3 col-lg-6">
+                <div class="form-inline" role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" />
+                    </div>
+                    <button type="button" class="btn btn-primary">Search</button>
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-success">
+                            <span class=" glyphicon glyphicon-plus">
+                            </span> Add user
+                        </button>
+                    </div>
+                </div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>User Name</th>
                             <th>Email</th>
                             <th>Active</th>
-                            <th></th>
+                            <th style="width: 50px;"></th>
+                            <th style="width: 50px;"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,15 +64,28 @@
                             <td>{{user.userName}}</td>
                             <td>{{user.email}}</td>
                             <td><input type="checkbox" ng-model="user.active" /></td>
-                            <td>{{user.active}}</td>
+                            <td>
+                                <button type="button" class="cmdEdit btn-link tableBtn">Edit</button>
+                            </td>
+                            <td>
+                                <button type="button" class="cmdDelete btn-link tableBtn">Delete</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-offset-3 col-lg-6 text-center" ng-show="users.total > 0">
+                <pagination class="pagination" ng-change="pageChanged(page)" total-items="users.total" ng-model="users.page"
+                            boundary-links="true" max-size="5" num-pages="users.totalPages" rotate="false">
+                </pagination>
+            </div>
+        </div>
+
     </main>
     <footer role="contentinfo" class="fluid-container">
-        <div class="row col-lg-offset-3 col-lg-6">
+        <div class="row col-lg-offset-3 col-lg-6 text-center">
             <p><small>Copyright 2015 &copy; Łukasz Wiatrak</small></p>
         </div>
     </footer>
