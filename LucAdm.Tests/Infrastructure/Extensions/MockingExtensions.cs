@@ -16,7 +16,14 @@ namespace LucAdm.Tests
             return t;
         }
 
-        public static IDbSet<T> Returns<T>(this IDbSet<T> dbSet, IList<T> data) where T : class
+        public static IList<T> AsList<T>(this ObjectBuilder<T> builder)
+            where T: class
+        {
+            return new List<T>() { builder.Build() };
+        }
+
+        public static IDbSet<T> Returns<T>(this IDbSet<T> dbSet, IList<T> data) 
+            where T : class
         {
             var queryableData = data.AsQueryable();
             dbSet.Provider.Returns(queryableData.Provider);

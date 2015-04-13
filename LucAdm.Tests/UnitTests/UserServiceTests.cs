@@ -13,7 +13,7 @@ namespace LucAdm.Tests
         [Trait("Category", "Unit")]
         public void Validation_Error_When_Create_User_Without_UserName()
         {
-            var response = new UserService(null).CreateUser(Some.CreateUserCommand().With(userName: "").Build());            
+            var response = new UserService(null).CreateUser(Some.CreateUserCommand().With(userName: ""));            
             response.ValidationResult.Errors.Should().ContainKey(PropertyName.Get((CreateUserCommand x) => x.UserName));
         }
 
@@ -21,18 +21,18 @@ namespace LucAdm.Tests
         [Trait("Category", "Unit")]
         public void Validation_Error_When_Create_User_Without_Password()
         {
-            var response = new UserService(null).CreateUser(Some.CreateUserCommand().With(password: "").Build());
+            var response = new UserService(null).CreateUser(Some.CreateUserCommand().With(password: ""));
             response.ValidationResult.Errors.Should().ContainKey(PropertyName.Get((CreateUserCommand x) => x.Password));
         }
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void Validation_Error_When_Create_User_With_Duplicated_UserName()
+        public void Validation_Error_When_Create_User_With_Duplicated_UserName() 
         {
             var userService = new UserService(new UserRepository(Substitute.For<PersistenceContext>()
-                .Where(x => x.Users.Returns(new List<User>() { new User() { Id = 1, UserName = "existingName" } }))));
+                .Where(x => x.Users.Returns(Some.User().With(userName: "existingName").AsList()))));
 
-            var response = userService.CreateUser(Some.CreateUserCommand().With(userName: "existingName").Build());
+            var response = userService.CreateUser(Some.CreateUserCommand().With(userName: "existingName"));
 
             response.ValidationResult.Errors.Should().ContainKey(PropertyName.Get((CreateUserCommand x) => x.UserName));
         }

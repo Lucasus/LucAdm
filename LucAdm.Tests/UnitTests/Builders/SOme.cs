@@ -13,5 +13,10 @@ namespace LucAdm.Tests
             return new CreateUserCommandBuilder().Create();
         }
 
+        public static UserBuilder User()
+        {
+            return new UserBuilder().Create();
+        }
+
     }
 }

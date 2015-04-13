@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LucAdm.Tests
+﻿namespace LucAdm.Tests
 {
-    public class CreateUserCommandBuilder
+    public class CreateUserCommandBuilder : ObjectBuilder<CreateUserCommand>
     {
-        private CreateUserCommand command;
-
         public CreateUserCommandBuilder Create()
         {
-            command = new CreateUserCommand()
+            instance = new CreateUserCommand()
             {
                 AcceptedTermsOfUse = true,
                 Email = "email@email.com",
@@ -25,14 +17,9 @@ namespace LucAdm.Tests
 
         public CreateUserCommandBuilder With(string userName = null, string password = null)
         {
-            command.UserName = userName ?? command.UserName;
-            command.Password = password ?? command.Password;
+            instance.UserName = userName ?? instance.UserName;
+            instance.Password = password ?? instance.Password;
             return this;
-        }
-
-        public CreateUserCommand Build()
-        {
-            return command;
         }
     }
 }
