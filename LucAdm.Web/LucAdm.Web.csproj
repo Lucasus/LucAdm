@@ -179,6 +179,7 @@
     <PreBuildEvent>cd "$(ProjectDir)"
 npm install --save
 if '$(Configuration)'=='Release' (
+    "node_modules\.bin\bower" install
     "node_modules\.bin\gulp" release
 )
 if '$(Configuration)'=='Debug' (
