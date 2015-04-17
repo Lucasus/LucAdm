@@ -177,13 +177,12 @@
   </Target>
   <PropertyGroup>
     <PreBuildEvent>cd "$(ProjectDir)"
-npm install --save
-if '$(Configuration)'=='Release' (
-    "node_modules\.bin\bower" install
-    "node_modules\.bin\gulp" release
+
+if 'Debug'=='Release' (
+      npm install --save &amp;&amp; "node_modules\.bin\bower" install &amp;&amp; "node_modules\.bin\gulp" release
 )
-if '$(Configuration)'=='Debug' (
-    "node_modules\.bin\gulp" debug
+if 'Debug'=='Debug' (
+      npm install --save &amp;&amp; "node_modules\.bin\bower" install &amp;&amp; "node_modules\.bin\gulp" debug
 )</PreBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
