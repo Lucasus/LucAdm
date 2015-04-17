@@ -1,8 +1,9 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace LucAdm.Tests
 {
-    public class SeleniumServer
+    public sealed class SeleniumServer : IDisposable
     {
         private Process process;
         private bool isStarted = false;
@@ -36,6 +37,14 @@ namespace LucAdm.Tests
             {
                 // TODO: we need to take this path from settings
                 return @"-jar C:\Core\selenium-server-standalone-2.45.0.jar";
+            }
+        }
+
+        public void Dispose()
+        {
+            if(process != null)
+            {
+                process.Dispose();
             }
         }
     }

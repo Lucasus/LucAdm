@@ -7,6 +7,7 @@ namespace LucAdm
     /// <summary>
     /// Code from this SO answer: http://stackoverflow.com/questions/7795300/validation-failed-for-one-or-more-entities-see-entityvalidationerrors-propert
     /// </summary>
+    [Serializable]
     public class FormattedDbEntityValidationException : Exception
     {
         public FormattedDbEntityValidationException(DbEntityValidationException innerException) :

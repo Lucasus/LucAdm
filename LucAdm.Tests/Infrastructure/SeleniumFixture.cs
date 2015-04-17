@@ -4,7 +4,7 @@ using System;
 
 namespace LucAdm.Tests
 {
-    public class SeleniumFixture : IDisposable
+    public sealed class SeleniumFixture : IDisposable
     {
         private UsesDBFixture usesDbFixture;
         private SeleniumServer seleniumServer;
@@ -24,6 +24,7 @@ namespace LucAdm.Tests
         public void Dispose()
         {
             driver.Quit();
+            driver.Dispose();
             seleniumServer.Stop();
             webServer.Stop();
             usesDbFixture.Dispose();

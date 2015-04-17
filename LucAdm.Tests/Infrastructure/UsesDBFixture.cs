@@ -3,7 +3,7 @@ using System.Data.Entity.Migrations;
 
 namespace LucAdm.Tests
 {
-    public class UsesDBFixture : IDisposable
+    public sealed class UsesDBFixture : IDisposable
     {
         public UsesDBFixture()
         {

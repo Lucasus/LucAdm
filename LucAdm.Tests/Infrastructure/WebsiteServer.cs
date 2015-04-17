@@ -5,7 +5,7 @@ using System.IO;
 
 namespace LucAdm.Tests
 {
-    public class WebsiteServer
+    public sealed class WebsiteServer : IDisposable
     {
         private Process process;
         private bool isStarted = false;
@@ -15,7 +15,8 @@ namespace LucAdm.Tests
             // Publish newest website version
             var publishProcess = new Process();
             var projectFileName =  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\LucAdm.Web\LucAdm.Web.csproj");
-            publishProcess.StartInfo.FileName = @"C:\Program Files (x86)\MSBuild\12.0\Bin\amd64\MSBuild.exe";
+            //             publishProcess.StartInfo.FileName = Environment.GetEnvironmentVariable("MSBUILD_PATH");
+            publishProcess.StartInfo.FileName =  @"C:\Program Files (x86)\MSBuild\12.0\Bin\amd64\MSBuild.exe";
             publishProcess.StartInfo.Arguments = projectFileName + " /p:DeployOnBuild=true /p:PublishProfile=LocalTest /p:VisualStudioVersion=12.0";
             publishProcess.Start();
             publishProcess.WaitForExit();
@@ -47,10 +48,18 @@ namespace LucAdm.Tests
             isStarted = false;
         }
 
-        protected virtual string GetApplicationPath(string applicationName)
+        private string GetApplicationPath(string applicationName)
         {
             var solutionFolder = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)));
             return Path.Combine(solutionFolder, applicationName);
+        }
+
+        public void Dispose()
+        {
+            if(process != null)
+            {
+                process.Dispose();
+            }
         }
     }
 }
