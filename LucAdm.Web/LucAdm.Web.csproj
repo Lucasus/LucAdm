@@ -186,12 +186,12 @@
     </PreBuildEvent>
     <PreBuildEvent>
       cd "$(ProjectDir)"
-if 'Debug'=='Release' (
+      if '$(Configuration)'=='Release' (
       "node_modules\.bin\gulp" release
-)
-if 'Debug'=='Debug' (
+      )
+      if '$(Configuration)'=='Debug' (
       "node_modules\.bin\gulp" debug
-)</PreBuildEvent>
+      )</PreBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
