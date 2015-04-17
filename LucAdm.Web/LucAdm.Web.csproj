@@ -91,9 +91,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\all.js" />
     <Content Include="app\app.js" />
     <Content Include="app\controllers\navCtrl.js" />
     <Content Include="app\controllers\userCtrl.js" />
+    <Content Include="css\all.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -152,7 +154,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>34025</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
