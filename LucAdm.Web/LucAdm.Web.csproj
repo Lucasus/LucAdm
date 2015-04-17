@@ -176,13 +176,21 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>cd "$(ProjectDir)"
-
+    <PreBuildEvent>
+      cd "$(ProjectDir)"
+      npm install --save
+    </PreBuildEvent>
+    <PreBuildEvent>
+      cd "$(ProjectDir)"
+      "node_modules\.bin\bower" install
+    </PreBuildEvent>
+    <PreBuildEvent>
+      cd "$(ProjectDir)"
 if 'Debug'=='Release' (
-      npm install --save &amp;&amp; "node_modules\.bin\bower" install &amp;&amp; "node_modules\.bin\gulp" release
+      "node_modules\.bin\gulp" release
 )
 if 'Debug'=='Debug' (
-      npm install --save &amp;&amp; "node_modules\.bin\bower" install &amp;&amp; "node_modules\.bin\gulp" debug
+      "node_modules\.bin\gulp" debug
 )</PreBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
