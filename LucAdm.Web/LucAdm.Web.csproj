@@ -176,14 +176,14 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>cd $(ProjectDir)
+    <PreBuildEvent>cd $(ProjectDir)
 npm install --save
 if '$(Configuration)'=='Release' (
     gulp release
 )
 if '$(Configuration)'=='Debug' (
     gulp debug
-)</PostBuildEvent>
+)</PreBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
