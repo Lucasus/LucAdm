@@ -12,14 +12,24 @@ namespace LucAdm.Tests
 
         public WebsiteServer Start()
         {
+            //TODO: Remove everything from website path first
+
             // Publish newest website version
+            // publishProcess.StartInfo.FileName =  @"C:\Program Files (x86)\MSBuild\12.0\Bin\amd64\MSBuild.exe";
             var publishProcess = new Process();
             var projectFileName =  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\LucAdm.Web\LucAdm.Web.csproj");
-            //             publishProcess.StartInfo.FileName = Environment.GetEnvironmentVariable("MSBUILD_PATH");
-            publishProcess.StartInfo.FileName =  @"C:\Program Files (x86)\MSBuild\12.0\Bin\amd64\MSBuild.exe";
-            publishProcess.StartInfo.Arguments = projectFileName + " /p:DeployOnBuild=true /p:PublishProfile=LocalTest /p:VisualStudioVersion=12.0";
+            publishProcess.StartInfo.FileName = Environment.GetEnvironmentVariable("MSBUILD_PATH");
+            publishProcess.StartInfo.Arguments = projectFileName + " /p:DeployOnBuild=true /p:PublishProfile=Debug /p:VisualStudioVersion=12.0";
+            publishProcess.StartInfo.UseShellExecute = false;
+            publishProcess.StartInfo.RedirectStandardOutput = true; 
             publishProcess.Start();
+
+            var output = publishProcess.StandardOutput.ReadToEnd();
             publishProcess.WaitForExit();
+            if (!output.Contains("Build succeeded"))
+            {
+                throw new Exception("Build exception: " + output);
+            }
 
             // Start IIS Express
             if (isStarted)

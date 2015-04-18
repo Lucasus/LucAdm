@@ -16,19 +16,16 @@ var config = {
         'bower_components/angular/angular.js',
         'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'],
     src: ['app/app.js',
-        'app/**/*.js',
-        '!app/all.js'],
+        'app/**/*.js'],
     css: ['bower_components/bootstrap/dist/css/bootstrap.css',
-          'bower_components/bootstrap/dist/css/bootstrap.css.map',
-        '!css/all.css'],
+          'bower_components/bootstrap/dist/css/bootstrap.css.map'],
     fonts: ['bower_components/bootstrap/dist/fonts/*.*'],
     less: ['bower_components/bootstrap/less/bootstrap.less']
 }
  
 // Common tasks:
 gulp.task('clean', function(){
-  del.sync(['app/all.js'])
-//  del.sync(['lib/*.*'])
+  del.sync(['dist/*.*'])
 });
  
 gulp.task('fonts', function () {
@@ -54,7 +51,7 @@ gulp.task('scripts-debug', ['clean'], function () {
 
 gulp.task('index-debug', ['less-debug', 'scripts-debug'], function () {
     return gulp.src('index.html')
-        .pipe(inject(series(gulp.src(['css/*.css', '!css/all.css']), gulp.src('lib/*.js'), gulp.src(config.src)).pipe(debug())))
+        .pipe(inject(series(gulp.src(['css/*.css']), gulp.src('lib/*.js'), gulp.src(config.src)).pipe(debug())))
         .pipe(gulp.dest('.'));
 });
 
@@ -63,7 +60,7 @@ gulp.task('scripts-release', ['clean'], function () {
     return gulp.src(config.lib.concat(config.src))
       .pipe(debug())
       .pipe(concat('all.js'))
-      .pipe(gulp.dest('./app'));
+      .pipe(gulp.dest('./dist'));
 });
 
 
@@ -71,13 +68,13 @@ gulp.task('css-release', function () {
     return gulp.src(config.css)
     .pipe(debug({title: 'css-release'}))
     .pipe(concat('all.css'))
-    .pipe(gulp.dest('./css'));
+    .pipe(gulp.dest('./dist'));
 });
 
 
 gulp.task('index-release', ['css-release', 'scripts-release'], function () {
     return gulp.src('index.html')
-        .pipe(inject(gulp.src(['css/all.css', 'app/all.js'])))
+        .pipe(inject(gulp.src(['dist/all.css', 'dist/all.js'])))
         .pipe(gulp.dest('.'));
 });
 
