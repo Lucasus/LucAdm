@@ -154,6 +154,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -183,11 +185,25 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
-  <Target Name="BeforeBuild" Condition="'$(Configuration)' != 'Debug'">
-    <ItemGroup>
-      <Content Include="dist\*.*" />
-    </ItemGroup>
-  </Target>
+  <PropertyGroup>
+    <MyReleaseOutput>.\dist</MyReleaseOutput>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+  </PropertyGroup>
+	<PropertyGroup>
+	  <PipelineCollectFilesPhaseDependsOn>
+		CustomCollectFiles;
+		$(PipelineCollectFilesPhaseDependsOn);
+	  </PipelineCollectFilesPhaseDependsOn>
+	</PropertyGroup>
+	<Target Name="CustomCollectFiles">
+	  <Message Text="Inside of CustomCollectFiles" Importance="high"/>
+	  <ItemGroup>
+		<_CustomFiles Include="$(ProjectDir)dist\*" />
+		<FilesForPackagingFromProject  Include="%(_CustomFiles.Identity)">
+		  <DestinationRelativePath>dist\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+		</FilesForPackagingFromProject>
+	  </ItemGroup>
+	</Target>  
   <PropertyGroup>
     <PreBuildEvent>
       cd "$(ProjectDir)"
@@ -209,9 +225,5 @@
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
 </Project>
