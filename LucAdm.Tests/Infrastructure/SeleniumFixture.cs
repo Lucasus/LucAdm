@@ -7,12 +7,12 @@ namespace LucAdm.Tests
     public sealed class SeleniumFixture : IDisposable
     {
         private readonly SeleniumServer _seleniumServer;
-        private readonly UsesDBFixture _usesDbFixture;
+        private readonly UsesDbFixture _usesDbFixture;
         private readonly WebsiteServer _webServer;
 
         public SeleniumFixture()
         {
-            _usesDbFixture = new UsesDBFixture();
+            _usesDbFixture = new UsesDbFixture();
             _webServer = new WebsiteServer().Start();
             _seleniumServer = new SeleniumServer().Start();
             Driver = new ChromeDriver(@"C:\Core\Selenium");

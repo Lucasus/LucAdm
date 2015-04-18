@@ -4,7 +4,7 @@ using Xunit;
 
 namespace LucAdm.Tests
 {
-    public class MigrationTests : IClassFixture<UsesDBFixture>
+    public class MigrationTests : IClassFixture<UsesDbFixture>
     {
         [Theory]
         [InlineData(EnvironmentEnum.Test)]

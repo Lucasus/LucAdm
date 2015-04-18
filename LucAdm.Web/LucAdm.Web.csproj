@@ -104,11 +104,12 @@
     <Content Include="gulpfile.js" />
     <Content Include="Index.html" />
     <Content Include="lib\angular.js" />
+    <Content Include="lib\angular-resource.js" />
     <Content Include="lib\ui-bootstrap-tpls.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Infrastructure\CompositionRootConfig.cs" />
     <Compile Include="Infrastructure\AutoMapperConfig.cs" />
     <Compile Include="Infrastructure\Extensions\MappingExtensions.cs" />
@@ -118,8 +119,9 @@
     <Compile Include="Infrastructure\Windsor\PersistenceInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\WinsorControllerActivator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\UserVM.cs" />
-    <Compile Include="ViewModels\VMMappingProfile.cs" />
+    <Compile Include="ViewModels\UsersVm.cs" />
+    <Compile Include="ViewModels\UserVm.cs" />
+    <Compile Include="ViewModels\VmMappingProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

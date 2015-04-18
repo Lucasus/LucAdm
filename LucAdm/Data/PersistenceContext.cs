@@ -4,19 +4,20 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Validation;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 
 namespace LucAdm
 {
-    public class PersistenceContext : DbContext
+    public sealed class PersistenceContext : DbContext
     {
         public PersistenceContext()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PersistenceContext, MigrationConfiguration>());
         }
 
-        public virtual IDbSet<User> Users { get; set; }
+        public IDbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -10,8 +10,8 @@ namespace LucAdm
             Value = val;
         }
 
-        public T Value { get; set; }
-        public bool IsValid { get; set; }
+        public T Value { get; private set; }
+        public bool IsValid { get; private set; }
 
         public static implicit operator Validated<T>(T val)
         {

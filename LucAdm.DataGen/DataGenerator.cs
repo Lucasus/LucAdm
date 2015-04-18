@@ -4,7 +4,9 @@ namespace LucAdm.DataGen
 {
     public class DataGenerator : GeneratorBase
     {
-        public DataGenerator(DbContext context, EnvironmentEnum environment) : base(context, environment) { }
+        public DataGenerator(DbContext context, EnvironmentEnum environment) : base(context, environment)
+        {
+        }
 
         public void Generate()
         {

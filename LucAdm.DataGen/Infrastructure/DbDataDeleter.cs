@@ -1,7 +1,6 @@
-﻿///
-/// Klasa przerobiona na EF z  http://lostechies.com/jimmybogard/2012/10/18/isolating-database-data-in-integration-tests/
-///
-using System;
+﻿//
+// Klasa przerobiona na EF z  http://lostechies.com/jimmybogard/2012/10/18/isolating-database-data-in-integration-tests/
+//
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -10,35 +9,29 @@ using System.Text;
 
 namespace LucAdm.DataGen
 {
-    public class DbDataDeleter
+    public sealed class DbDataDeleter
     {
-        private DbContext context;
-        private string[] ignoredTables = new[] { "sysdiagrams", "__MigrationHistory" };
+        private readonly DbContext _context;
+        private readonly string[] _ignoredTables = {"sysdiagrams", "__MigrationHistory"};
 
         public DbDataDeleter(DbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
-        private class Relationship
-        {
-            public string PrimaryKeyTable { get; set; }
-            public string ForeignKeyTable { get; set; }
-        }
-
-        public virtual void DeleteAllData()
+        public void DeleteAllData()
         {
             var allTables = GetAllTables();
             var allRelationships = GetRelationships();
             var tablesToDelete = BuildTableList(allTables, allRelationships);
             var deleteSql = BuildTableSql(tablesToDelete);
-            context.Database.ExecuteSqlCommand(deleteSql);
+            _context.Database.ExecuteSqlCommand(deleteSql);
         }
 
         private IList<string> GetAllTables()
         {
-            return context.Database.SqlQuery<string>("select name from sys.tables")
-                .Except(ignoredTables)
+            return _context.Database.SqlQuery<string>("select name from sys.tables")
+                .Except(_ignoredTables)
                 .ToList();
         }
 
@@ -52,8 +45,8 @@ namespace LucAdm.DataGen
                     inner join sysobjects so_pk on sfk.rkeyid = so_pk.id
                     inner join sysobjects so_fk on sfk.fkeyid = so_fk.id
                 order by so_pk.name, so_fk.name";
-               
-            var objectContext = ((IObjectContextAdapter)context).ObjectContext;
+
+            var objectContext = ((IObjectContextAdapter) _context).ObjectContext;
             return objectContext.ExecuteStoreQuery<Relationship>(relationshipsSql).ToList();
         }
 
@@ -62,7 +55,7 @@ namespace LucAdm.DataGen
             var sb = new StringBuilder();
             foreach (var tableName in tablesToDelete)
             {
-                sb.Append(String.Format("delete from [{0}];", tableName));
+                sb.Append(string.Format("delete from [{0}];", tableName));
             }
             return sb.ToString();
         }
@@ -91,5 +84,26 @@ namespace LucAdm.DataGen
             return tablesToDelete.ToArray();
         }
 
+        private class Relationship
+        {
+            private readonly string _primaryKeyTable;
+            private readonly string _foreignKeyTable;
+
+            public Relationship(string primaryKeyTable, string foreignKeyTable)
+            {
+                _primaryKeyTable = primaryKeyTable;
+                _foreignKeyTable = foreignKeyTable;
+            }
+
+            public string PrimaryKeyTable
+            {
+                get { return _primaryKeyTable; }
+            }
+
+            public string ForeignKeyTable
+            {
+                get { return _foreignKeyTable; }
+            }
+        }
     }
 }

@@ -3,9 +3,9 @@ using System.Data.Entity.Migrations;
 
 namespace LucAdm.Tests
 {
-    public sealed class UsesDBFixture : IDisposable
+    public sealed class UsesDbFixture : IDisposable
     {
-        public UsesDBFixture()
+        public UsesDbFixture()
         {
             new DbMigrator(new MigrationConfiguration()).Update();
         }

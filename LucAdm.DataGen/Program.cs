@@ -3,9 +3,9 @@ using System.Data.Entity.Migrations;
 
 namespace LucAdm.DataGen
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var context = new PersistenceContext();
             new DbDataDeleter(context).DeleteAllData();

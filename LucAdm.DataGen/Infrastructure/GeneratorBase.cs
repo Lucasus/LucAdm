@@ -7,39 +7,38 @@ namespace LucAdm.DataGen
 {
     public abstract class GeneratorBase
     {
-        private DbContext context;
-        
-        public EnvironmentEnum Environment { get; private set; }
+        private readonly DbContext _context;
+        private readonly EnvironmentEnum _environment;
 
-
-        public GeneratorBase(DbContext context, EnvironmentEnum environment)
+        protected GeneratorBase(DbContext context, EnvironmentEnum environment)
         {
-            this.context = context;
-            this.Environment = environment;
+            _context = context;
+            _environment = environment;
         }
 
-        public void Save<T>(Data<T> data)
-            where T: Entity, new()
+
+        protected void Save<T>(Data<T> data)
+            where T : Entity, new()
         {
             var entities = data.GetType()
-                          .GetFields(BindingFlags.Public | BindingFlags.Static)
-                          .Where(field => 
-                          {
-                              if(field.FieldType != typeof(T))
-                              {
-                                  return false;
-                              }
+                .GetFields(BindingFlags.Public | BindingFlags.Static)
+                .Where(field =>
+                {
+                    if (field.FieldType != typeof (T))
+                    {
+                        return false;
+                    }
 
-                              var envAttribute = field.GetCustomAttributes<EnvironmentAttribute>().FirstOrDefault();
-                              if (envAttribute != null)
-                              {
-                                  return envAttribute.Environments.Any(env => env == this.Environment || env == EnvironmentEnum.All);
-                              }
-                              return true; 
-                          })
-                          .Select(prop => (T)prop.GetValue(null)).ToList();
+                    var envAttribute = field.GetCustomAttributes<EnvironmentAttribute>().FirstOrDefault();
+                    if (envAttribute != null)
+                    {
+                        return envAttribute.Environments.Any(env => env == _environment || env == EnvironmentEnum.All);
+                    }
+                    return true;
+                })
+                .Select(prop => (T) prop.GetValue(null)).ToList();
 
-            var additionalEntites = data.GetData(Environment);
+            var additionalEntites = data.GetData(_environment);
             if (additionalEntites != null)
             {
                 entities = entities.Union(additionalEntites).ToList();
@@ -47,10 +46,10 @@ namespace LucAdm.DataGen
 
             foreach (var ent in entities)
             {
-                context.Set<T>().Add(ent);
+                _context.Set<T>().Add(ent);
             }
-            Console.Write("Creating " + typeof(T).Name + "... ");
-            context.SaveChanges();
+            Console.Write("Creating " + typeof (T).Name + "... ");
+            _context.SaveChanges();
             Console.WriteLine(" DONE");
         }
     }

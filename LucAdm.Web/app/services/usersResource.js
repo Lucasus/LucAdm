@@ -2,19 +2,19 @@
 {
     "use strict";
 
-    angular.module('lucAdm').factory('usersResource', function ($resource, $q)
+    angular.module("lucAdm").factory("usersResource", function ($resource)
     {
-        var urlPrefix = "/api/user/";
+        var urlPrefix = "/api/users/";
 
         return $resource(urlPrefix,
         {
-            id: '@id'
+            id: "@id"
         }, 
         {
-            'query': { method: 'GET', isArray: false },
-            'create': { method: 'POST' },
-            'update': { method: 'POST', url: urlPrefix + ':id' },
-            'delete': { method: 'DELETE', url: urlPrefix + ':id' }
+            'query': { method: "GET", isArray: false },
+            'create': { method: "POST" },
+            'update': { method: "POST", url: urlPrefix + ":id" },
+            'delete': { method: "DELETE", url: urlPrefix + ":id" }
         });
     });
 }());

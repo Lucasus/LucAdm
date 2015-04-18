@@ -3,10 +3,25 @@
         <h3 class="modal-title">I'm a modal!</h3>
     </div>
     <div class="modal-body">
-        content
+        <div class="clearfix">
+            <form id="userForm" class="form-horizontal">
+                <label>User Name</label>
+                <div class="clearfix">
+                    <div class="input">
+                        <input type="text" ng-model="user.userName" />
+                    </div>
+                </div>
+                <label>Email</label>
+                <div class="clearfix">
+                    <div class="input">
+                        <input type="text" ng-model="user.email" />
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="save(keyword)">OK</button>
+        <button class="btn btn-primary" ng-click="save(user)">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </div>

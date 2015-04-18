@@ -70,13 +70,13 @@ namespace LucAdm.Tests
             destination.NullableIntProperty.Value.Should().Be(null);
         }
 
-        public class ExampleViewModel
+        private class ExampleViewModel
         {
             public string IntProperty { get; set; }
             public string NullableIntProperty { get; set; }
         }
 
-        public class ExampleRequest
+        private class ExampleRequest
         {
             public Validated<int> IntProperty { get; set; }
             public Validated<int?> NullableIntProperty { get; set; }

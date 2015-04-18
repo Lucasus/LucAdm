@@ -11,7 +11,7 @@ namespace LucAdm
             Message = "User name must be unique";
         }
 
-        public string UserName { get; set; }
+        public string UserName { private get; set; }
 
         public override bool Check()
         {

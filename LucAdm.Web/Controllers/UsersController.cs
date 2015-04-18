@@ -6,26 +6,29 @@ using System.Web.Http;
 
 namespace LucAdm.Web
 {
-    [RoutePrefix("api/user")]
-    public class UserController : ApiController
+    public class UsersController : ApiController
     {
         private readonly UserRepository _userRepository;
         private readonly UserService _userService;
 
-        public UserController(UserRepository userRepository, UserService userService)
+        public UsersController(UserRepository userRepository, UserService userService)
         {
             _userRepository = userRepository;
             _userService = userService;
         }
 
-        public IList<UserVm> Get()
+        public UsersVm Get([FromUri] GetUsersQuery query)
         {
-            return _userRepository.GetAll().Select(x => x.ToViewModel<UserVm>()).ToList();
+            return new UsersVm()
+            {
+                List = _userRepository.Get(query).Select(x => x.ToViewModel<UserVm>()).ToList(),
+                Total = 15
+            };
         }
 
         public UserVm Get(int id)
         {
-            return null;
+            return _userRepository.GetById(id).ToViewModel<UserVm>();
         }
 
         public OperationResponse<int> Post(CreateUserCommand command)
@@ -33,14 +36,14 @@ namespace LucAdm.Web
             return _userService.CreateUser(command);
         }
 
-        [HttpPost]
-        [Route("{id}")]
-        public virtual HttpResponseMessage Post(UpdateUserCommand command)
+
+        [Route("api/users/{id}")]
+        public HttpResponseMessage Post(UpdateUserCommand command)
         {
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        public virtual HttpResponseMessage Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
             return Request.CreateResponse(HttpStatusCode.OK);
         }

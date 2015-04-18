@@ -10,7 +10,7 @@ namespace LucAdm
             GlobalErrors = new List<string>();
         }
 
-        public IDictionary<string, IList<string>> Errors { get; protected set; }
+        public IDictionary<string, IList<string>> Errors { get; private set; }
         public IList<string> GlobalErrors { get; protected set; }
 
         public bool IsValid

@@ -77,12 +77,5 @@ namespace LucAdm.Tests
             }
             _isStarted = false;
         }
-
-        private string GetApplicationPath(string applicationName)
-        {
-            var solutionFolder =
-                Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))) ?? string.Empty;
-            return Path.Combine(solutionFolder, applicationName);
-        }
     }
 }

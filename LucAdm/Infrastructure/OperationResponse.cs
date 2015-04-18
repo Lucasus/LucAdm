@@ -2,11 +2,11 @@
 {
     public class OperationResponse
     {
-        public OperationResponse(ValidationResult validationResult = null)
+        protected OperationResponse(ValidationResult validationResult = null)
         {
             ValidationResult = validationResult ?? new ValidationResult();
         }
 
-        public ValidationResult ValidationResult { get; set; }
+        public ValidationResult ValidationResult { get; protected set; }
     }
 }

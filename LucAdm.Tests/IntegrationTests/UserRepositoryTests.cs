@@ -3,7 +3,7 @@ using Xunit;
 
 namespace LucAdm.Tests
 {
-    public class UserRepositoryTests : IClassFixture<UsesDBFixture>
+    public class UserRepositoryTests : IClassFixture<UsesDbFixture>
     {
         // https://github.com/scott-xu/EntityFramework.Testing
         [Fact]

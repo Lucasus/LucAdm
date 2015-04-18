@@ -7,7 +7,7 @@ namespace LucAdm
     public abstract class Repository<T>
         where T : Entity, new()
     {
-        protected PersistenceContext Context;
+        protected readonly PersistenceContext Context;
 
         protected Repository(PersistenceContext context)
         {
