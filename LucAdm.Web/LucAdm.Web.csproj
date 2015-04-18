@@ -212,7 +212,7 @@
   </Target>
   <PropertyGroup>
     <PreBuildEvent>
-cd "C:\Projects\LucAdm\LucAdm.Web\"
+cd "$(ProjectDir)"
 call npm install --save
 
 call "node_modules\.bin\bower" install
