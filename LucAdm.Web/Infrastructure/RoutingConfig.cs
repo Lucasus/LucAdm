@@ -5,7 +5,7 @@ using System.Web.Http;
 
 namespace LucAdm.Web
 {
-    public class RoutingConfig
+    public static class RoutingConfig
     {
         public static void Register(HttpConfiguration config)
         {

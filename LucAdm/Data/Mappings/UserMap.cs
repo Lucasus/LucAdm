@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace LucAdm
 {
-    public class UserMap : EntityTypeConfiguration<User>  
+    public class UserMap : EntityTypeConfiguration<User>
     {
         public UserMap()
         {
@@ -15,7 +15,7 @@ namespace LucAdm
             Property(t => t.Email).IsRequired();
 
             //table  
-            ToTable("User");  
+            ToTable("User");
         }
     }
 }

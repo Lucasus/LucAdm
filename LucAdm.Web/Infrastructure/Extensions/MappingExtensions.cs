@@ -11,7 +11,7 @@ namespace LucAdm.Web
 
         public static TEntity ToEntity<TViewModel, TEntity>(this TViewModel viewModel, TEntity loadedEntity)
         {
-            return Mapper.Map<TViewModel, TEntity>(viewModel, loadedEntity);
+            return Mapper.Map(viewModel, loadedEntity);
         }
     }
 }

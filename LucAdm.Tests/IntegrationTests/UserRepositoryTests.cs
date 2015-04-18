@@ -14,18 +14,15 @@ namespace LucAdm.Tests
             var context = new PersistenceContext().ResetDbState();
             var userRepository = new UserRepository(context);
 
-            var newUser = new User()
+            var newUser = new User
             {
                 Email = "user@user.com",
                 UserName = "newUser",
-                HashedPassword = "hashedPassword",
+                HashedPassword = "hashedPassword"
             };
 
             // act
-            new UnitOfWork(context).Do((work) => 
-            { 
-                userRepository.Add(newUser); 
-            });
+            new UnitOfWork(context).Do(work => { userRepository.Add(newUser); });
 
             // assert
             userRepository.GetById(newUser.Id).ShouldBeEquivalentTo(newUser);

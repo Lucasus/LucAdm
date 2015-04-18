@@ -1,8 +1,5 @@
 ﻿using FluentAssertions;
 using NSubstitute;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using Xunit;
 
 namespace LucAdm.Tests
@@ -13,7 +10,7 @@ namespace LucAdm.Tests
         [Trait("Category", "Unit")]
         public void Validation_Error_When_Create_User_Without_UserName()
         {
-            var response = new UserService(null).CreateUser(Some.CreateUserCommand().With(userName: ""));            
+            var response = new UserService(null).CreateUser(Some.CreateUserCommand().With(userName: ""));
             response.ValidationResult.Errors.Should().ContainKey(PropertyName.Get((CreateUserCommand x) => x.UserName));
         }
 
@@ -27,7 +24,7 @@ namespace LucAdm.Tests
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void Validation_Error_When_Create_User_With_Duplicated_UserName() 
+        public void Validation_Error_When_Create_User_With_Duplicated_UserName()
         {
             var userService = new UserService(new UserRepository(Substitute.For<PersistenceContext>()
                 .Where(x => x.Users.Returns(Some.User().With(userName: "existingName").AsList()))));
@@ -36,6 +33,5 @@ namespace LucAdm.Tests
 
             response.ValidationResult.Errors.Should().ContainKey(PropertyName.Get((CreateUserCommand x) => x.UserName));
         }
-
     }
 }

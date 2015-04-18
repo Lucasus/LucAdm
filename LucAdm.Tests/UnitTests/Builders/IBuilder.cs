@@ -2,17 +2,16 @@
 {
     public abstract class ObjectBuilder<T>
     {
-        protected T instance;
+        protected T Instance { get; set; }
 
         public static implicit operator T(ObjectBuilder<T> builder)
         {
-            return builder.instance;
+            return builder.Instance;
         }
 
         public T Build()
         {
-            return instance;
+            return Instance;
         }
-
     }
 }

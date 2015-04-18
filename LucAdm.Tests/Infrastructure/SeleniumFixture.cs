@@ -1,33 +1,32 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
 
 namespace LucAdm.Tests
 {
     public sealed class SeleniumFixture : IDisposable
     {
-        private UsesDBFixture usesDbFixture;
-        private SeleniumServer seleniumServer;
-        private WebsiteServer webServer;
-        private IWebDriver driver;
-
-        public IWebDriver Driver { get { return driver; } }
+        private readonly SeleniumServer _seleniumServer;
+        private readonly UsesDBFixture _usesDbFixture;
+        private readonly WebsiteServer _webServer;
 
         public SeleniumFixture()
         {
-            usesDbFixture = new UsesDBFixture();
-            webServer = new WebsiteServer().Start();
-            seleniumServer = new SeleniumServer().Start();
-            driver = new ChromeDriver(@"C:\Core\Selenium");
+            _usesDbFixture = new UsesDBFixture();
+            _webServer = new WebsiteServer().Start();
+            _seleniumServer = new SeleniumServer().Start();
+            Driver = new ChromeDriver(@"C:\Core\Selenium");
         }
+
+        public IWebDriver Driver { get; private set; }
 
         public void Dispose()
         {
-            driver.Quit();
-            driver.Dispose();
-            seleniumServer.Stop();
-            webServer.Stop();
-            usesDbFixture.Dispose();
+            Driver.Quit();
+            Driver.Dispose();
+            _seleniumServer.Stop();
+            _webServer.Stop();
+            _usesDbFixture.Dispose();
         }
     }
 }

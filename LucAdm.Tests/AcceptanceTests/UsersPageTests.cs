@@ -6,19 +6,19 @@ namespace LucAdm.Tests
 {
     public class UsersPageTests : IClassFixture<SeleniumFixture>
     {
-        private IWebDriver driver;
+        private readonly IWebDriver _driver;
 
         public UsersPageTests(SeleniumFixture seleniumFixture)
         {
-            this.driver = seleniumFixture.Driver;
+            _driver = seleniumFixture.Driver;
         }
 
         [Fact]
         [Trait("Category", "Acceptance")]
         public void Should_Display_Users_Page()
         {
-            var usersPage = new UsersPage(driver);
-            driver.Navigate().GoToRelativeUrl(usersPage.Url);
+            var usersPage = new UsersPage(_driver);
+            _driver.Navigate().GoToRelativeUrl(usersPage.Url);
             usersPage.Header.Should().Contain("Luc");
         }
     }

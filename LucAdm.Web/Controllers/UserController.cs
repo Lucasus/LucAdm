@@ -1,28 +1,48 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace LucAdm.Web
 {
+    [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-        private UserRepository userRepository;
-        private UserService userService;
+        private readonly UserRepository _userRepository;
+        private readonly UserService _userService;
 
         public UserController(UserRepository userRepository, UserService userService)
         {
-            this.userRepository = userRepository;
-            this.userService = userService;
+            _userRepository = userRepository;
+            _userService = userService;
         }
 
-        public IList<UserVM> Get()
+        public IList<UserVm> Get()
         {
-            return userRepository.GetAll().Select(x => x.ToViewModel<UserVM>()).ToList();
+            return _userRepository.GetAll().Select(x => x.ToViewModel<UserVm>()).ToList();
+        }
+
+        public UserVm Get(int id)
+        {
+            return null;
         }
 
         public OperationResponse<int> Post(CreateUserCommand command)
         {
-            return userService.CreateUser(command);
+            return _userService.CreateUser(command);
+        }
+
+        [HttpPost]
+        [Route("{id}")]
+        public virtual HttpResponseMessage Post(UpdateUserCommand command)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        public virtual HttpResponseMessage Delete(int id)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

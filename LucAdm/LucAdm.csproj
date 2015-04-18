@@ -62,6 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\IValidatable.cs" />
+    <Compile Include="Commands\UpdateUserCommand.cs" />
     <Compile Include="Data\Migrations\201504041006586_UserNewPropertyActive.cs" />
     <Compile Include="Data\Migrations\201504041006586_UserNewPropertyActive.Designer.cs">
       <DependentUpon>201504041006586_UserNewPropertyActive.cs</DependentUpon>

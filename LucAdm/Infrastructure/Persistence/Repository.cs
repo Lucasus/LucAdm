@@ -5,40 +5,39 @@ using System.Linq;
 namespace LucAdm
 {
     public abstract class Repository<T>
-        where T: Entity, new()
+        where T : Entity, new()
     {
-        protected PersistenceContext context;
+        protected PersistenceContext Context;
 
-        public Repository(PersistenceContext context)
+        protected Repository(PersistenceContext context)
         {
-            this.context = context;
+            Context = context;
         }
 
         public virtual IList<T> GetAll()
         {
-            return context.Set<T>().ToList();
+            return Context.Set<T>().ToList();
         }
 
         public virtual T GetById(int id)
         {
-            return context.Set<T>().Find(id);
+            return Context.Set<T>().Find(id);
         }
 
         public virtual void Add(T entity)
         {
-            context.Set<T>().Add(entity);
+            Context.Set<T>().Add(entity);
         }
 
         public virtual void Update(T entity)
         {
-            context.Entry(entity).State = EntityState.Modified;
+            Context.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Delete(int id)
         {
-            var entity = new T() { Id = id };
-            context.Entry(entity).State = EntityState.Deleted;
+            var entity = new T {Id = id};
+            Context.Entry(entity).State = EntityState.Deleted;
         }
-
     }
 }

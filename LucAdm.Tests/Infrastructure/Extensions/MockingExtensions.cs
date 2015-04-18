@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NSubstitute;
 
 namespace LucAdm.Tests
@@ -17,12 +15,12 @@ namespace LucAdm.Tests
         }
 
         public static IList<T> AsList<T>(this ObjectBuilder<T> builder)
-            where T: class
+            where T : class
         {
-            return new List<T>() { builder.Build() };
+            return new List<T> {builder.Build()};
         }
 
-        public static IDbSet<T> Returns<T>(this IDbSet<T> dbSet, IList<T> data) 
+        public static IDbSet<T> Returns<T>(this IDbSet<T> dbSet, IList<T> data)
             where T : class
         {
             var queryableData = data.AsQueryable();

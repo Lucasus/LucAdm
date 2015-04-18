@@ -4,20 +4,23 @@ namespace LucAdm.Tests
 {
     public class UsersPage
     {
-        private IWebDriver driver;
+        private readonly IWebDriver _driver;
 
         public UsersPage(IWebDriver driver)
         {
-            this.driver = driver;
+            _driver = driver;
         }
 
-        public string Url { get { return "/"; } }
+        public string Url
+        {
+            get { return "/"; }
+        }
 
         public string Header
         {
             get
             {
-                var header = driver.FindElement(By.CssSelector("header"));
+                var header = _driver.FindElement(By.CssSelector("header"));
                 return header.Text;
             }
         }

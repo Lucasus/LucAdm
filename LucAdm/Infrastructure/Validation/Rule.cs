@@ -1,6 +1,3 @@
-using System;
-using System.Linq.Expressions;
-using System.Reflection;
 namespace LucAdm
 {
     public abstract class Rule

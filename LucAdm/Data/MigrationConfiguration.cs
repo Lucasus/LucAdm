@@ -1,5 +1,5 @@
-﻿using LucAdm;
-using System.Data.Entity.Migrations;
+﻿using System.Data.Entity.Migrations;
+using LucAdm;
 
 public sealed class MigrationConfiguration : DbMigrationsConfiguration<PersistenceContext>
 {
@@ -9,7 +9,6 @@ public sealed class MigrationConfiguration : DbMigrationsConfiguration<Persisten
         MigrationsDirectory = @"Data\Migrations";
         ContextKey = "LucAdm.PersistenceContext";
     }
-
 
     protected override void Seed(PersistenceContext context)
     {

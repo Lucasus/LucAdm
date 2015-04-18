@@ -4,21 +4,21 @@
     {
         public CreateUserCommandBuilder Create()
         {
-            instance = new CreateUserCommand()
+            Instance = new CreateUserCommand
             {
                 AcceptedTermsOfUse = true,
                 Email = "email@email.com",
                 Password = "somePassword",
                 RepeatedPassword = "somePassword",
-                UserName = "userName",
+                UserName = "userName"
             };
             return this;
         }
 
         public CreateUserCommandBuilder With(string userName = null, string password = null)
         {
-            instance.UserName = userName ?? instance.UserName;
-            instance.Password = password ?? instance.Password;
+            Instance.UserName = userName ?? Instance.UserName;
+            Instance.Password = password ?? Instance.Password;
             return this;
         }
     }

@@ -93,7 +93,11 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\controllers\navCtrl.js" />
-    <Content Include="app\controllers\userCtrl.js" />
+    <Content Include="app\controllers\userModalCtrl.js" />
+    <Content Include="app\controllers\usersCtrl.js" />
+    <Content Include="app\directives\confirm.js" />
+    <Content Include="app\services\usersResource.js" />
+    <Content Include="app\views\userModal.html" />
     <Content Include="css\bootstrap.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -189,21 +193,21 @@
     <MyReleaseOutput>.\dist</MyReleaseOutput>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
   </PropertyGroup>
-	<PropertyGroup>
-	  <PipelineCollectFilesPhaseDependsOn>
+  <PropertyGroup>
+    <PipelineCollectFilesPhaseDependsOn>
 		CustomCollectFiles;
 		$(PipelineCollectFilesPhaseDependsOn);
 	  </PipelineCollectFilesPhaseDependsOn>
-	</PropertyGroup>
-	<Target Name="CustomCollectFiles">
-	  <Message Text="Inside of CustomCollectFiles" Importance="high"/>
-	  <ItemGroup>
-		<_CustomFiles Include="$(ProjectDir)dist\*" />
-		<FilesForPackagingFromProject  Include="%(_CustomFiles.Identity)">
-		  <DestinationRelativePath>dist\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
-		</FilesForPackagingFromProject>
-	  </ItemGroup>
-	</Target>  
+  </PropertyGroup>
+  <Target Name="CustomCollectFiles">
+    <Message Text="Inside of CustomCollectFiles" Importance="high" />
+    <ItemGroup>
+      <_CustomFiles Include="$(ProjectDir)dist\*" />
+      <FilesForPackagingFromProject Include="%(_CustomFiles.Identity)">
+        <DestinationRelativePath>dist\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+      </FilesForPackagingFromProject>
+    </ItemGroup>
+  </Target>
   <PropertyGroup>
     <PreBuildEvent>
       cd "$(ProjectDir)"

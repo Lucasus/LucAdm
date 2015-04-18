@@ -2,22 +2,28 @@
 {
     public class UserService
     {
-        private UserRepository userRepository; 
+        private readonly UserRepository _userRepository;
 
         public UserService(UserRepository userRepository)
         {
-            this.userRepository = userRepository;
+            _userRepository = userRepository;
         }
 
         public OperationResponse<int> CreateUser(CreateUserCommand command)
         {
             return command.IsValid(new CreateUserCommandValidator())
-                .And(new UserNameUnique(userRepository) { UserName = command.UserName })
+                .And(new UserNameUnique(_userRepository) {UserName = command.UserName})
                 .Then(() =>
-            {
-                return new OperationResponse<int>(1);
-            });
+                {
+                    //_userRepository.Add(new User()
+                    //{
+                    //    Active = false,
+                    //    Email = command.Email,
+                    //    HashedPassword = command.Password,
+                    //    UserName = command.UserName
+                    //});
+                    return new OperationResponse<int>(1);
+                });
         }
     }
-
 }

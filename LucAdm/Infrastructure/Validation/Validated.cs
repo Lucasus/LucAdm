@@ -5,13 +5,13 @@ namespace LucAdm
 {
     public class Validated<T>
     {
-        public T Value { get; set; }
-        public bool IsValid { get; set; }
-
         public Validated(T val)
         {
             Value = val;
         }
+
+        public T Value { get; set; }
+        public bool IsValid { get; set; }
 
         public static implicit operator Validated<T>(T val)
         {
@@ -20,17 +20,13 @@ namespace LucAdm
 
         public static implicit operator Validated<T>(string rawValue)
         {
-            var converter = TypeDescriptor.GetConverter(typeof(T));
+            var converter = TypeDescriptor.GetConverter(typeof (T));
 
-            if (converter != null && converter.IsValid(rawValue))
+            if (converter.IsValid(rawValue))
             {
-                return new Validated<T>((T)converter.ConvertFromString(rawValue)) { IsValid = true };
+                return new Validated<T>((T) converter.ConvertFromString(rawValue)) {IsValid = true};
             }
-            else
-            {
-                return new Validated<T>(default(T)) { IsValid = false };
-
-            }
+            return new Validated<T>(default(T)) {IsValid = false};
         }
 
         public static implicit operator T(Validated<T> val)
@@ -40,33 +36,33 @@ namespace LucAdm
 
         public override string ToString()
         {
-            if(Value == null)
+            if (Value == null)
             {
-                return null;
+                return string.Empty;
             }
             return Value.ToString();
         }
 
         public override bool Equals(object obj)
         {
-            if(obj == null && this.Value != null)
+            if (obj == null && Value != null)
             {
                 return false;
             }
-            if(obj.GetType() != typeof(T))
+            if (obj != null && obj.GetType() != typeof (T))
             {
                 return false;
             }
-            return EqualityComparer<T>.Default.Equals(this.Value, (T)obj);
+            return EqualityComparer<T>.Default.Equals(Value, (T) obj);
         }
 
         public override int GetHashCode()
         {
-            if(this.Value == null)
+            if (Value == null)
             {
                 return 0;
             }
-            return this.Value.GetHashCode();
+            return Value.GetHashCode();
         }
     }
 }

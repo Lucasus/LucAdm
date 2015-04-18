@@ -5,38 +5,38 @@ namespace LucAdm
 {
     public class UnitOfWork
     {
-        private DbContext context;
-        private bool canceled = false;
-
-        public bool Canceled { get { return canceled; } }
+        private readonly DbContext _context;
 
         public UnitOfWork(DbContext context)
         {
-            this.context = context;
+            Canceled = false;
+            _context = context;
         }
+
+        public bool Canceled { get; private set; }
 
         public void Do(Action<UnitOfWork> work)
         {
             try
             {
                 work(this);
-                if (!canceled)
+                if (!Canceled)
                 {
-                    context.SaveChanges();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception)
             {
-                canceled = true;
+                Canceled = true;
                 throw;
             }
         }
 
         public void Cancel()
         {
-            if (!canceled)
+            if (!Canceled)
             {
-                canceled = true;
+                Canceled = true;
             }
         }
     }

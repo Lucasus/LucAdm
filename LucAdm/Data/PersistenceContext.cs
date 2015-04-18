@@ -11,13 +11,12 @@ namespace LucAdm
 {
     public class PersistenceContext : DbContext
     {
-        public virtual IDbSet<User> Users { get; set; }
-
         public PersistenceContext()
-            : base()
         {
-            Database.SetInitializer<PersistenceContext>(new MigrateDatabaseToLatestVersion<PersistenceContext, MigrationConfiguration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PersistenceContext, MigrationConfiguration>());
         }
+
+        public virtual IDbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -34,9 +33,9 @@ namespace LucAdm
         private IEnumerable<Type> getMappingTypes()
         {
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
-                       .Where(type => !String.IsNullOrEmpty(type.Namespace))
-                       .Where(type => type.BaseType != null && type.BaseType.IsGenericType
-                            && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
+                .Where(type => !string.IsNullOrEmpty(type.Namespace))
+                .Where(type => type.BaseType != null && type.BaseType.IsGenericType
+                               && type.BaseType.GetGenericTypeDefinition() == typeof (EntityTypeConfiguration<>));
             return typesToRegister;
         }
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LucAdm.Tests
+﻿namespace LucAdm.Tests
 {
     public static class Some
     {
@@ -17,6 +11,5 @@ namespace LucAdm.Tests
         {
             return new UserBuilder().Create();
         }
-
     }
 }

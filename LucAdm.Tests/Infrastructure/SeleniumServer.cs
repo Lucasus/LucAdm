@@ -5,31 +5,8 @@ namespace LucAdm.Tests
 {
     public sealed class SeleniumServer : IDisposable
     {
-        private Process process;
-        private bool isStarted = false;
-
-        public SeleniumServer Start()
-        {
-            if (isStarted)
-            {
-                return this;
-            }
-
-            isStarted = true;
-
-            process = new Process();
-            process.StartInfo.FileName = "java";
-            process.StartInfo.Arguments = JavaArguments;
-            process.StartInfo.CreateNoWindow = true;
-            process.Start();
-            return this;
-        }
-
-        public void Stop()
-        {
-            process.Kill();
-            isStarted = false;
-        }
+        private bool _isStarted;
+        private Process _process;
 
         private string JavaArguments
         {
@@ -42,10 +19,38 @@ namespace LucAdm.Tests
 
         public void Dispose()
         {
-            if(process != null)
+            if (_process != null)
             {
-                process.Dispose();
+                _process.Dispose();
             }
+        }
+
+        public SeleniumServer Start()
+        {
+            if (_isStarted)
+            {
+                return this;
+            }
+
+            _isStarted = true;
+
+            _process = new Process
+            {
+                StartInfo =
+                {
+                    FileName = "java",
+                    Arguments = JavaArguments,
+                    CreateNoWindow = true
+                }
+            };
+            _process.Start();
+            return this;
+        }
+
+        public void Stop()
+        {
+            _process.Kill();
+            _isStarted = false;
         }
     }
 }

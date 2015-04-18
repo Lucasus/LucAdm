@@ -2,13 +2,13 @@
 
 namespace LucAdm.Web
 {
-    public class AutoMapperConfig
+    public static class AutoMapperConfig
     {
         public static void Register()
         {
             Mapper.Initialize(config =>
             {
-                config.AddProfile(new VMMappingProfile());
+                config.AddProfile(new VmMappingProfile());
             });
         }
     }

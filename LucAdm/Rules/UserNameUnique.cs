@@ -2,21 +2,20 @@ namespace LucAdm
 {
     public class UserNameUnique : Rule
     {
-        private UserRepository userRepository;
-
-        public string UserName { get; set; }
+        private readonly UserRepository _userRepository;
 
         public UserNameUnique(UserRepository userRepository)
         {
-            this.userRepository = userRepository;
-            this.Name = PropertyName.Get((User x) => x.UserName);
-            this.Message = "User name must be unique";
+            _userRepository = userRepository;
+            Name = PropertyName.Get((User x) => x.UserName);
+            Message = "User name must be unique";
         }
+
+        public string UserName { get; set; }
 
         public override bool Check()
         {
-            return userRepository.GetByUserName(this.UserName) == null;
+            return _userRepository.GetByUserName(UserName) == null;
         }
-
     }
 }

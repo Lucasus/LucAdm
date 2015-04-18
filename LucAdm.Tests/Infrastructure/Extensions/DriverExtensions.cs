@@ -1,6 +1,5 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Configuration;
+﻿using System.Configuration;
+using OpenQA.Selenium;
 
 namespace LucAdm.Tests
 {
@@ -8,14 +7,14 @@ namespace LucAdm.Tests
     {
         public static void GoToRelativeUrl(this INavigation navigation, string relativeUrl)
         {
-            var port = Int32.Parse(ConfigurationManager.AppSettings.Get("Port"));
+            var port = int.Parse(ConfigurationManager.AppSettings.Get("Port"));
 
             if (!relativeUrl.StartsWith("/"))
             {
                 relativeUrl = "/" + relativeUrl;
             }
 
-            navigation.GoToUrl(String.Format("http://localhost:{0}{1}", port, relativeUrl));
+            navigation.GoToUrl(string.Format("http://localhost:{0}{1}", port, relativeUrl));
         }
     }
 }
