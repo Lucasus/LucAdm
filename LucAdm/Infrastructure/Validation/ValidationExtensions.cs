@@ -5,7 +5,7 @@ namespace LucAdm
 {
     public static class ValidationExtensions
     {
-        public static ValidationResult IsValid<TCommand>(this TCommand command, AbstractValidator<TCommand> validator)
+        public static ValidationResult Validate<TCommand>(this TCommand command, AbstractValidator<TCommand> validator)
             where TCommand : IValidatable
         {
             var validationResult = new ValidationResult();
@@ -31,7 +31,7 @@ namespace LucAdm
             return validationResult;
         }
 
-        public static OperationResponse<TResult> Then<TResult>(this ValidationResult validationResult,
+        public static OperationResponse<TResult> IfValid<TResult>(this ValidationResult validationResult,
             Func<ValidationResult, OperationResponse<TResult>> operation)
         {
             if (validationResult.IsValid)
@@ -41,7 +41,7 @@ namespace LucAdm
             return new OperationResponse<TResult>(default(TResult), validationResult);
         }
 
-        public static OperationResponse<TResult> Then<TResult>(this ValidationResult validationResult,
+        public static OperationResponse<TResult> IfValid<TResult>(this ValidationResult validationResult,
             Func<OperationResponse<TResult>> operation)
         {
             if (validationResult.IsValid)

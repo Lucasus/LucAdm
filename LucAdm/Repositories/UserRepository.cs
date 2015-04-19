@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace LucAdm
 {
-    public sealed class UserRepository : Repository<User>
+    public sealed class UserRepository : Repository<User, PersistenceContext>
     {
         public UserRepository(PersistenceContext context) : base(context)
         {

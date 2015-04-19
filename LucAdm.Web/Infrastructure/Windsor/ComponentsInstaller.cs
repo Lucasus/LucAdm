@@ -10,11 +10,14 @@ namespace LucAdm.Web
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<UnitOfWork>()
-                                .LifestyleTransient());
+                .LifestyleTransient());
+
+            container.Register(Component.For<UnitOfWorkFactoy>()
+                .LifestyleTransient());
 
             container.Register(Classes.FromThisAssembly()
-                                .BasedOn<ApiController>()
-                                .LifestyleTransient());
+                .BasedOn<ApiController>()
+                .LifestyleTransient());
 
             container.Register(Classes.FromAssemblyContaining<UserService>()
                 .Where(x => x.Name.Contains("Service"))

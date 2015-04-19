@@ -10,8 +10,8 @@ namespace LucAdm.Web
         {
             container.AddFacility<EntityFrameworkFacility>();
 
-            container.Register(Classes.FromAssemblyContaining(typeof(Repository<>))
-                                .BasedOn(typeof(Repository<>))
+            container.Register(Classes.FromAssemblyContaining(typeof(Repository<,>))
+                                .BasedOn(typeof(Repository<,>))
                                 .LifestyleTransient());
         }
     }

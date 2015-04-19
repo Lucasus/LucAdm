@@ -79,6 +79,6 @@ gulp.task("index-release", ["css-release", "scripts-release"], function () {
 });
 
 //Set a default tasks
-gulp.task("debug", ["fonts", "scripts-debug", "less-debug", "index-debug"], function () { });
-gulp.task("release", ["fonts", "scripts-release", "css-release", "index-release"], function () { });
+gulp.task("Debug", ["fonts", "scripts-debug", "less-debug", "index-debug"], function () { });
+gulp.task("Release", ["fonts", "scripts-release", "css-release", "index-release"], function () { });
 

@@ -21,7 +21,7 @@ namespace LucAdm.Web
         {
             return new UsersVm()
             {
-                List = _userRepository.Get(query).Select(x => x.ToViewModel<UserVm>()).ToList(),
+                List = _userRepository.Get(query).Select(x => x.ToViewModel<UserItemVm>()).ToList(),
                 Total = 15
             };
         }
@@ -37,8 +37,7 @@ namespace LucAdm.Web
         }
 
 
-        [Route("api/users/{id}")]
-        public HttpResponseMessage Post(UpdateUserCommand command)
+        public HttpResponseMessage Put(UpdateUserCommand command)
         {
             return Request.CreateResponse(HttpStatusCode.OK);
         }

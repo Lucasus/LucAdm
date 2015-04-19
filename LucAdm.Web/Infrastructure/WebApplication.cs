@@ -9,8 +9,11 @@ namespace LucAdm.Web
             GlobalConfiguration.Configure(config =>
             {
                 AutoMapperConfig.Register();
+                BindingConfig.Register(config);
                 CompositionRootConfig.Register(config);
                 RoutingConfig.Register(config);
+
+                config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new ValidatedPrimitiveConverter());
             });
         }
     }

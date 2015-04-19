@@ -10,6 +10,22 @@ namespace LucAdm
             Value = val;
         }
 
+        public Validated(string rawValue)
+        {
+            var converter = TypeDescriptor.GetConverter(typeof(T));
+
+            if (converter.IsValid(rawValue))
+            {
+                IsValid = true;
+                Value = (T) converter.ConvertFromString(rawValue);
+            }
+            else
+            {
+                IsValid = false;
+                Value = default(T);
+            }
+        }
+
         public T Value { get; private set; }
         public bool IsValid { get; private set; }
 
@@ -36,11 +52,7 @@ namespace LucAdm
 
         public override string ToString()
         {
-            if (Value == null)
-            {
-                return string.Empty;
-            }
-            return Value.ToString();
+            return Value == null ? string.Empty : Value.ToString();
         }
 
         public override bool Equals(object obj)
@@ -58,11 +70,7 @@ namespace LucAdm
 
         public override int GetHashCode()
         {
-            if (Value == null)
-            {
-                return 0;
-            }
-            return Value.GetHashCode();
+            return Value == null ? 0 : Value.GetHashCode();
         }
     }
 }

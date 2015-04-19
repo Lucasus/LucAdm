@@ -19,12 +19,12 @@
             $scope.save = function (user) {
                 if (userId) {
                     usersResource.update({ id: userId }, user, function () {
-                        $modalInstance.dismiss("cancel");
+                        $modalInstance.close();
                     });
                 }
                 else {
                     usersResource.create({}, user, function () {
-                        $modalInstance.dismiss("cancel");
+                        $modalInstance.close();
                     });
                 }
             }

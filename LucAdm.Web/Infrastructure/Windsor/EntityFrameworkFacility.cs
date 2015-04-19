@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Facilities;
+﻿using System.Data.Entity;
+using Castle.MicroKernel.Facilities;
 using Castle.MicroKernel.Registration;
 
 namespace LucAdm.Web
@@ -7,7 +8,7 @@ namespace LucAdm.Web
     {
         protected override void Init()
         {
-            Kernel.Register(Component.For<PersistenceContext>().LifestylePerWebRequest());
+            Kernel.Register(Component.For<PersistenceContext, DbContext>().ImplementedBy<PersistenceContext>().LifestylePerWebRequest());
         }
     }
 }

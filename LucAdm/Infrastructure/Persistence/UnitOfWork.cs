@@ -3,6 +3,21 @@ using System.Data.Entity;
 
 namespace LucAdm
 {
+    public class UnitOfWorkFactoy
+    {
+        private readonly DbContext _context;
+
+        public UnitOfWorkFactoy(DbContext context)
+        {
+            _context = context;
+        }
+
+        public UnitOfWork Create()
+        {
+            return new UnitOfWork(_context);
+        }
+    }
+
     public class UnitOfWork
     {
         private readonly DbContext _context;
@@ -24,6 +39,24 @@ namespace LucAdm
                 {
                     _context.SaveChanges();
                 }
+            }
+            catch (Exception)
+            {
+                Canceled = true;
+                throw;
+            }
+        }
+
+        public T Do<T>(Func<UnitOfWork, T> work)
+        {
+            try
+            {
+                var result = work(this);
+                if (!Canceled)
+                {
+                    _context.SaveChanges();
+                }
+                return result;
             }
             catch (Exception)
             {

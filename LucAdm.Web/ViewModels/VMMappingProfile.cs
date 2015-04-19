@@ -7,6 +7,7 @@ namespace LucAdm.Web
         protected override void Configure()
         {
             Mapper.CreateMap<User, UserVm>();
+            Mapper.CreateMap<User, UserItemVm>();
         }
     }
 }
