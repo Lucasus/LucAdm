@@ -34,7 +34,7 @@ gulp.task("fonts", function () {
     .pipe(gulp.dest("./fonts"));
 });
 
-gulp.task("less-debug", function () {
+gulp.task("less", function () {
     return gulp.src(config.less)
       .pipe(newer("./css"))
       .pipe(less({
@@ -49,7 +49,7 @@ gulp.task("scripts-debug", ["clean"], function () {
       .pipe(gulp.dest("./lib"));
 });
 
-gulp.task("index-debug", ["less-debug", "scripts-debug"], function () {
+gulp.task("index-debug", ["less", "scripts-debug"], function () {
     return gulp.src("index.html")
         .pipe(inject(series(gulp.src(["css/*.css"]), gulp.src(config.lib).pipe(gulp.dest("./lib")), gulp.src(config.src)).pipe(debug())))
         .pipe(gulp.dest("."));
@@ -64,8 +64,8 @@ gulp.task("scripts-release", ["clean"], function () {
 });
 
 
-gulp.task("css-release", function () {
-    return gulp.src(config.css)
+gulp.task("css-release", ["less"], function () {
+    return gulp.src(["css/*.css"])
     .pipe(debug({title: "css-release"}))
     .pipe(concat("all.css"))
     .pipe(gulp.dest("./dist"));
@@ -79,6 +79,6 @@ gulp.task("index-release", ["css-release", "scripts-release"], function () {
 });
 
 //Set a default tasks
-gulp.task("Debug", ["fonts", "scripts-debug", "less-debug", "index-debug"], function () { });
+gulp.task("Debug", ["fonts", "scripts-debug", "less", "index-debug"], function () { });
 gulp.task("Release", ["fonts", "scripts-release", "css-release", "index-release"], function () { });
 
