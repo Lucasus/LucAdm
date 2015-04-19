@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 
 namespace LucAdm
 {
@@ -16,21 +17,19 @@ namespace LucAdm
 
         public IEnumerable<User> Get(GetUsersQuery query)
         {
-            var users = Context.Users.Where(x => x.UserName.Contains(query.SearchTerm) || string.IsNullOrEmpty(query.SearchTerm));
-            switch (query.SortType)
-            {
-                case "userName_asc":
-                    users = users.OrderBy(x => x.UserName);
-                    break;
-                case "userName_desc":
-                    users = users.OrderByDescending(x => x.UserName);
-                    break;
-                default:
-                    users = users.OrderBy(x => x.Id);
-                    break;
-            }
-            users = users.Skip((query.Page - 1) * query.PageSize).Take(query.PageSize);
-            return users.ToList();            
+            var sortColumn = string.IsNullOrEmpty(query.SortColumn) ? PropertyName.Get((User x) => x.Id) : query.SortColumn.FirstLetterToUpper();
+            var sortType = query.SortType == "desc" ? " descending" : "";
+            var users = Context.Users.Where(x => x.UserName.Contains(query.SearchTerm) || string.IsNullOrEmpty(query.SearchTerm))
+                .OrderBy(sortColumn + sortType)
+                .Skip((query.Page - 1) * query.PageSize).Take(query.PageSize)
+                .ToList();
+
+            return users;            
+        }
+
+        public int Count(string searchTerm)
+        {
+            return Context.Users.Count(x => x.UserName.Contains(searchTerm) || string.IsNullOrEmpty(searchTerm));
         }
     }
 }

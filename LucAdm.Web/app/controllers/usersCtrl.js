@@ -5,6 +5,7 @@
 
         var users = {
             searchTerm: "",
+            sortColumn: "",
             sortType: "",
             page: 1,
             pageSize: 10,
@@ -17,6 +18,7 @@
         function loadUsers() {
             usersResource.query({
                 searchTerm: users.searchTerm,
+                sortColumn: users.sortColumn,
                 sortType: users.sortType,
                 page: users.page,
                 pageSize: users.pageSize
@@ -43,7 +45,8 @@
         };
 
         $scope.sort = function (column) {
-            users.sortType = column + (users.sortType === column + "_asc" ? "_desc" : "_asc");
+            users.sortColumn = column;
+            users.sortType = (users.sortType === "asc" ? "desc" : "asc");
             loadUsers();
         };
 

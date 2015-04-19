@@ -42,18 +42,16 @@
                         <input type="text" class="form-control" ng-model="users.searchTerm" />
                     </div>
                     <button type="button" class="btn btn-primary" ng-click="search()">Search</button>
-                    <div class="btn-group pull-right">
-                        <button class="btn btn-success" ng-click="openModal('')">
-                            <span class=" glyphicon glyphicon-plus">
-                            </span> Add user
-                        </button>
-                    </div>
+                    <button class="btn btn-success pull-right" ng-click="openModal('')">
+                        <span class=" glyphicon glyphicon-plus">
+                        </span> Add user
+                    </button>
                 </div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th><button type="button" class="btn-link tableBtn" ng-click="sort('userName')">User Name</button></th>
-                            <th>Email</th>
+                            <th><button type="button" class="btn-link tableBtn" ng-click="sort('email')">Email</button></th>
                             <th>Active</th>
                             <th style="width: 50px;"></th>
                             <th style="width: 50px;"></th>

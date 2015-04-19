@@ -21,7 +21,7 @@ namespace LucAdm.Web
             return new UsersVm()
             {
                 List = _userRepository.Get(query).Select(x => x.ToViewModel<UserItemVm>()).ToList(),
-                Total = 15
+                Total = _userRepository.Count(query.SearchTerm)
             };
         }
 
