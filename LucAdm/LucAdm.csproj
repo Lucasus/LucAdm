@@ -97,6 +97,8 @@
     <Compile Include="Rules\UserNameUnique.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Infrastructure\Validation\ValidationExtensions.cs" />
+    <Compile Include="Validators\IdValidator.cs" />
+    <Compile Include="Validators\UpdateUserCommandValidator.cs" />
     <Compile Include="Validators\CreateUserCommandValidator.cs" />
   </ItemGroup>
   <ItemGroup>

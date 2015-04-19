@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -39,11 +38,13 @@ namespace LucAdm.Web
 
         public HttpResponseMessage Put(UpdateUserCommand command)
         {
+            _userService.UpdateUser(command);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        public HttpResponseMessage Delete(int id)
+        public HttpResponseMessage Delete(Validated<int> id)
         {
+            _userService.DeleteUser(id);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
     }

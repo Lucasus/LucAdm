@@ -3,11 +3,11 @@ using System.Data.Entity;
 
 namespace LucAdm
 {
-    public class UnitOfWorkFactoy
+    public class UnitOfWorkFactory
     {
         private readonly DbContext _context;
 
-        public UnitOfWorkFactoy(DbContext context)
+        public UnitOfWorkFactory(DbContext context)
         {
             _context = context;
         }

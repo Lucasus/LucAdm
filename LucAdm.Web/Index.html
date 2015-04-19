@@ -52,7 +52,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th><button type="button" class="btn-link tableBtn" data-ng-click="sort('userName')">User Name</button></th>
+                            <th><button type="button" class="btn-link tableBtn" ng-click="sort('userName')">User Name</button></th>
                             <th>Email</th>
                             <th>Active</th>
                             <th style="width: 50px;"></th>
@@ -65,10 +65,10 @@
                             <td>{{user.email}}</td>
                             <td><input type="checkbox" ng-model="user.active" /></td>
                             <td>
-                                <button type="button" class="cmdEdit btn-link tableBtn" data-ng-click="openModal(user.id)">Edit</button>
+                                <button type="button" class="cmdEdit btn-link tableBtn" ng-click="openModal(user.id)">Edit</button>
                             </td>
                             <td>
-                                <button type="button" class="cmdDelete btn-link tableBtn">Delete</button>
+                                <button type="button" class="cmdDelete btn-link tableBtn" ng-confirm-message="Are you sure?" ng-confirm-click="delete(user.id)">Delete</button>
                             </td>
                         </tr>
                     </tbody>

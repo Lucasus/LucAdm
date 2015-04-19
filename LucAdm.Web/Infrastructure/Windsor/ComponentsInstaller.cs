@@ -12,7 +12,7 @@ namespace LucAdm.Web
             container.Register(Component.For<UnitOfWork>()
                 .LifestyleTransient());
 
-            container.Register(Component.For<UnitOfWorkFactoy>()
+            container.Register(Component.For<UnitOfWorkFactory>()
                 .LifestyleTransient());
 
             container.Register(Classes.FromThisAssembly()

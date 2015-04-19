@@ -6,7 +6,6 @@ namespace LucAdm
     public static class ValidationExtensions
     {
         public static ValidationResult Validate<TCommand>(this TCommand command, AbstractValidator<TCommand> validator)
-            where TCommand : IValidatable
         {
             var validationResult = new ValidationResult();
             foreach (var error in validator.Validate(command).Errors)
@@ -15,7 +14,7 @@ namespace LucAdm
             }
             return validationResult;
         }
-
+       
         public static ValidationResult And(this ValidationResult validationResult, params Rule[] rules)
         {
             if (validationResult.IsValid)
@@ -31,8 +30,40 @@ namespace LucAdm
             return validationResult;
         }
 
-        public static OperationResponse<TResult> IfValid<TResult>(this ValidationResult validationResult,
-            Func<ValidationResult, OperationResponse<TResult>> operation)
+        public static OperationResponse IfValid(this ValidationResult validationResult, Action operation)
+        {
+            return IfValid(validationResult, result => operation());
+        }
+
+        public static OperationResponse IfValid(this ValidationResult validationResult, Action<ValidationResult> operation)
+        {
+            if (validationResult.IsValid)
+            {
+                operation(validationResult);
+            }
+            return new OperationResponse(validationResult);
+        }
+
+        public static OperationResponse IfValid(this ValidationResult validationResult, Func<OperationResponse> operation)
+        {
+            return IfValid(validationResult, result => operation());
+        }
+
+        public static OperationResponse IfValid(this ValidationResult validationResult, Func<ValidationResult, OperationResponse> operation)
+        {
+            if (validationResult.IsValid)
+            {
+                return operation(validationResult);
+            }
+            return new OperationResponse(validationResult);
+        }
+
+        public static OperationResponse<TResult> IfValid<TResult>(this ValidationResult validationResult, Func<OperationResponse<TResult>> operation)
+        {
+            return IfValid(validationResult, result => operation());
+        }
+
+        public static OperationResponse<TResult> IfValid<TResult>(this ValidationResult validationResult, Func<ValidationResult, OperationResponse<TResult>> operation)
         {
             if (validationResult.IsValid)
             {
@@ -41,14 +72,5 @@ namespace LucAdm
             return new OperationResponse<TResult>(default(TResult), validationResult);
         }
 
-        public static OperationResponse<TResult> IfValid<TResult>(this ValidationResult validationResult,
-            Func<OperationResponse<TResult>> operation)
-        {
-            if (validationResult.IsValid)
-            {
-                return operation();
-            }
-            return new OperationResponse<TResult>(default(TResult), validationResult);
-        }
     }
 }

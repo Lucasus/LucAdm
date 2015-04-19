@@ -11,7 +11,6 @@ namespace LucAdm.Web
 
         public static void Register(HttpConfiguration config)
         {
-            // DI Composition Root
             _container = new WindsorContainer().Install(FromAssembly.This());
             config.Services.Replace(typeof(IHttpControllerActivator), new WinsorControllerActivator(_container));
         }
