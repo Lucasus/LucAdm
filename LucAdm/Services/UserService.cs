@@ -15,7 +15,7 @@
         {
             return command.Validate(new CreateUserCommandValidator())
                 .And(new UserNameUnique(_userRepository) {UserName = command.UserName})
-                .IfValid(() => _unitOfWorkFactory.Create().Do(work =>
+                .IfValid(() => _unitOfWorkFactory.Do(work =>
                 {
                     var user = new User
                     {
@@ -32,7 +32,7 @@
         public OperationResponse UpdateUser(UpdateUserCommand command)
         {
             return command.Validate(new UpdateUserCommandValidator())
-                .IfValid(result => _unitOfWorkFactory.Create().Do(work =>
+                .IfValid(result => _unitOfWorkFactory.Do(work =>
                 {
                     var user = _userRepository.GetById(command.Id);
                     user.Email = command.Email;
@@ -44,7 +44,7 @@
         public OperationResponse DeleteUser(Validated<int> id)
         {
             return id.Validate(new IdValidator())
-                .IfValid(() => _unitOfWorkFactory.Create().Do(work =>
+                .IfValid(() => _unitOfWorkFactory.Do(work =>
                 {
                     _userRepository.Delete(id);
                 }));
