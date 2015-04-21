@@ -5,8 +5,9 @@ This project is a reference for technologies, architecture and best practices us
 
 * **Core**: Entity Framework 6.0, Fluent Validation  
 * **Web**: ASP.NET Web API 2.0, Castle Windsor, AutoMapper, 
-* **Client**: AngularJS 1.2, Bootstrap 3.0, Angular-Bootstrap 1.2
+* **Client**: AngularJS 1.2, Bootstrap 3.0, Angular-Bootstrap 1.2, Bower, Gulp
 * **Tests**: xUnit 2.0, NSubstitute, Fluent Assertions, Selenium
+* **CI**: I'm using Jenkins for CI and deployment, in the future I'll create repo with Jenkins configuration
 
 ##### Installation prequisites
 
