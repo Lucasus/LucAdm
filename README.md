@@ -3,7 +3,7 @@ This project is a reference for technologies, architecture and best practices us
 
 ##### Technologies used
 
-* **Core**: Entity Framework 6.0, Fluent Validation  
+* **Core**: Entity Framework 6.0 Code First, Fluent Validation  
 * **Web**: ASP.NET Web API 2.0, Castle Windsor, AutoMapper, 
 * **Client**: AngularJS 1.2, Bootstrap 3.0, Angular-Bootstrap 1.2, Bower, Gulp
 * **Tests**: xUnit 2.0, NSubstitute, Fluent Assertions, Selenium
