@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Linq.Expressions;
 
 namespace LucAdm
 {
-    public sealed class UserRepository : Repository<User, PersistenceContext>
+    public class UserRepository : Repository<User, PersistenceContext>
     {
         public UserRepository(PersistenceContext context) : base(context)
         {
@@ -19,7 +21,7 @@ namespace LucAdm
         {
             var sortColumn = string.IsNullOrEmpty(query.SortColumn) ? PropertyName.Get((User x) => x.Id) : query.SortColumn.FirstLetterToUpper();
             var sortType = query.SortType == "desc" ? " descending" : "";
-            var users = Context.Users.Where(x => x.UserName.Contains(query.SearchTerm) || string.IsNullOrEmpty(query.SearchTerm))
+            var users = Context.Users.Where(SearchCriteria(query.SearchTerm))
                 .OrderBy(sortColumn + sortType)
                 .Skip((query.Page - 1) * query.PageSize).Take(query.PageSize)
                 .ToList();
@@ -29,7 +31,12 @@ namespace LucAdm
 
         public int Count(string searchTerm)
         {
-            return Context.Users.Count(x => x.UserName.Contains(searchTerm) || string.IsNullOrEmpty(searchTerm));
+            return Context.Users.Count(SearchCriteria(searchTerm));
+        }
+
+        private Expression<Func<User, bool>> SearchCriteria(string searchTerm)
+        {
+            return x => x.UserName.Contains(searchTerm) || string.IsNullOrEmpty(searchTerm);
         }
     }
 }

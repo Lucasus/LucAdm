@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.Migrations;
 using LucAdm;
 
-public sealed class MigrationConfiguration : DbMigrationsConfiguration<PersistenceContext>
+public class MigrationConfiguration : DbMigrationsConfiguration<PersistenceContext>
 {
     public MigrationConfiguration()
     {

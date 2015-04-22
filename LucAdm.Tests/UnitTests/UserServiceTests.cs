@@ -1,6 +1,9 @@
 ﻿using FluentAssertions;
 using NSubstitute;
 using Xunit;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace LucAdm.Tests
 {

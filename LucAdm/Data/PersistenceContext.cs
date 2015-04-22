@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace LucAdm
 {
-    public sealed class PersistenceContext : DbContext
+    public class PersistenceContext : DbContext
     {
         public PersistenceContext()
         {

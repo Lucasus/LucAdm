@@ -23,16 +23,13 @@ namespace LucAdm.Tests
             //TODO: Remove everything from website path first
 
             // Publish newest website version
-            // publishProcess.StartInfo.FileName =  @"C:\Program Files (x86)\MSBuild\12.0\Bin\amd64\MSBuild.exe";
-            var projectFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                @"..\..\..\LucAdm.Web\LucAdm.Web.csproj");
+            var projectFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\LucAdm.Web\LucAdm.Web.csproj");
             var publishProcess = new Process
             {
                 StartInfo =
                 {
-                    FileName = Environment.GetEnvironmentVariable("MSBUILD_PATH") ?? string.Empty,
-                    Arguments = projectFileName +
-                                " /p:DeployOnBuild=true /p:PublishProfile=Debug /p:VisualStudioVersion=12.0",
+                    FileName = @"C:\Program Files (x86)\MSBuild\12.0\Bin\amd64\MSBuild.exe",
+                    Arguments = projectFileName + " /p:DeployOnBuild=true /p:PublishProfile=Debug /p:VisualStudioVersion=12.0",
                     UseShellExecute = false,
                     RedirectStandardOutput = true
                 }
