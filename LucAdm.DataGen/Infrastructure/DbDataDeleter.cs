@@ -9,7 +9,7 @@ using System.Text;
 
 namespace LucAdm.DataGen
 {
-    public sealed class DbDataDeleter
+    public class DbDataDeleter
     {
         private readonly DbContext _context;
         private readonly string[] _ignoredTables = {"sysdiagrams", "__MigrationHistory"};
@@ -19,7 +19,7 @@ namespace LucAdm.DataGen
             _context = context;
         }
 
-        public void DeleteAllData()
+        public virtual void DeleteAllData()
         {
             var allTables = GetAllTables();
             var allRelationships = GetRelationships();
@@ -86,24 +86,8 @@ namespace LucAdm.DataGen
 
         private class Relationship
         {
-            private readonly string _primaryKeyTable;
-            private readonly string _foreignKeyTable;
-
-            public Relationship(string primaryKeyTable, string foreignKeyTable)
-            {
-                _primaryKeyTable = primaryKeyTable;
-                _foreignKeyTable = foreignKeyTable;
-            }
-
-            public string PrimaryKeyTable
-            {
-                get { return _primaryKeyTable; }
-            }
-
-            public string ForeignKeyTable
-            {
-                get { return _foreignKeyTable; }
-            }
+            public string PrimaryKeyTable { get; set; }
+            public string ForeignKeyTable { get; set;}
         }
     }
 }
