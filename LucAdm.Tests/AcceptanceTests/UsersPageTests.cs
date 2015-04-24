@@ -17,6 +17,7 @@ namespace LucAdm.Tests
         [Trait("Category", "Acceptance")]
         public void UsersPage_Should_Display_Header()
         {
+
             var usersPage = new UsersPage(_driver);
 
             _driver.Navigate().GoToRelativeUrl(usersPage.Url);

@@ -23,13 +23,17 @@ namespace LucAdm.Tests
             //TODO: Remove everything from website path first
 
             // Publish newest website version
+            var configuration = ConfigurationManager.AppSettings.Get("Configuration");
             var projectFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\LucAdm.Web\LucAdm.Web.csproj");
+            var msbuildArguments = String.Format("{0} /p:DeployOnBuild=true /p:PublishProfile={1} /p:Configuration={2} /p:VisualStudioVersion=12.0",
+                projectFileName, configuration, configuration);
+
             var publishProcess = new Process
             {
                 StartInfo =
                 {
-                    FileName = @"C:\Program Files (x86)\MSBuild\12.0\Bin\amd64\MSBuild.exe",
-                    Arguments = projectFileName + " /p:DeployOnBuild=true /p:PublishProfile=Debug /p:VisualStudioVersion=12.0",
+                    FileName = ConfigurationManager.AppSettings.Get("MSBuildPath"),
+                    Arguments = msbuildArguments,
                     UseShellExecute = false,
                     RedirectStandardOutput = true
                 }
@@ -51,14 +55,14 @@ namespace LucAdm.Tests
 
             _isStarted = true;
 
-            var applicationPath = @"C:\wwwroot\LucAdm";
+            var applicationPath = ConfigurationManager.AppSettings.Get("WwwRootPath");
             var port = int.Parse(ConfigurationManager.AppSettings.Get("Port"));
 
             _process = new Process
             {
                 StartInfo =
                 {
-                    FileName = @"C:\Program Files\IIS Express\iisexpress.exe",
+                    FileName = ConfigurationManager.AppSettings.Get("IISExpressPath"),
                     Arguments = string.Format("/path:\"{0}\" /port:{1}", applicationPath, port)
                 }
             };
