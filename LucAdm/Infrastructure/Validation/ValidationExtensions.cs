@@ -15,7 +15,7 @@ namespace LucAdm
             return validationResult;
         }
        
-        public static ValidationResult And(this ValidationResult validationResult, params Rule[] rules)
+        public static ValidationResult Check(this ValidationResult validationResult, params Rule[] rules)
         {
             if (validationResult.IsValid)
             {

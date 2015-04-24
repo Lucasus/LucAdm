@@ -10,4 +10,5 @@ namespace LucAdm
 
         public TResult Result { get; private set; }
     }
+
 }

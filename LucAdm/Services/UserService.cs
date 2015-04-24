@@ -14,7 +14,7 @@
         public OperationResponse<int> CreateUser(CreateUserCommand command)
         {
             return command.Validate(new CreateUserCommandValidator())
-                .And(new UserNameUnique(_userRepository) {UserName = command.UserName})
+                .Check(new UserNameUnique(_userRepository) {UserName = command.UserName})
                 .IfValid(() => _unitOfWorkFactory.Do(work =>
                 {
                     var user = new User
@@ -25,7 +25,7 @@
                         UserName = command.UserName
                     };
                     _userRepository.Add(user);
-                    return new OperationResponse<int>(user.Id);
+                    return user.Id.AsOperationResponse();
                 }));
         }
 

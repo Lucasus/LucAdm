@@ -15,10 +15,12 @@ namespace LucAdm.Tests
 
         [Fact]
         [Trait("Category", "Acceptance")]
-        public void Should_Display_Users_Page()
+        public void UsersPage_Should_Display_Header()
         {
             var usersPage = new UsersPage(_driver);
+
             _driver.Navigate().GoToRelativeUrl(usersPage.Url);
+
             usersPage.Header.Should().Contain("Luc");
         }
     }
