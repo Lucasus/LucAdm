@@ -22,61 +22,71 @@ namespace LucAdm.Tests
         {
             //TODO: Remove everything from website path first
 
-            // Publish newest website version
             var configuration = ConfigurationManager.AppSettings.Get("Configuration");
-            var projectFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\LucAdm.Web\LucAdm.Web.csproj");
-            var msbuildArguments = String.Format("{0} /p:DeployOnBuild=true /p:PublishProfile={1} /p:Configuration={2} /p:VisualStudioVersion=12.0",
-                projectFileName, configuration, configuration);
 
-            var publishProcess = new Process
+            if(configuration == "Debug")
             {
-                StartInfo =
+                var projectFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\LucAdm.Web\LucAdm.Web.csproj");
+                var msbuildArguments = String.Format("{0} /p:DeployOnBuild=true /p:PublishProfile={1} /p:Configuration={2} /p:VisualStudioVersion=12.0",
+                    projectFileName, configuration, configuration);
+
+                var publishProcess = new Process
                 {
-                    FileName = ConfigurationManager.AppSettings.Get("MSBuildPath"),
-                    Arguments = msbuildArguments,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true
-                }
-            };
-            publishProcess.Start();
+                    StartInfo =
+                    {
+                        FileName = ConfigurationManager.AppSettings.Get("MSBuildPath"),
+                        Arguments = msbuildArguments,
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true
+                    }
+                };
+                publishProcess.Start();
 
-            var output = publishProcess.StandardOutput.ReadToEnd();
-            publishProcess.WaitForExit();
-            if (!output.Contains("Build succeeded"))
-            {
-                throw new Exception("Build exception: " + output);
+                var output = publishProcess.StandardOutput.ReadToEnd();
+                publishProcess.WaitForExit();
+                if (!output.Contains("Build succeeded"))
+                {
+                    throw new Exception("Build exception: " + output);
+                }
+
+                // Start IIS Express
+                if (_isStarted)
+                {
+                    return this;
+                }
+
+                _isStarted = true;
+
+                var applicationPath = ConfigurationManager.AppSettings.Get("WwwRootPath");
+                var port = int.Parse(ConfigurationManager.AppSettings.Get("Port"));
+
+                _process = new Process
+                {
+                    StartInfo =
+                    {
+                        FileName = ConfigurationManager.AppSettings.Get("IISExpressPath"),
+                        Arguments = string.Format("/path:\"{0}\" /port:{1}", applicationPath, port)
+                    }
+                };
+                _process.Start();
             }
 
-            // Start IIS Express
-            if (_isStarted)
-            {
-                return this;
-            }
 
-            _isStarted = true;
-
-            var applicationPath = ConfigurationManager.AppSettings.Get("WwwRootPath");
-            var port = int.Parse(ConfigurationManager.AppSettings.Get("Port"));
-
-            _process = new Process
-            {
-                StartInfo =
-                {
-                    FileName = ConfigurationManager.AppSettings.Get("IISExpressPath"),
-                    Arguments = string.Format("/path:\"{0}\" /port:{1}", applicationPath, port)
-                }
-            };
-            _process.Start();
             return this;
         }
 
         public void Stop()
         {
-            if (_process.HasExited == false)
+            var configuration = ConfigurationManager.AppSettings.Get("Configuration");
+
+            if (configuration == "Debug")
             {
-                _process.Kill();
+                if (_process.HasExited == false)
+                {
+                    _process.Kill();
+                }
+                _isStarted = false;
             }
-            _isStarted = false;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 
 namespace LucAdm.Tests
@@ -12,8 +13,7 @@ namespace LucAdm.Tests
         {
             get
             {
-                // TODO: we need to take this path from settings
-                return @"-jar C:\Core\selenium-server-standalone-2.45.0.jar";
+                return @"-jar " + ConfigurationManager.AppSettings.Get("SeleniumServerPath");
             }
         }
 

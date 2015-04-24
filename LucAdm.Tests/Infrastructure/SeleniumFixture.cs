@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.IO;
 
 namespace LucAdm.Tests
 {
@@ -15,7 +16,8 @@ namespace LucAdm.Tests
             _usesDbFixture = new UsesDbFixture();
             _webServer = new WebsiteServer().Start();
             _seleniumServer = new SeleniumServer().Start();
-            Driver = new ChromeDriver(@"C:\Core\Selenium");
+            var chromeDriverFolder = AppDomain.CurrentDomain.BaseDirectory;
+            Driver = new ChromeDriver(chromeDriverFolder);
         }
 
         public IWebDriver Driver { get; private set; }
