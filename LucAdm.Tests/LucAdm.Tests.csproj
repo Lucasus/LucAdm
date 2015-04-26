@@ -110,6 +110,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Infrastructure\Attributes\NamedTheoryAttribute.cs" />
     <Compile Include="Infrastructure\Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\WebElementExtensions.cs" />
     <Compile Include="Infrastructure\Web\PageObject.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="UnitTests\Builders\CreateUserCommandBuilder.cs" />
     <Compile Include="Infrastructure\Extensions\MockingExtensions.cs" />
     <Compile Include="UnitTests\Builders\Some.cs" />
+    <Compile Include="Infrastructure\Attributes\NamedFactAttribute.cs" />
     <Compile Include="UnitTests\ValidationTests.cs" />
     <Compile Include="UnitTests\UserServiceTests.cs" />
   </ItemGroup>

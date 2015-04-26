@@ -16,7 +16,6 @@ namespace LucAdm.Tests
         public SeleniumFixture()
         {
             _usesDbFixture = new UsesDbFixture();
-            new PersistenceContext().ResetDbState(EnvironmentEnum.Test);
             _webServer = new WebServer().Start();
             _seleniumServer = new SeleniumServer().Start();
             _browser = new Browser(new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory));

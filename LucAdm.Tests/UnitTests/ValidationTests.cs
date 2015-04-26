@@ -6,12 +6,12 @@ namespace LucAdm.Tests
 {
     public class ValidationTests
     {
-        [Theory]
+        [NamedTheory]
         [Trait("Category", "Unit")]
         [InlineData("5", true, 5)]
         [InlineData("notANumber", false, default(int))]
         [InlineData(null, false, default(int))]
-        public void Mapping_IntAsString_MapsTo_CorrectValidatedInt(string initialValue, bool expectedValid, int expectedValue)
+        public void Mapping_IntAsString_Maps_To_CorrectValidatedInt(string initialValue, bool expectedValid, int expectedValue)
         {
             Mapper.CreateMap<ExampleViewModel, ExampleRequest>();
             var source = new ExampleViewModel {IntProperty = initialValue};
@@ -22,9 +22,9 @@ namespace LucAdm.Tests
             destination.IntProperty.Value.Should().Be(expectedValue);
         }
 
-        [Fact]
+        [NamedFact]
         [Trait("Category", "Unit")]
-        public void Mapping_Null_ToValidatedNullableInt_MapsTo_ValidValidatedInt_WithNullValue()
+        public void Mapping_Null_ToValidatedNullableInt_Maps_To_ValidValidatedInt_WithNullValue()
         {
             Mapper.CreateMap<ExampleViewModel, ExampleRequest>();
             var source = new ExampleViewModel {NullableIntProperty = null};

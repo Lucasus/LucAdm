@@ -6,7 +6,7 @@ namespace LucAdm.Tests
 {
     public class MigrationTests : IClassFixture<UsesDbFixture>
     {
-        [Theory]
+        [NamedTheory]
         [InlineData(EnvironmentEnum.Test)]
         [InlineData(EnvironmentEnum.Dev)]
         [Trait("Category", "Integration")]

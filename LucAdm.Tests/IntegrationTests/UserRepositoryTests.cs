@@ -6,7 +6,7 @@ namespace LucAdm.Tests
     public class UserRepositoryTests : IClassFixture<UsesDbFixture>
     {
         // https://github.com/scott-xu/EntityFramework.Testing
-        [Fact]
+        [NamedFact]
         [Trait("Category", "Integration")]
         public void User_Should_Be_Saved_Correctly()
         {
