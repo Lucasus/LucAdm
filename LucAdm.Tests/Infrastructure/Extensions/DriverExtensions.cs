@@ -11,7 +11,7 @@ namespace LucAdm.Tests
     {
         public static IReadOnlyCollection<IWebElement> WaitForListByCss(this IWebDriver driver, string cssSelector, int? expectedCount = null)
         {
-            new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(x =>
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(x =>
             {
                 return expectedCount == null && driver.ListByCss(cssSelector).Count > 0
                     || expectedCount != null && driver.ListByCss(cssSelector).Count == expectedCount;
