@@ -32,9 +32,9 @@ namespace LucAdm.DataGen
             Active = true
         };
 
-        public override IEnumerable<User> GetData(EnvironmentEnum environment)
+        public override IEnumerable<User> GetGeneratedData(EnvironmentEnum environment)
         {
-            if (environment == EnvironmentEnum.Dev)
+            if (environment == EnvironmentEnum.Dev || environment == EnvironmentEnum.Test)
             {
                 return Enumerable.Range(1, 10).Select(i => new User
                 {

@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.IO;
+using LucAdm.DataGen;
 
 namespace LucAdm.Tests
 {
@@ -9,26 +10,26 @@ namespace LucAdm.Tests
     {
         private readonly SeleniumServer _seleniumServer;
         private readonly UsesDbFixture _usesDbFixture;
-        private readonly WebsiteServer _webServer;
+        private readonly WebServer _webServer;
+        private readonly Browser _browser;
 
         public SeleniumFixture()
         {
             _usesDbFixture = new UsesDbFixture();
-            _webServer = new WebsiteServer().Start();
+            new PersistenceContext().ResetDbState(EnvironmentEnum.Test);
+            _webServer = new WebServer().Start();
             _seleniumServer = new SeleniumServer().Start();
-            var chromeDriverFolder = AppDomain.CurrentDomain.BaseDirectory;
-            Driver = new ChromeDriver(chromeDriverFolder);
+            _browser = new Browser(new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory));
         }
 
-        public IWebDriver Driver { get; private set; }
+        public Browser Browser { get { return _browser; } }
 
         public void Dispose()
         {
-            Driver.Quit();
-            Driver.Dispose();
+            _browser.Quit();
             _seleniumServer.Stop();
             _webServer.Stop();
             _usesDbFixture.Dispose();
         }
     }
-}
+};

@@ -38,7 +38,7 @@ namespace LucAdm.DataGen
                 })
                 .Select(prop => (T) prop.GetValue(null)).ToList();
 
-            var additionalEntites = data.GetData(_environment);
+            var additionalEntites = data.GetGeneratedData(_environment);
             if (additionalEntites != null)
             {
                 entities = entities.Union(additionalEntites).ToList();

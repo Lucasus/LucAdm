@@ -5,7 +5,7 @@ using System.IO;
 
 namespace LucAdm.Tests
 {
-    public sealed class WebsiteServer : IDisposable
+    public sealed class WebServer : IDisposable
     {
         private bool _isStarted;
         private Process _process;
@@ -18,7 +18,7 @@ namespace LucAdm.Tests
             }
         }
 
-        public WebsiteServer Start()
+        public WebServer Start()
         {
             //TODO: Remove everything from website path first
 
@@ -27,7 +27,7 @@ namespace LucAdm.Tests
             if(configuration == "Debug")
             {
                 var projectFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\LucAdm.Web\LucAdm.Web.csproj");
-                var msbuildArguments = String.Format("{0} /p:DeployOnBuild=true /p:PublishProfile={1} /p:Configuration={2} /p:VisualStudioVersion=12.0",
+                var msbuildArguments = String.Format("{0} /p:DeployOnBuild=true /maxcpucount:4 /p:PublishProfile={1} /p:Configuration={2} /p:VisualStudioVersion=12.0",
                     projectFileName, configuration, configuration);
 
                 var publishProcess = new Process

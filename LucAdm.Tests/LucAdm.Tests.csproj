@@ -110,13 +110,17 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Infrastructure\Extensions\StringExtensions.cs" />
+    <Compile Include="Infrastructure\Extensions\WebElementExtensions.cs" />
+    <Compile Include="Infrastructure\Web\PageObject.cs" />
     <Compile Include="AcceptanceTests\Pages\UsersPage.cs" />
     <Compile Include="AcceptanceTests\UsersPageTests.cs" />
     <Compile Include="Infrastructure\Extensions\ContextExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\DriverExtensions.cs" />
-    <Compile Include="Infrastructure\WebsiteServer.cs" />
+    <Compile Include="Infrastructure\Servers\WebServer.cs" />
     <Compile Include="Infrastructure\SeleniumFixture.cs" />
-    <Compile Include="Infrastructure\SeleniumServer.cs" />
+    <Compile Include="Infrastructure\Servers\SeleniumServer.cs" />
+    <Compile Include="Infrastructure\Web\Browser.cs" />
     <Compile Include="IntegrationTests\MigrationTests.cs" />
     <Compile Include="IntegrationTests\UserRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
