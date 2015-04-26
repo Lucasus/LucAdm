@@ -6,9 +6,9 @@ namespace LucAdm.Tests
 {
     public class NamedTheoryAttribute : TheoryAttribute
     {
-        public NamedTheoryAttribute([CallerMemberName] string propertyName = null)
+        public NamedTheoryAttribute([CallerMemberName] string methodName = null)
         {
-            DisplayName = AddSpacesToSentence(propertyName.Replace("_", " "), preserveAcronyms: true);
+            DisplayName = AddSpacesToSentence(methodName.Replace("_", " "), preserveAcronyms: true);
         }
 
         string AddSpacesToSentence(string text, bool preserveAcronyms)

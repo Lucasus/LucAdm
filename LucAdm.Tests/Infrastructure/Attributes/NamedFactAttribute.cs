@@ -6,9 +6,9 @@ namespace LucAdm.Tests
 {
     public class NamedFactAttribute : FactAttribute
     {
-        public NamedFactAttribute([CallerMemberName] string propertyName = null)
+        public NamedFactAttribute([CallerMemberName] string methodName = null)
         {
-            DisplayName = AddSpacesToSentence(propertyName.Replace("_", " "), preserveAcronyms: true);
+            DisplayName = AddSpacesToSentence(methodName.Replace("_", " "), preserveAcronyms: true);
         }
 
         // Method based on this SO answer: http://stackoverflow.com/questions/272633/add-spaces-before-capital-letters
