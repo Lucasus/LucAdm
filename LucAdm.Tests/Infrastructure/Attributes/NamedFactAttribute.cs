@@ -11,7 +11,8 @@ namespace LucAdm.Tests
             DisplayName = AddSpacesToSentence(propertyName.Replace("_", " "), preserveAcronyms: true);
         }
 
-        string AddSpacesToSentence(string text, bool preserveAcronyms)
+        // Method based on this SO answer: http://stackoverflow.com/questions/272633/add-spaces-before-capital-letters
+        private string AddSpacesToSentence(string text, bool preserveAcronyms)
         {
             if (string.IsNullOrWhiteSpace(text))
                 return string.Empty;
@@ -29,5 +30,4 @@ namespace LucAdm.Tests
             return newText.ToString();
         }
     }
-
 }
