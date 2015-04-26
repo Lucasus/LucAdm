@@ -21,9 +21,15 @@ namespace LucAdm.Tests
             userToDelete.ElementFor(".cmdDelete").Click();
         }
 
+        public void ClickEditFor(string userName)
+        {
+            var userToEdit = getUserElements().First(x => x.Text.Contains(userName));
+            userToEdit.ElementFor(".cmdEdit").Click();
+        }
+
         public void SearchFor(string searchTerm)
         {
-            Driver.ElementFor("input[ng-model=\"users.searchTerm\"").SendKeys(searchTerm);
+            Driver.OverrideValueFor("input[ng-model=\"users.searchTerm\"", searchTerm);
             Driver.ElementFor("button[ng-click=\"search()\"").Click();
         }
 
@@ -37,11 +43,21 @@ namespace LucAdm.Tests
             Driver.ElementFor("button[ng-click=\"openModal('')\"").Click();
         }
 
-        public void FillNewUserForm(string userName, string email, string password)
+        public void FillUserForm(bool edit, string userName = null, string email = null, string password = null)
         {
-            Driver.WaitElementFor(userNameInputSelector()).SendKeys(userName);
-            Driver.ElementFor("input[ng-model=\"user.email\"").SendKeys(email);
-            Driver.ElementFor("input[ng-model=\"user.password\"").SendKeys(password);
+            Driver.WaitFor(userNameInputSelector());
+            if(userName != null)
+            {
+                Driver.OverrideValueFor(userNameInputSelector(), userName);
+            }
+            if(email != null)
+            {
+                Driver.OverrideValueFor("input[ng-model=\"user.email\"", email, edit);
+            }
+            if(password != null)
+            {
+                Driver.OverrideValueFor("input[ng-model=\"user.password\"", password);
+            }
         }
 
         public void ModalClickOK()
@@ -57,7 +73,7 @@ namespace LucAdm.Tests
 
         private IList<IWebElement> getUserElements(int? expectedCount = null, double timeout = 5)
         {
-            return Driver.WaitListFor(".user-item", expectedCount, timeout).ToList();
+            return Driver.WaitForList(".user-item", expectedCount, timeout).ToList();
         }
     }
 }

@@ -62,19 +62,37 @@ namespace LucAdm.Tests
         public void UsersPage_Can_Add_User()
         {
             var newUserName = "BilboBaggins";
-            var newUserEmail = "bilbo@bilbo.com";
+            var newEmail = "bilbo@bilbo.com";
             var usersPage = preparePage();
 
             usersPage.ClickAddUser();
-            usersPage.FillNewUserForm(newUserName, newUserEmail, "somePassword");
+            usersPage.FillUserForm(false, newUserName, newEmail, "somePassword");
             usersPage.ModalClickOK();
             usersPage.SearchFor(newUserName);
             var users = usersPage.GetUsersList(expectedCount: 1);
 
             users.Should().HaveCount(1);
-            users.Should().Contain(item => item.Contains(newUserName) && item.Contains(newUserEmail));
+            users.Should().Contain(item => item.Contains(newUserName) && item.Contains(newEmail));
         }
 
+        [NamedFact]
+        [Trait("Category", "Acceptance")]
+        public void UsersPage_Can_Edit_User()
+        {
+            var userName = Users.Frodo.UserName;
+            var newEmail = "bilbo@bilbo.com";
+            var usersPage = preparePage();
+
+            usersPage.SearchFor(userName);
+            usersPage.ClickEditFor(userName);
+            usersPage.FillUserForm(edit: true, email: newEmail);
+            usersPage.ModalClickOK();
+            usersPage.SearchFor(userName);
+            var users = usersPage.GetUsersList(expectedCount: 1);
+
+            users.Should().HaveCount(1);
+            users.Should().Contain(item => item.Contains(userName) && item.Contains(newEmail));
+        }
 
         private UsersPage preparePage()
         {
