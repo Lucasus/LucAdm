@@ -1,9 +1,6 @@
 ﻿using FluentAssertions;
 using LucAdm.DataGen;
-using System.Linq;
-using OpenQA.Selenium;
 using Xunit;
-using System.ComponentModel;
 
 namespace LucAdm.Tests
 {

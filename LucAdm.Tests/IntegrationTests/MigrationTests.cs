@@ -1,5 +1,5 @@
-﻿using System.Data.Entity.Migrations;
-using LucAdm.DataGen;
+﻿using LucAdm.DataGen;
+using System.Data.Entity.Migrations;
 using Xunit;
 
 namespace LucAdm.Tests

@@ -1,6 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,14 +6,14 @@ namespace LucAdm.Tests
 {
     public class UsersPage : PageObject
     {
-        public override string Url { get { return "/"; } } 
+        public override string Url { get { return "/"; } }
 
         public string Header { get { return Driver.ListByCss("header").FirstOrDefault().Text; } }
 
         public IList<string> GetUsersList(int? expectedCount = null)
         {
-            return getUserElements(expectedCount).Select(x => x.Content()).ToList(); 
-        }     
+            return getUserElements(expectedCount).Select(x => x.Content()).ToList();
+        }
 
         public void ClickRemoveFor(string userName)
         {
@@ -43,5 +41,5 @@ namespace LucAdm.Tests
         {
             return Driver.WaitForListByCss(".user-item", expectedCount).ToList();
         }
-    } 
+    }
 }

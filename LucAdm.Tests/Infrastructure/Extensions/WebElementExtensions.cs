@@ -1,5 +1,4 @@
 using OpenQA.Selenium;
-using System;
 
 namespace LucAdm.Tests
 {
@@ -7,7 +6,7 @@ namespace LucAdm.Tests
     {
         public static string Content(this IWebElement element)
         {
-            if(element == null)
+            if (element == null)
             {
                 return null;
             }

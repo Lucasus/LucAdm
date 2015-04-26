@@ -1,10 +1,6 @@
 ﻿using FluentAssertions;
 using NSubstitute;
 using Xunit;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace LucAdm.Tests
 {
@@ -38,5 +34,4 @@ namespace LucAdm.Tests
             response.ValidationResult.Errors.Should().ContainKey(PropertyName.Get((CreateUserCommand x) => x.UserName));
         }
     }
-
 }

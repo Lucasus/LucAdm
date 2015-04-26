@@ -1,8 +1,5 @@
-﻿using System;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System.IO;
-using LucAdm.DataGen;
+﻿using OpenQA.Selenium.Chrome;
+using System;
 
 namespace LucAdm.Tests
 {

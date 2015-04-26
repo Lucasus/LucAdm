@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Diagnostics;
-using System.IO;
 
 namespace LucAdm.Tests
 {
@@ -24,7 +23,7 @@ namespace LucAdm.Tests
 
             var configuration = ConfigurationManager.AppSettings.Get("Configuration");
 
-            if(configuration == "Debug")
+            if (configuration == "Debug")
             {
                 new WebPublisher().Publish();
 
@@ -49,7 +48,6 @@ namespace LucAdm.Tests
                 };
                 _process.Start();
             }
-
 
             return this;
         }

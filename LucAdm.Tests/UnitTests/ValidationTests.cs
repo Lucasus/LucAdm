@@ -14,7 +14,7 @@ namespace LucAdm.Tests
         public void Mapping_IntAsString_Maps_To_CorrectValidatedInt(string initialValue, bool expectedValid, int expectedValue)
         {
             Mapper.CreateMap<ExampleViewModel, ExampleRequest>();
-            var source = new ExampleViewModel {IntProperty = initialValue};
+            var source = new ExampleViewModel { IntProperty = initialValue };
 
             var destination = Mapper.Map(source, new ExampleRequest());
 
@@ -27,7 +27,7 @@ namespace LucAdm.Tests
         public void Mapping_Null_ToValidatedNullableInt_Maps_To_ValidValidatedInt_WithNullValue()
         {
             Mapper.CreateMap<ExampleViewModel, ExampleRequest>();
-            var source = new ExampleViewModel {NullableIntProperty = null};
+            var source = new ExampleViewModel { NullableIntProperty = null };
 
             var destination = Mapper.Map(source, new ExampleRequest());
 
@@ -38,12 +38,14 @@ namespace LucAdm.Tests
         private class ExampleViewModel
         {
             public string IntProperty { get; set; }
+
             public string NullableIntProperty { get; set; }
         }
 
         private class ExampleRequest
         {
             public Validated<int> IntProperty { get; set; }
+
             public Validated<int?> NullableIntProperty { get; set; }
         }
     }

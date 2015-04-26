@@ -1,9 +1,8 @@
-﻿using System.Configuration;
-using OpenQA.Selenium;
-using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
 
 namespace LucAdm.Tests
 {
