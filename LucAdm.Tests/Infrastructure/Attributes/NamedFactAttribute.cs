@@ -7,7 +7,7 @@ namespace LucAdm.Tests
     {
         public NamedFactAttribute([CallerMemberName] string methodName = null)
         {
-            DisplayName = methodName.Replace("_", " ").AddSpacesToSentence(preserveAcronyms: true);
+            DisplayName = methodName.Replace('_', ' ').AddSpacesToSentence(preserveAcronyms: true, delimiter: ' ');
         }
     }
 }

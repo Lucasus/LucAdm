@@ -7,7 +7,7 @@ namespace LucAdm.Tests
     {
         public NamedTheoryAttribute([CallerMemberName] string methodName = null)
         {
-            DisplayName = methodName.Replace('_', '\u00A0').AddSpacesToSentence(preserveAcronyms: true, delimiter: '\u00A0');
+            DisplayName = methodName.Replace('_', ' ').AddSpacesToSentence(preserveAcronyms: true, delimiter: ' ');
         }
     }
 }
