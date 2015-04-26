@@ -18,7 +18,7 @@ namespace LucAdm.Tests
         public T Load<T>(T page)
             where T: PageObject
         {
-            page.WebDriver = _webDriver;
+            page.Driver = _webDriver;
             _webDriver.Navigate().GoToRelativeUrl(page.Url);
             return page;
         }

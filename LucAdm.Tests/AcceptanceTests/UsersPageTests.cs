@@ -20,6 +20,7 @@ namespace LucAdm.Tests
         public void UsersPage_ShouldDisplay_Header()
         {
             var usersPage = _browser.Load(new UsersPage());
+
             usersPage.Header.Should().Contain("Luc");
         }
 
@@ -28,7 +29,21 @@ namespace LucAdm.Tests
         public void UsersPage_ShouldDisplay_ListOfUsers()
         {
             var usersPage = _browser.Load(new UsersPage());
-            usersPage.UsersList.Should().Contain(item => item.Contains(Users.Admin.UserName) && item.Contains(Users.Admin.Email));
+
+            usersPage.UsersList.Should().Contain(item => item.Contains(Users.GandalfTheAdmin.UserName) && item.Contains(Users.GandalfTheAdmin.Email));
         }
+
+        [Fact]
+        [Trait("Category", "Acceptance")]
+        public void UsersPage_ShouldRemove_User()
+        {
+            var usersPage = _browser.Load(new UsersPage());
+
+            usersPage.ClickRemoveFor(Users.Frodo.UserName);
+            usersPage.AcceptRemove();
+
+            usersPage.UsersList.Should().NotContain(item => item.Contains(Users.Frodo.UserName));
+        }
+
     }
 }

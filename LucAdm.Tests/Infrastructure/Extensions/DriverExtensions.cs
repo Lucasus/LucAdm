@@ -9,18 +9,23 @@ namespace LucAdm.Tests
 {
     public static class DriverExtensions
     {
-        public static IReadOnlyCollection<IWebElement> WaitForCss(this IWebDriver driver, string cssSelector)
+        public static IReadOnlyCollection<IWebElement> WaitForListByCss(this IWebDriver driver, string cssSelector)
         {
             new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(x =>
             {
-                return driver.Css(cssSelector).Count > 0;
+                return driver.ListByCss(cssSelector).Count > 0;
             });
-            return driver.Css(cssSelector);
+            return driver.ListByCss(cssSelector);
         }
 
-        public static IReadOnlyCollection<IWebElement> Css(this IWebDriver driver, string cssSelector)
+        public static IReadOnlyCollection<IWebElement> ListByCss(this ISearchContext driver, string cssSelector)
         {
             return driver.FindElements(By.CssSelector(cssSelector));
+        }
+
+        public static IWebElement ElementByCss(this ISearchContext driver, string cssSelector)
+        {
+            return driver.FindElement(By.CssSelector(cssSelector));
         }
 
         public static void GoToRelativeUrl(this INavigation navigation, string relativeUrl)

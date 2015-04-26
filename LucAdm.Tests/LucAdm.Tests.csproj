@@ -121,6 +121,7 @@
     <Compile Include="Infrastructure\SeleniumFixture.cs" />
     <Compile Include="Infrastructure\Servers\SeleniumServer.cs" />
     <Compile Include="Infrastructure\Web\Browser.cs" />
+    <Compile Include="Infrastructure\Web\WebPublisher.cs" />
     <Compile Include="IntegrationTests\MigrationTests.cs" />
     <Compile Include="IntegrationTests\UserRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,25 +6,25 @@ namespace LucAdm.DataGen
     public class Users : Data<User>
     {
         [Environment(EnvironmentEnum.Dev, EnvironmentEnum.Test)] 
-        public static User Admin = new User
+        public static User GandalfTheAdmin = new User
         {
-            UserName = "admin",
+            UserName = "gandalf",
             HashedPassword = "adminPwd",
             Email = "admin@admin.com",
             Active = true
         };
 
         [Environment(EnvironmentEnum.Dev, EnvironmentEnum.Test)] 
-        public static User User1 = new User
+        public static User Legolas = new User
         {
-            UserName = "Gandalf",
-            HashedPassword = "gandalfPwd",
-            Email = "gandalf@gandalf.com",
+            UserName = "Legolas",
+            HashedPassword = "legolasPwd",
+            Email = "legolas@legolas.com",
             Active = true
         };
 
         [Environment(EnvironmentEnum.Dev, EnvironmentEnum.Test)] 
-        public static User User2 = new User
+        public static User Frodo = new User
         {
             UserName = "Frodo",
             HashedPassword = "frodo",
