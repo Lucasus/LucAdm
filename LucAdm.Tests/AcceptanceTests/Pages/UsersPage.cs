@@ -10,26 +10,21 @@ namespace LucAdm.Tests
 
         public string Header { get { return Driver.ListByCss("header").FirstOrDefault().Text; } }
 
-        public IList<string> GetUsersList(int? expectedCount = null)
+        public IList<string> GetUsersList(int? expectedCount = null, double timeout = 5)
         {
-            return getUserElements(expectedCount).Select(x => x.Content()).ToList();
+            return getUserElements(expectedCount, timeout).Select(x => x.Content()).ToList();
         }
 
         public void ClickRemoveFor(string userName)
         {
-            var userElements = getUserElements();
-            var userToDelete = userElements.First(x => x.Text.Contains(userName));
-            var btnRemove = userToDelete.ElementByCss(".cmdDelete");
-            btnRemove.Click();
+            var userToDelete = getUserElements().First(x => x.Text.Contains(userName));
+            userToDelete.ElementFor(".cmdDelete").Click();
         }
 
         public void SearchFor(string searchTerm)
         {
-            var searchBox = Driver.ElementByCss("input[ng-model=\"users.searchTerm\"");
-            searchBox.SendKeys(searchTerm);
-
-            var searchButton = Driver.ElementByCss("button[ng-click=\"search()\"");
-            searchButton.Click();
+            Driver.ElementFor("input[ng-model=\"users.searchTerm\"").SendKeys(searchTerm);
+            Driver.ElementFor("button[ng-click=\"search()\"").Click();
         }
 
         public void AcceptRemove()
@@ -37,9 +32,32 @@ namespace LucAdm.Tests
             Driver.SwitchTo().Alert().Accept();
         }
 
-        private IList<IWebElement> getUserElements(int? expectedCount = null)
+        public void ClickAddUser()
         {
-            return Driver.WaitForListByCss(".user-item", expectedCount).ToList();
+            Driver.ElementFor("button[ng-click=\"openModal('')\"").Click();
+        }
+
+        public void FillNewUserForm(string userName, string email, string password)
+        {
+            Driver.WaitElementFor(userNameInputSelector()).SendKeys(userName);
+            Driver.ElementFor("input[ng-model=\"user.email\"").SendKeys(email);
+            Driver.ElementFor("input[ng-model=\"user.password\"").SendKeys(password);
+        }
+
+        public void ModalClickOK()
+        {
+            Driver.ElementFor("button[ng-click=\"save(user)\"").Click();
+            Driver.WaitUntilHidden(userNameInputSelector());
+        }
+
+        private string userNameInputSelector()
+        {
+            return "input[ng-model=\"user.userName\"";
+        }
+
+        private IList<IWebElement> getUserElements(int? expectedCount = null, double timeout = 5)
+        {
+            return Driver.WaitListFor(".user-item", expectedCount, timeout).ToList();
         }
     }
 }

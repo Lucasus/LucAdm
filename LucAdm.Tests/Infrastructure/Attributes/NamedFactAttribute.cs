@@ -3,7 +3,7 @@ using Xunit;
 
 namespace LucAdm.Tests
 {
-    public class NamedFactAttribute : FactAttribute
+    public sealed class NamedFactAttribute : FactAttribute
     {
         public NamedFactAttribute([CallerMemberName] string methodName = null)
         {

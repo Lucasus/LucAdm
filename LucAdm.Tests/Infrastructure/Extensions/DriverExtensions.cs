@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Configuration;
 
@@ -8,9 +9,9 @@ namespace LucAdm.Tests
 {
     public static class DriverExtensions
     {
-        public static IReadOnlyCollection<IWebElement> WaitForListByCss(this IWebDriver driver, string cssSelector, int? expectedCount = null)
+        public static IReadOnlyCollection<IWebElement> WaitListFor(this IWebDriver driver, string cssSelector, int? expectedCount, double timeout)
         {
-            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(x =>
+            new WebDriverWait(driver, TimeSpan.FromSeconds(timeout)).Until(x =>
             {
                 return expectedCount == null && driver.ListByCss(cssSelector).Count > 0
                     || expectedCount != null && driver.ListByCss(cssSelector).Count == expectedCount;
@@ -18,12 +19,22 @@ namespace LucAdm.Tests
             return driver.ListByCss(cssSelector);
         }
 
+        public static IWebElement WaitElementFor(this IWebDriver driver, string cssSelector, double timeout = 1)
+        {
+            return WaitListFor(driver, cssSelector, 1, timeout).FirstOrDefault();
+        }
+
+        public static void WaitUntilHidden(this IWebDriver driver, string cssSelector, double timeout = 1)
+        {
+            WaitListFor(driver, cssSelector, 0, timeout);
+        }
+
         public static IReadOnlyCollection<IWebElement> ListByCss(this ISearchContext driver, string cssSelector)
         {
             return driver.FindElements(By.CssSelector(cssSelector));
         }
 
-        public static IWebElement ElementByCss(this ISearchContext driver, string cssSelector)
+        public static IWebElement ElementFor(this ISearchContext driver, string cssSelector)
         {
             return driver.FindElement(By.CssSelector(cssSelector));
         }

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace LucAdm.Tests
 {
-    public class NamedTheoryAttribute : TheoryAttribute
+    public sealed class NamedTheoryAttribute : TheoryAttribute
     {
         public NamedTheoryAttribute([CallerMemberName] string methodName = null)
         {
