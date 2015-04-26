@@ -11,7 +11,7 @@ namespace LucAdm.Tests
         }
 
         // Method based on this SO answer: http://stackoverflow.com/questions/272633/add-spaces-before-capital-letters
-        public static string AddSpacesToSentence(this string text, bool preserveAcronyms)
+        public static string AddSpacesToSentence(this string text, bool preserveAcronyms, char delimiter = ' ')
         {
             if (string.IsNullOrWhiteSpace(text))
                 return string.Empty;
@@ -20,10 +20,10 @@ namespace LucAdm.Tests
             for (int i = 1; i < text.Length; i++)
             {
                 if (char.IsUpper(text[i]))
-                    if ((text[i - 1] != ' ' && !char.IsUpper(text[i - 1])) ||
+                    if ((text[i - 1] != delimiter && !char.IsUpper(text[i - 1])) ||
                         (preserveAcronyms && char.IsUpper(text[i - 1]) &&
                          i < text.Length - 1 && !char.IsUpper(text[i + 1])))
-                        newText.Append(' ');
+                        newText.Append(delimiter);
                 newText.Append(text[i]);
             }
             return newText.ToString();
