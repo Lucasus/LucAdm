@@ -49,7 +49,14 @@ namespace LucAdm.Tests
 
         public void Stop()
         {
-            _process.Kill();
+            try
+            {
+                _process.Kill();
+            }
+            catch
+            {
+                // Process already killed - we do nothing
+            }
             _isStarted = false;
         }
     }

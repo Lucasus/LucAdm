@@ -35,7 +35,7 @@ namespace LucAdm.Tests
 
         [Fact]
         [Trait("Category", "Acceptance")]
-        public void UsersPage_ShouldRemove_User()
+        public void UsersPage_CanRemove_User()
         {
             var usersPage = _browser.Load(new UsersPage());
 
