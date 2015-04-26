@@ -51,6 +51,7 @@ namespace LucAdm.Tests
             var usersPage = preparePage();
 
             usersPage.SearchFor(Users.Frodo.UserName);
+            usersPage.GetUsersList(expectedCount: 1);
             usersPage.ClickRemoveFor(Users.Frodo.UserName);
             usersPage.AcceptRemove();
 
