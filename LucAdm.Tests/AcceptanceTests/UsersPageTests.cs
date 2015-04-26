@@ -46,7 +46,7 @@ namespace LucAdm.Tests
             usersPage.GetUsersList();
             usersPage.SearchFor(Users.Frodo.UserName);
 
-            var users = usersPage.GetUsersList(expectedCount: 1);
+            var users = usersPage.GetUsersList(expectedCount: 2);
             users.Should().HaveCount(1);
             users.Should().Contain(item => item.Contains(Users.Frodo.UserName) && item.Contains(Users.Frodo.Email));
         }
