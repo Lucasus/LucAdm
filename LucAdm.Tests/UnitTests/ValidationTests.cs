@@ -8,7 +8,7 @@ namespace LucAdm.Tests
     {
         [NamedTheory]
         [Trait("Category", "Unit")]
-        [InlineData("5", true, 5)]
+        [InlineData("5", true, 6)]
         [InlineData("notANumber", false, default(int))]
         [InlineData(null, false, default(int))]
         public void Mapping_IntAsString_Maps_To_CorrectValidatedInt(string initialValue, bool expectedValid, int expectedValue)
