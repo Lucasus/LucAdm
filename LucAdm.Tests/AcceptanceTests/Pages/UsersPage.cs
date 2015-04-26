@@ -12,12 +12,9 @@ namespace LucAdm.Tests
 
         public string Header { get { return Driver.ListByCss("header").FirstOrDefault().Text; } }
 
-        public IList<string> UsersList 
+        public IList<string> GetUsersList(bool shouldBeEmpty = false)
         { 
-            get 
-            {
-                return getUserElements().Select(x => x.Content()).ToList(); 
-            } 
+            return getUserElements(shouldBeEmpty).Select(x => x.Content()).ToList(); 
         }     
 
         public void ClickRemoveFor(string userName)
@@ -28,14 +25,23 @@ namespace LucAdm.Tests
             btnRemove.Click();
         }
 
+        public void SearchFor(string searchTerm)
+        {
+            var searchBox = Driver.ElementByCss("input[ng-model=\"users.searchTerm\"");
+            searchBox.SendKeys(searchTerm);
+
+            var searchButton = Driver.ElementByCss("button[ng-click=\"search()\"");
+            searchButton.Click();
+        }
+
         public void AcceptRemove()
         {
             Driver.SwitchTo().Alert().Accept();
         }
 
-        private IList<IWebElement> getUserElements()
+        private IList<IWebElement> getUserElements(bool shouldBeEmpty = false)
         {
-            return Driver.WaitForListByCss(".user-item").ToList();
+            return Driver.WaitForListByCss(".user-item", shouldBeEmpty).ToList();
         }
     } 
 }
