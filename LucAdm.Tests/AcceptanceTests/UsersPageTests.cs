@@ -84,6 +84,7 @@ namespace LucAdm.Tests
             var usersPage = preparePage();
 
             usersPage.SearchFor(userName);
+            usersPage.GetUsersList(expectedCount: 1);
             usersPage.ClickEditFor(userName);
             usersPage.FillUserForm(edit: true, email: newEmail);
             usersPage.ModalClickOK();
