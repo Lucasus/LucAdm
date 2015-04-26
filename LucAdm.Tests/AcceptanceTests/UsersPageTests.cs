@@ -43,9 +43,10 @@ namespace LucAdm.Tests
             new PersistenceContext().ResetDbState(EnvironmentEnum.Test);
             var usersPage = _browser.Load(new UsersPage());
 
+            usersPage.GetUsersList();
             usersPage.SearchFor(Users.Frodo.UserName);
 
-            var users = usersPage.GetUsersList();
+            var users = usersPage.GetUsersList(expectedCount: 1);
             users.Should().HaveCount(1);
             users.Should().Contain(item => item.Contains(Users.Frodo.UserName) && item.Contains(Users.Frodo.Email));
         }
@@ -61,7 +62,7 @@ namespace LucAdm.Tests
             usersPage.ClickRemoveFor(Users.Frodo.UserName);
             usersPage.AcceptRemove();
 
-            usersPage.GetUsersList(shouldBeEmpty: true).Should().BeEmpty();
+            usersPage.GetUsersList(expectedCount: 0).Should().BeEmpty();
         }
     }
 }

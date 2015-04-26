@@ -9,12 +9,12 @@ namespace LucAdm.Tests
 {
     public static class DriverExtensions
     {
-        public static IReadOnlyCollection<IWebElement> WaitForListByCss(this IWebDriver driver, string cssSelector, bool shouldBeEmpty = false)
+        public static IReadOnlyCollection<IWebElement> WaitForListByCss(this IWebDriver driver, string cssSelector, int? expectedCount = null)
         {
             new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(x =>
             {
-                return !shouldBeEmpty && driver.ListByCss(cssSelector).Count > 0 
-                    || shouldBeEmpty && driver.ListByCss(cssSelector).Count == 0;
+                return expectedCount == null && driver.ListByCss(cssSelector).Count > 0
+                    || expectedCount != null && driver.ListByCss(cssSelector).Count == expectedCount;
             });
             return driver.ListByCss(cssSelector);
         }

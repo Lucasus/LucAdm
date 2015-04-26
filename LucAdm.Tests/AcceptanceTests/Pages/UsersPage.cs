@@ -12,9 +12,9 @@ namespace LucAdm.Tests
 
         public string Header { get { return Driver.ListByCss("header").FirstOrDefault().Text; } }
 
-        public IList<string> GetUsersList(bool shouldBeEmpty = false)
-        { 
-            return getUserElements(shouldBeEmpty).Select(x => x.Content()).ToList(); 
+        public IList<string> GetUsersList(int? expectedCount = null)
+        {
+            return getUserElements(expectedCount).Select(x => x.Content()).ToList(); 
         }     
 
         public void ClickRemoveFor(string userName)
@@ -39,9 +39,9 @@ namespace LucAdm.Tests
             Driver.SwitchTo().Alert().Accept();
         }
 
-        private IList<IWebElement> getUserElements(bool shouldBeEmpty = false)
+        private IList<IWebElement> getUserElements(int? expectedCount = null)
         {
-            return Driver.WaitForListByCss(".user-item", shouldBeEmpty).ToList();
+            return Driver.WaitForListByCss(".user-item", expectedCount).ToList();
         }
     } 
 }
