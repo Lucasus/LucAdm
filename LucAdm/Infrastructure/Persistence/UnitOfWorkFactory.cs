@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 
 namespace LucAdm
 {
@@ -14,6 +15,16 @@ namespace LucAdm
         public UnitOfWork Create()
         {
             return new UnitOfWork(_context);
+        }
+
+        public void Do(Action<UnitOfWork> action)
+        {
+            Create().Do(action);
+        }
+
+        public T Do<T>(Func<UnitOfWork, T> action)
+        {
+            return Create().Do(action);
         }
     }
 }

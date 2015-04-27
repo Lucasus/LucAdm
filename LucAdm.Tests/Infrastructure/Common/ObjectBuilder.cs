@@ -1,6 +1,8 @@
-﻿namespace LucAdm.Tests
+﻿using System.Collections.Generic;
+namespace LucAdm.Tests
 {
     public abstract class ObjectBuilder<T>
+        where T : class
     {
         protected T Instance { get; set; }
 
@@ -12,6 +14,11 @@
         public T Build()
         {
             return Instance;
+        }
+
+        public IList<T> AsList()
+        {
+            return new List<T> { Build() };
         }
     }
 }

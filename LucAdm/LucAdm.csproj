@@ -69,7 +69,6 @@
     <Compile Include="Infrastructure\Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\OperationResponseExtensions.cs" />
     <Compile Include="Infrastructure\Persistence\UnitOfWorkFactory.cs" />
-    <Compile Include="Infrastructure\Persistence\UnitOfWorkFactoryExtensions.cs" />
     <Compile Include="Queries\GetUsersQuery.cs" />
     <Compile Include="Infrastructure\IValidatable.cs" />
     <Compile Include="Commands\UpdateUserCommand.cs" />
