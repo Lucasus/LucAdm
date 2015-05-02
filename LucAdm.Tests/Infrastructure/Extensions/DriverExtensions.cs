@@ -19,12 +19,12 @@ namespace LucAdm.Tests
             return driver.ListByCss(cssSelector);
         }
 
-        public static IWebElement WaitFor(this IWebDriver driver, string cssSelector, double timeout = 1)
+        public static IWebElement WaitFor(this IWebDriver driver, string cssSelector, double timeout = 2)
         {
             return WaitForList(driver, cssSelector, 1, timeout).FirstOrDefault();
         }
 
-        public static void WaitUntilHidden(this IWebDriver driver, string cssSelector, double timeout = 1)
+        public static void WaitUntilHidden(this IWebDriver driver, string cssSelector, double timeout = 2)
         {
             WaitForList(driver, cssSelector, 0, timeout);
         }

@@ -15,11 +15,6 @@ namespace LucAdm
             Context = context;
         }
 
-        public virtual IList<TEntity> GetAll()
-        {
-            return Context.Set<TEntity>().ToList();
-        }
-
         public virtual TEntity GetById(int id)
         {
             return Context.Set<TEntity>().Find(id);

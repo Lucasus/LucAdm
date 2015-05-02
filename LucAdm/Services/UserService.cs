@@ -2,19 +2,21 @@
 {
     public class UserService
     {
-        private readonly UserRepository _userRepository;
+        private readonly UserQueryService _userQueryService;
         private readonly UnitOfWorkFactory _unitOfWorkFactory;
+        private readonly UserRepository _userRepository;
 
-        public UserService(UserRepository userRepository, UnitOfWorkFactory unitOfWorkFactory)
+        public UserService(UserRepository userRepository, UserQueryService userQueryService, UnitOfWorkFactory unitOfWorkFactory)
         {
-            _userRepository = userRepository;
+            _userQueryService = userQueryService;
             _unitOfWorkFactory = unitOfWorkFactory;
+            _userRepository = userRepository;
         }
 
         public OperationResponse<int> CreateUser(CreateUserCommand command)
         {
             return command.Validate(new CreateUserCommandValidator())
-                .Check(new UserNameUnique(_userRepository) {UserName = command.UserName})
+                .Check(new UserNameUnique(_userQueryService) { UserName = command.UserName })
                 .IfValid(() => _unitOfWorkFactory.Do(work =>
                 {
                     var user = new User

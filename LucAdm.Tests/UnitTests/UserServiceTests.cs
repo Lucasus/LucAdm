@@ -4,13 +4,13 @@ using Xunit;
 
 namespace LucAdm.Tests
 {
-    public class UserServiceTests
+    public class UserServiceTests : IClassFixture<ServiceFixture>
     {
         [NamedFact]
         [Trait("Category", "Unit")]
         public void CreateUser_Without_UserName_Should_Return_Validation_Error()
         {
-            var response = new UserService(null, null).CreateUser(Some.CreateUserCommand().With(userName: ""));
+            var response = UserService().CreateUser(Some.CreateUserCommand().With(userName: ""));
             response.ValidationResult.Errors.Should().ContainKey(PropertyName.Get((CreateUserCommand x) => x.UserName));
         }
 
@@ -18,7 +18,7 @@ namespace LucAdm.Tests
         [Trait("Category", "Unit")]
         public void CreateUser_Without_Password_Should_Return_Validation_Error()
         {
-            var response = new UserService(null, null).CreateUser(Some.CreateUserCommand().With(password: ""));
+            var response = UserService().CreateUser(Some.CreateUserCommand().With(password: ""));
             response.ValidationResult.Errors.Should().ContainKey(PropertyName.Get((CreateUserCommand x) => x.Password));
         }
 
@@ -26,12 +26,17 @@ namespace LucAdm.Tests
         [Trait("Category", "Unit")]
         public void CreateUser_With_Duplicated_UserName_Should_Return_Validation_Error()
         {
-            var userService = new UserService(new UserRepository(Substitute.For<PersistenceContext>()
-                .Where(x => x.Users.Returns(Some.User().With(userName: "existingName").AsList()))), null);
+            var userService = UserService(Substitute.For<PersistenceContext>()
+                .Where(x => x.Users.Returns(Some.User().With(userName: "existingName").AsList())));
 
             var response = userService.CreateUser(Some.CreateUserCommand().With(userName: "existingName"));
 
             response.ValidationResult.Errors.Should().ContainKey(PropertyName.Get((CreateUserCommand x) => x.UserName));
+        }
+
+        private UserService UserService(PersistenceContext context = null)
+        {
+            return new UserService(new UserRepository(context), new UserQueryService(context), null);
         }
     }
 }

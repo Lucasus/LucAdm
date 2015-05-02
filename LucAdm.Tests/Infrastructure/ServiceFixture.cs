@@ -3,12 +3,10 @@ using System.Data.Entity.Migrations;
 
 namespace LucAdm.Tests
 {
-    public sealed class UsesDbFixture : IDisposable
+    public sealed class ServiceFixture : IDisposable
     {
-        public UsesDbFixture()
+        public ServiceFixture()
         {
-            new DbMigrator(new MigrationConfiguration()).Update();
-            new PersistenceContext().ResetDbState();
             AutoMapperConfig.Register();
         }
 

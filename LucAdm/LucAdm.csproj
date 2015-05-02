@@ -42,6 +42,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -70,6 +78,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\AutoMapperConfig.cs" />
+    <Compile Include="Infrastructure\Extensions\MappingExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\OperationResponseExtensions.cs" />
     <Compile Include="Infrastructure\Persistence\UnitOfWorkFactory.cs" />
@@ -106,11 +116,16 @@
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Infrastructure\Validation\Rule.cs" />
     <Compile Include="Rules\UserNameUnique.cs" />
+    <Compile Include="Services\UserQueryService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Infrastructure\Validation\ValidationExtensions.cs" />
     <Compile Include="Validators\IdValidator.cs" />
     <Compile Include="Validators\UpdateUserCommandValidator.cs" />
     <Compile Include="Validators\CreateUserCommandValidator.cs" />
+    <Compile Include="Dto\UserItemDto.cs" />
+    <Compile Include="Dto\UsersDto.cs" />
+    <Compile Include="Dto\UserDto.cs" />
+    <Compile Include="Dto\DtoMappingProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -137,6 +152,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

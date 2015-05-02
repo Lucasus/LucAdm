@@ -1,6 +1,6 @@
-﻿namespace LucAdm.Web
+﻿namespace LucAdm
 {
-    public class UserVm
+    public class UserItemDto
     {
         public int Id { get; set; }
         public string UserName { get; set; }

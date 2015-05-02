@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace LucAdm.Web
+namespace LucAdm
 {
     public static class AutoMapperConfig
     {
@@ -8,7 +8,7 @@ namespace LucAdm.Web
         {
             Mapper.Initialize(config =>
             {
-                config.AddProfile(new VmMappingProfile());
+                config.AddProfile(new DtoMappingProfile());
             });
         }
     }

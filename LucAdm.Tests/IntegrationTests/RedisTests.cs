@@ -6,7 +6,7 @@ namespace LucAdm.Tests
 {
     public class RedisTests
     {
-        [NamedFact]
+        [NamedFact(Skip="Experiments")]
         [Trait("Category", "Integration-Experimental")]
         public void Should_Correctly_Connect_To_Redis()
         {

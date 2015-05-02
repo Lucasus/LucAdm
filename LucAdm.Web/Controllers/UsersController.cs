@@ -7,27 +7,23 @@ namespace LucAdm.Web
 {
     public class UsersController : ApiController
     {
-        private readonly UserRepository _userRepository;
+        private readonly UserQueryService _userQueryService;
         private readonly UserService _userService;
 
-        public UsersController(UserRepository userRepository, UserService userService)
+        public UsersController(UserQueryService userQueryService, UserService userService)
         {
-            _userRepository = userRepository;
+            _userQueryService = userQueryService;
             _userService = userService;
         }
 
-        public UsersVm Get([FromUri] GetUsersQuery query)
+        public UsersDto Get([FromUri] GetUsersQuery query)
         {
-            return new UsersVm()
-            {
-                List = _userRepository.Get(query).Select(x => x.ToViewModel<UserItemVm>()).ToList(),
-                Total = _userRepository.Count(query.SearchTerm)
-            };
+            return _userQueryService.Get(query);
         }
 
-        public UserVm Get(int id)
+        public UserDto Get(int id)
         {
-            return _userRepository.GetById(id).ToViewModel<UserVm>();
+            return _userQueryService.GetById(id).ToDto<UserDto>();
         }
 
         public OperationResponse<int> Post(CreateUserCommand command)

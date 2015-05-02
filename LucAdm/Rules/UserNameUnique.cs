@@ -2,11 +2,11 @@ namespace LucAdm
 {
     public class UserNameUnique : Rule
     {
-        private readonly UserRepository _userRepository;
+        private readonly UserQueryService _userQueryService;
 
-        public UserNameUnique(UserRepository userRepository)
+        public UserNameUnique(UserQueryService userQueryService)
         {
-            _userRepository = userRepository;
+            _userQueryService = userQueryService;
             Name = PropertyName.Get((User x) => x.UserName);
             Message = "User name must be unique";
         }
@@ -15,7 +15,7 @@ namespace LucAdm
 
         public override bool Check()
         {
-            return _userRepository.GetByUserName(UserName) == null;
+            return _userQueryService.GetByUserName(UserName) == null;
         }
     }
 }
