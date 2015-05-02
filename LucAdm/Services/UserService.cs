@@ -4,9 +4,9 @@
     {
         private readonly UserQueryService _userQueryService;
         private readonly UnitOfWorkFactory _unitOfWorkFactory;
-        private readonly UserRepository _userRepository;
+        private readonly Repository<User> _userRepository;
 
-        public UserService(UserRepository userRepository, UserQueryService userQueryService, UnitOfWorkFactory unitOfWorkFactory)
+        public UserService(Repository<User> userRepository, UserQueryService userQueryService, UnitOfWorkFactory unitOfWorkFactory)
         {
             _userQueryService = userQueryService;
             _unitOfWorkFactory = unitOfWorkFactory;

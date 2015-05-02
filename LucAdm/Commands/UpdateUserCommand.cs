@@ -1,6 +1,6 @@
 ﻿namespace LucAdm
 {
-    public class UpdateUserCommand : IValidatable
+    public class UpdateUserCommand
     {
         public Validated<int> Id { get; set; }
         public string UserName { get; set; }

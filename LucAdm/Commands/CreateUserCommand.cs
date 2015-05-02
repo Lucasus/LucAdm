@@ -1,6 +1,6 @@
 ﻿namespace LucAdm
 {
-    public class CreateUserCommand : IValidatable
+    public class CreateUserCommand
     {
         public string UserName { get; set; }
         public string Email { get; set; }

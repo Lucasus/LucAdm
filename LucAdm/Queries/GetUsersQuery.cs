@@ -1,6 +1,6 @@
 ﻿namespace LucAdm
 {
-    public class GetUsersQuery : IValidatable
+    public class GetUsersQuery
     {
         public string SearchTerm { get; set; }
         public string SortColumn { get; set; }

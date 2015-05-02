@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace LucAdm
 {
@@ -20,24 +22,25 @@ namespace LucAdm
                 .ToDto<UserDto>();
         }
 
-        public UserDto GetByUserName(string userName)
+        public int CountByUserName(string userName)
         {
-            var user = _context.Users.FirstOrDefault(x => x.UserName == userName);
-            return user != null ? user.ToDto<UserDto>() : null;
+            return _context.Users.Count(x => x.UserName == userName);
         }
 
         public UsersDto Get(GetUsersQuery query)
         {
             var sortColumn = string.IsNullOrEmpty(query.SortColumn) ? PropertyName.Get((User x) => x.Id) : query.SortColumn.FirstLetterToUpper();
             var sortType = query.SortType == "desc" ? " descending" : "";
+
             var users = _context.Users.Where(SearchCriteria(query.SearchTerm))
                 .OrderBy(sortColumn + sortType)
                 .Skip((query.Page - 1) * query.PageSize).Take(query.PageSize)
+                .Project().To<UserItemDto>()
                 .ToList();
 
             return new UsersDto()
             {
-                List = users.Select(x => x.ToDto<UserItemDto>()).ToList(),
+                List = users,
                 Total = _context.Users.Count(SearchCriteria(query.SearchTerm))
             };
         }

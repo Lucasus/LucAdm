@@ -11,5 +11,10 @@
         {
             return new UserBuilder().Create();
         }
+
+        public static UserService UserService(PersistenceContext context = null)
+        {
+            return new UserService(new Repository<User>(context), new UserQueryService(context), null);
+        }
     }
 }

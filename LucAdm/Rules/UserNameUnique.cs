@@ -15,7 +15,7 @@ namespace LucAdm
 
         public override bool Check()
         {
-            return _userQueryService.GetByUserName(UserName) == null;
+            return _userQueryService.CountByUserName(UserName) == 0;
         }
     }
 }

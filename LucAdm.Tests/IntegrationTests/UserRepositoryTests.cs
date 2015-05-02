@@ -11,7 +11,7 @@ namespace LucAdm.Tests
         public void User_Should_Be_Saved_Correctly()
         {
             var context = new PersistenceContext().ResetDbState();
-            var userRepository = new UserRepository(context);
+            var userRepository = new Repository<User, PersistenceContext>(context);
             User newUser = Some.User();
 
             new UnitOfWork(context).Do(work => { userRepository.Add(newUser); });

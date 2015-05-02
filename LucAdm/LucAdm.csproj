@@ -84,7 +84,6 @@
     <Compile Include="Infrastructure\OperationResponseExtensions.cs" />
     <Compile Include="Infrastructure\Persistence\UnitOfWorkFactory.cs" />
     <Compile Include="Queries\GetUsersQuery.cs" />
-    <Compile Include="Infrastructure\IValidatable.cs" />
     <Compile Include="Commands\UpdateUserCommand.cs" />
     <Compile Include="Data\Migrations\201504041006586_UserNewPropertyActive.cs" />
     <Compile Include="Data\Migrations\201504041006586_UserNewPropertyActive.Designer.cs">
@@ -113,7 +112,6 @@
     <Compile Include="Infrastructure\Validation\ValidationResult.cs" />
     <Compile Include="Commands\CreateUserCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Infrastructure\Validation\Rule.cs" />
     <Compile Include="Rules\UserNameUnique.cs" />
     <Compile Include="Services\UserQueryService.cs" />
