@@ -4,7 +4,7 @@
     {
         public UserBuilder Create()
         {
-            Instance = new User
+            _instance = new User
             {
                 UserName = "userName",
                 Email = "email@email.com",
@@ -15,8 +15,8 @@
 
         public UserBuilder With(string userName = null, string email = null)
         {
-            Instance.UserName = userName ?? Instance.UserName;
-            Instance.Email = email ?? Instance.Email;
+            _instance.UserName = userName ?? _instance.UserName;
+            _instance.Email = email ?? _instance.Email;
             return this;
         }
     }

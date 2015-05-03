@@ -32,7 +32,7 @@ namespace LucAdm
 
         public virtual void Add(TEntity entity)
         {
-            _context.Set<TEntity>().Add(entity);
+            _context.Entry(entity).State = EntityState.Added;
         }
 
         public virtual void Update(TEntity entity)
@@ -42,7 +42,7 @@ namespace LucAdm
 
         public virtual void Delete(int id)
         {
-            var entity = new TEntity {Id = id};
+            var entity = new TEntity { Id = id };
             _context.Entry(entity).State = EntityState.Deleted;
         }
     }

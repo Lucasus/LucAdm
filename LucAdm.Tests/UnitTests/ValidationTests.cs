@@ -6,8 +6,7 @@ namespace LucAdm.Tests
 {
     public class ValidationTests
     {
-        [NamedTheory]
-        [Trait("Category", "Unit")]
+        [NamedTheory, Trait("Category", "Unit")]
         [InlineData("5", true, 5)]
         [InlineData("notANumber", false, default(int))]
         [InlineData(null, false, default(int))]
@@ -22,8 +21,7 @@ namespace LucAdm.Tests
             destination.IntProperty.Value.Should().Be(expectedValue);
         }
 
-        [NamedFact]
-        [Trait("Category", "Unit")]
+        [NamedFact, Trait("Category", "Unit")]
         public void Mapping_Null_ToValidatedNullableInt_Maps_To_ValidValidatedInt_WithNullValue()
         {
             Mapper.CreateMap<ExampleViewModel, ExampleRequest>();

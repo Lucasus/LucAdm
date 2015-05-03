@@ -13,8 +13,7 @@ namespace LucAdm.Tests
             _browser = seleniumFixture.Browser;
         }
 
-        [NamedFact]
-        [Trait("Category", "Acceptance")]
+        [NamedFact, Trait("Category", "Acceptance")]
         public void UsersPage_ShouldDisplay_Header()
         {
             var usersPage = preparePage();
@@ -22,8 +21,7 @@ namespace LucAdm.Tests
             usersPage.Header.Should().Contain("Luc");
         }
 
-        [NamedFact]
-        [Trait("Category", "Acceptance")]
+        [NamedFact, Trait("Category", "Acceptance")]
         public void UsersPage_ShouldDisplay_ListOfUsers()
         {
             var usersPage = preparePage();
@@ -31,8 +29,7 @@ namespace LucAdm.Tests
             usersPage.GetUsersList().Should().NotBeEmpty();
         }
 
-        [NamedFact]
-        [Trait("Category", "Acceptance")]
+        [NamedFact, Trait("Category", "Acceptance")]
         public void UsersPage_Can_Search_By_UserName()
         {
             var usersPage = preparePage();
@@ -44,8 +41,7 @@ namespace LucAdm.Tests
             users.Should().Contain(item => item.Contains(Users.Frodo.UserName) && item.Contains(Users.Frodo.Email));
         }
 
-        [NamedFact]
-        [Trait("Category", "Acceptance")]
+        [NamedFact, Trait("Category", "Acceptance")]
         public void UsersPage_Can_Remove_User()
         {
             var usersPage = preparePage();
@@ -58,8 +54,7 @@ namespace LucAdm.Tests
             usersPage.GetUsersList(expectedCount: 0).Should().BeEmpty();
         }
 
-        [NamedFact]
-        [Trait("Category", "Acceptance")]
+        [NamedFact, Trait("Category", "Acceptance")]
         public void UsersPage_Can_Add_User()
         {
             var newUserName = "BilboBaggins";
@@ -76,8 +71,7 @@ namespace LucAdm.Tests
             users.Should().Contain(item => item.Contains(newUserName) && item.Contains(newEmail));
         }
 
-        [NamedFact]
-        [Trait("Category", "Acceptance")]
+        [NamedFact, Trait("Category", "Acceptance")]
         public void UsersPage_Can_Edit_User()
         {
             var userName = Users.Frodo.UserName;

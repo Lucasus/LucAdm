@@ -8,8 +8,7 @@ namespace LucAdm.Tests
 {
     public class UserQueryTests : IClassFixture<UsesDbFixture>
     {
-        [NamedFact]
-        [Trait("Category", "Integration")]
+        [NamedTheory, Trait("Category", "Integration")]
         public void UserQuery_Get_Should_Return_Correct_Users()
         {
             var queryService = new UserQueryService(new PersistenceContext().ResetDbState());

@@ -17,7 +17,7 @@ namespace LucAdm
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PersistenceContext, MigrationConfiguration>());
         }
 
-        public virtual IDbSet<User> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

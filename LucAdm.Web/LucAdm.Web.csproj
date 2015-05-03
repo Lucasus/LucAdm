@@ -117,7 +117,6 @@
     <Compile Include="Infrastructure\RoutingConfig.cs" />
     <Compile Include="Infrastructure\Windsor\ComponentsInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\EntityFrameworkFacility.cs" />
-    <Compile Include="Infrastructure\Windsor\PersistenceInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\WinsorControllerActivator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

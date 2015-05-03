@@ -23,14 +23,13 @@ namespace LucAdm.Web
 
         public UserDto Get(int id)
         {
-            return _userQueryService.GetById(id).ToDto<UserDto>();
+            return _userQueryService.GetById(id);
         }
 
         public OperationResponse<int> Post(CreateUserCommand command)
         {
             return _userService.CreateUser(command);
         }
-
 
         public HttpResponseMessage Put(UpdateUserCommand command)
         {

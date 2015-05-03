@@ -9,6 +9,12 @@ namespace LucAdm.Web
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.AddFacility<EntityFrameworkFacility>();
+
+            container.Register(Classes.FromAssemblyContaining(typeof(Repository<,>))
+                .BasedOn(typeof(Repository<,>))
+                .LifestyleTransient());
+
             container.Register(Component.For<UnitOfWork>()
                 .LifestyleTransient());
 

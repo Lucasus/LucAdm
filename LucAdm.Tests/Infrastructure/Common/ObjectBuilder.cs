@@ -4,19 +4,19 @@ namespace LucAdm.Tests
     public abstract class ObjectBuilder<T>
         where T : class
     {
-        protected T Instance { get; set; }
+        protected T _instance { get; set; }
 
         public static implicit operator T(ObjectBuilder<T> builder)
         {
-            return builder.Instance;
+            return builder._instance;
         }
 
         public T Build()
         {
-            return Instance;
+            return _instance;
         }
 
-        public IList<T> AsList()
+        public IList<T> ToList()
         {
             return new List<T> { Build() };
         }

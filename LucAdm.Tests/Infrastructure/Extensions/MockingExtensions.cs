@@ -8,21 +8,19 @@ namespace LucAdm.Tests
 {
     public static class MockingExtensions
     {
-        public static T Where<T>(this T t, Action<T> action)
-        {
-            action(t);
-            return t;
-        }
-
-        public static IDbSet<T> Returns<T>(this IDbSet<T> dbSet, IList<T> data)
-            where T : class
+        public static DbSet<T> AsMock<T>(this IList<T> data)
+             where T : class
         {
             var queryableData = data.AsQueryable();
-            dbSet.Provider.Returns(queryableData.Provider);
-            dbSet.Expression.Returns(queryableData.Expression);
-            dbSet.ElementType.Returns(queryableData.ElementType);
-            dbSet.GetEnumerator().Returns(queryableData.GetEnumerator());
-            return dbSet;
+            var mockSet = Substitute.For<DbSet<T>, IQueryable<T>>();
+
+            ((IQueryable<T>)mockSet).Provider.Returns(queryableData.Provider);
+            ((IQueryable<T>)mockSet).Expression.Returns(queryableData.Expression);
+            ((IQueryable<T>)mockSet).ElementType.Returns(queryableData.ElementType);
+            ((IQueryable<T>)mockSet).GetEnumerator().Returns(queryableData.GetEnumerator());
+
+            return mockSet;
         }
+ 
     }
 }

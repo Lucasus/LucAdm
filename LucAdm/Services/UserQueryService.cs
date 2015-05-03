@@ -18,8 +18,7 @@ namespace LucAdm
 
         public UserDto GetById(Validated<int> id)
         {
-            return _context.Users.Find(id.Value)
-                .ToDto<UserDto>();
+            return _context.Users.Find(id.Value).ToDto<UserDto>();
         }
 
         public int CountByUserName(string userName)
@@ -29,12 +28,16 @@ namespace LucAdm
 
         public UsersDto Get(GetUsersQuery query)
         {
-            var sortColumn = string.IsNullOrEmpty(query.SortColumn) ? PropertyName.Get((User x) => x.Id) : query.SortColumn.FirstLetterToUpper();
+            var sortColumn = string.IsNullOrEmpty(query.SortColumn) 
+                ? PropertyName.Get((User x) => x.Id) 
+                : query.SortColumn.FirstLetterToUpper();
+
             var sortType = query.SortType == "desc" ? " descending" : "";
 
             var users = _context.Users.Where(SearchCriteria(query.SearchTerm))
                 .OrderBy(sortColumn + sortType)
-                .Skip((query.Page - 1) * query.PageSize).Take(query.PageSize)
+                .Skip((query.Page - 1) * query.PageSize)
+                .Take(query.PageSize)
                 .Project().To<UserItemDto>()
                 .ToList();
 

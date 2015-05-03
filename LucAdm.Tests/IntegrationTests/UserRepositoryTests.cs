@@ -6,8 +6,7 @@ namespace LucAdm.Tests
     public class UserRepositoryTests : IClassFixture<UsesDbFixture>
     {
         // https://github.com/scott-xu/EntityFramework.Testing
-        [NamedFact]
-        [Trait("Category", "Integration")]
+        [NamedTheory, Trait("Category", "Integration")]
         public void User_Should_Be_Saved_Correctly()
         {
             var context = new PersistenceContext().ResetDbState();

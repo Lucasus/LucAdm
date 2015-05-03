@@ -85,27 +85,27 @@
     <Compile Include="Infrastructure\Persistence\UnitOfWorkFactory.cs" />
     <Compile Include="Queries\GetUsersQuery.cs" />
     <Compile Include="Commands\UpdateUserCommand.cs" />
-    <Compile Include="Data\Migrations\201504041006586_UserNewPropertyActive.cs" />
-    <Compile Include="Data\Migrations\201504041006586_UserNewPropertyActive.Designer.cs">
+    <Compile Include="Persistence\Migrations\201504041006586_UserNewPropertyActive.cs" />
+    <Compile Include="Persistence\Migrations\201504041006586_UserNewPropertyActive.Designer.cs">
       <DependentUpon>201504041006586_UserNewPropertyActive.cs</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\OperationResponseGeneric.cs" />
     <Compile Include="Infrastructure\Persistence\FormattedDbEntityValidationException.cs" />
-    <Compile Include="Data\MigrationConfiguration.cs" />
-    <Compile Include="Data\Migrations\201503071318296_InitialCreate.cs" />
-    <Compile Include="Data\Migrations\201503071318296_InitialCreate.Designer.cs">
+    <Compile Include="Persistence\MigrationConfiguration.cs" />
+    <Compile Include="Persistence\Migrations\201503071318296_InitialCreate.cs" />
+    <Compile Include="Persistence\Migrations\201503071318296_InitialCreate.Designer.cs">
       <DependentUpon>201503071318296_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\Migrations\201503071338045_UserCustomMap.cs" />
-    <Compile Include="Data\Migrations\201503071338045_UserCustomMap.Designer.cs">
+    <Compile Include="Persistence\Migrations\201503071338045_UserCustomMap.cs" />
+    <Compile Include="Persistence\Migrations\201503071338045_UserCustomMap.Designer.cs">
       <DependentUpon>201503071338045_UserCustomMap.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\PersistenceContext.cs" />
+    <Compile Include="Persistence\PersistenceContext.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Infrastructure\Entity.cs" />
     <Compile Include="Infrastructure\Persistence\Repository.cs" />
     <Compile Include="Infrastructure\Persistence\UnitOfWork.cs" />
-    <Compile Include="Data\Mappings\UserMap.cs" />
+    <Compile Include="Persistence\Mappings\UserMap.cs" />
     <Compile Include="Infrastructure\OperationResponse.cs" />
     <Compile Include="Infrastructure\Reflection\PropertyName.cs" />
     <Compile Include="Infrastructure\Validation\Validated.cs" />
@@ -129,16 +129,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Migrations\Readme.txt" />
+    <Content Include="Persistence\Migrations\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Migrations\201503071318296_InitialCreate.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201503071318296_InitialCreate.resx">
       <DependentUpon>201503071318296_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\201503071338045_UserCustomMap.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201503071338045_UserCustomMap.resx">
       <DependentUpon>201503071338045_UserCustomMap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\201504041006586_UserNewPropertyActive.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201504041006586_UserNewPropertyActive.resx">
       <DependentUpon>201504041006586_UserNewPropertyActive.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
