@@ -7,6 +7,7 @@ namespace LucAdm.Tests
     public class UsersPageTests : IClassFixture<SeleniumFixture>
     {
         private readonly Browser _browser;
+        private static bool firstLoad = true;
 
         public UsersPageTests(SeleniumFixture seleniumFixture)
         {
@@ -94,7 +95,9 @@ namespace LucAdm.Tests
         {
             new PersistenceContext().ResetDbState(EnvironmentEnum.Test);
             var usersPage = _browser.Load(new UsersPage());
-            usersPage.GetUsersList(timeout: 10);
+            var timeout = firstLoad ? 15 : 5;
+            firstLoad = false;
+            usersPage.GetUsersList(timeout);
             return usersPage;
         }
     }
