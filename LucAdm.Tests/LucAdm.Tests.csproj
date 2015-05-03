@@ -140,6 +140,7 @@
     <Compile Include="Infrastructure\Extensions\MockingExtensions.cs" />
     <Compile Include="UnitTests\Builders\Some.cs" />
     <Compile Include="Infrastructure\Attributes\NamedFactAttribute.cs" />
+    <Compile Include="UnitTests\UpdateUserTests.cs" />
     <Compile Include="UnitTests\ValidationTests.cs" />
     <Compile Include="UnitTests\CreateUserTests.cs" />
   </ItemGroup>

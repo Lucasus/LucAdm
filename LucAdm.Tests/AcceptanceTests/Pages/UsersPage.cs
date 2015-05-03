@@ -57,6 +57,7 @@ namespace LucAdm.Tests
             if(password != null)
             {
                 Driver.OverrideValueFor("input[ng-model=\"user.password\"", password);
+                Driver.OverrideValueFor("input[ng-model=\"user.repeatedPassword\"", password);
             }
         }
 

@@ -50,6 +50,13 @@ namespace LucAdm.DataGen
             }
             Console.Write("Creating " + typeof (T).Name + "... ");
             _context.SaveChanges();
+
+            var addedEntitiesCount = _context.Set<T>().Count();
+            if(addedEntitiesCount != entities.Count)
+            {
+                throw new Exception(String.Format("{0}: not all entries added (expected count: {1}, actual count: {2}",
+                    typeof(T).Name, entities.Count, addedEntitiesCount));
+            }
             Console.WriteLine(" DONE");
         }
     }
