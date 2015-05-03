@@ -2,8 +2,8 @@
 {
     public class UserService
     {
-        private readonly UserQueryService _userQueryService;
         private readonly UnitOfWorkFactory _unitOfWorkFactory;
+        private readonly UserQueryService _userQueryService;
         private readonly Repository<User> _userRepository;
 
         public UserService(Repository<User> userRepository, UserQueryService userQueryService, UnitOfWorkFactory unitOfWorkFactory)
@@ -16,9 +16,9 @@
         public OperationResponse<int> CreateUser(CreateUserCommand command)
         {
             return command.Validate(new CreateUserCommandValidator())
-                .Check(new UserNameUnique(_userQueryService) { UserName = command.UserName })
-                .Check(new EmailUnique(_userQueryService) { Email = command.Email })
-                .IfValid(() => _unitOfWorkFactory.Do(work =>
+                .Check(new UserNameUnique(_userQueryService, command.UserName))
+                .Check(new EmailUnique(_userQueryService, command.Email))
+                .IfValid(() => 
             {
                 var user = new User
                 {
@@ -27,14 +27,20 @@
                     HashedPassword = new HashProvider().GetPasswordHash(command.Password),
                     UserName = command.UserName
                 };
-                _userRepository.Add(user);
-                return user.Id.AsOperationResponse();
-            }));
+
+                _unitOfWorkFactory.Do(work =>
+                {
+                    _userRepository.Add(user);
+                });
+
+                return user.Id.AsResponse();
+            });
         }
 
         public OperationResponse UpdateUser(UpdateUserCommand command)
         {
-            return command.Validate(new UpdateUserCommandValidator()).IfValid(() => _unitOfWorkFactory.Do(() =>
+            return command.Validate(new UpdateUserCommandValidator())
+                .IfValid(() => _unitOfWorkFactory.Do(() =>
             {
                 var user = _userRepository.GetById(command.Id);
                 user.Email = command.Email;
