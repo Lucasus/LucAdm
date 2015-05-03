@@ -1,5 +1,8 @@
 ﻿namespace LucAdm
 {
+    /// <summary>
+    /// Operation response with validation result
+    /// </summary>
     public class OperationResponse
     {
         public OperationResponse(ValidationResult validationResult = null)

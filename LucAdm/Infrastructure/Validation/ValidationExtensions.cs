@@ -5,6 +5,9 @@ namespace LucAdm
 {
     public static class ValidationExtensions
     {
+        /// <summary>
+        /// Validates command with validator and creates validation result with validation errors
+        /// </summary>
         public static ValidationResult Validate<TCommand>(this TCommand command, AbstractValidator<TCommand> validator)
         {
             var validationResult = new ValidationResult();
@@ -15,7 +18,10 @@ namespace LucAdm
             return validationResult;
         }
        
-        public static ValidationResult Check(this ValidationResult validationResult, params Rule[] rules)
+        /// <summary>
+        /// Adds rule validation errors to validation result, but only if validation result is still valid
+        /// </summary>
+        public static ValidationResult Check(this ValidationResult validationResult, params IRule[] rules)
         {
             if (validationResult.IsValid)
             {
@@ -23,18 +29,24 @@ namespace LucAdm
                 {
                     if (!rule.Check())
                     {
-                        validationResult.AddError(rule.Name, rule.Message);
+                        validationResult.AddError(rule.Name, rule.ErrorMessage);
                     }
                 }
             }
             return validationResult;
         }
 
+        /// <summary>
+        /// Executes operation if a validation result contains no errors and returns response with the validation result
+        /// </summary>
         public static OperationResponse IfValid(this ValidationResult validationResult, Action operation)
         {
             return IfValid(validationResult, result => operation());
         }
 
+        /// <summary>
+        /// Executes operation if a validation result contains no errors and returns response with the validation result
+        /// </summary>
         public static OperationResponse IfValid(this ValidationResult validationResult, Action<ValidationResult> operation)
         {
             if (validationResult.IsValid)
@@ -44,11 +56,17 @@ namespace LucAdm
             return new OperationResponse(validationResult);
         }
 
+        /// <summary>
+        /// Executes operation if a validation result contains no errors and returns response with the validation result
+        /// </summary>
         public static OperationResponse IfValid(this ValidationResult validationResult, Func<OperationResponse> operation)
         {
             return IfValid(validationResult, result => operation());
         }
 
+        /// <summary>
+        /// Executes operation if a validation result contains no errors and returns response with the validation result
+        /// </summary>
         public static OperationResponse IfValid(this ValidationResult validationResult, Func<ValidationResult, OperationResponse> operation)
         {
             if (validationResult.IsValid)
@@ -58,11 +76,17 @@ namespace LucAdm
             return new OperationResponse(validationResult);
         }
 
+        /// <summary>
+        /// Executes operation if a validation result contains no errors and returns response with the validation result
+        /// </summary>
         public static OperationResponse<TResult> IfValid<TResult>(this ValidationResult validationResult, Func<OperationResponse<TResult>> operation)
         {
             return IfValid(validationResult, result => operation());
         }
 
+        /// <summary>
+        /// Executes operation only if validation result contains no errors
+        /// </summary>
         public static OperationResponse<TResult> IfValid<TResult>(this ValidationResult validationResult, Func<ValidationResult, OperationResponse<TResult>> operation)
         {
             if (validationResult.IsValid)

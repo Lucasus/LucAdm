@@ -3,6 +3,9 @@ using System.ComponentModel;
 
 namespace LucAdm
 {
+    /// <summary>
+    /// Wraps generic type with an additional validation information
+    /// </summary>
     public class Validated<T>
     {
         public Validated(T val)
@@ -10,6 +13,9 @@ namespace LucAdm
             Value = val;
         }
 
+        /// <summary>
+        /// Created object will be valid if conversion of string <paramref name="rawValue"/> to generic type will succeed
+        /// </summary>
         public Validated(string rawValue)
         {
             var converter = TypeDescriptor.GetConverter(typeof(T));
@@ -27,6 +33,10 @@ namespace LucAdm
         }
 
         public T Value { get; private set; }
+
+        /// <summary>
+        /// Equals true, if provided value was valid when object was created
+        /// </summary>
         public bool IsValid { get; private set; }
 
         public static implicit operator Validated<T>(T val)

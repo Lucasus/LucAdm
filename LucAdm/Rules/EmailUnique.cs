@@ -1,19 +1,27 @@
 namespace LucAdm
 {
-    public class EmailUnique : Rule
+    public class EmailUnique : IRule
     {
         private readonly UserQueryService _userQueryService;
 
         public EmailUnique(UserQueryService userQueryService)
         {
             _userQueryService = userQueryService;
-            Name = PropertyName.Get((User x) => x.Email);
-            Message = "Email must be unique";
         }
 
         public string Email { private get; set; }
 
-        public override bool Check()
+        public string ErrorMessage
+        {
+            get { return "Email must be unique"; }
+        }
+
+        public string Name
+        {
+            get { return PropertyName.Get((User x) => x.Email); }
+        }
+
+        public bool Check()
         {
             return _userQueryService.CountByEmail(Email) == 0;
         }

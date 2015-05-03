@@ -2,6 +2,9 @@
 
 namespace LucAdm
 {
+    /// <summary>
+    /// Contains collection of validation/business rules errors
+    /// </summary>
     public class ValidationResult
     {
         public ValidationResult()

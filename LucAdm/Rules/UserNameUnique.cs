@@ -1,19 +1,27 @@
 namespace LucAdm
 {
-    public class UserNameUnique : Rule
+    public class UserNameUnique : IRule
     {
         private readonly UserQueryService _userQueryService;
 
         public UserNameUnique(UserQueryService userQueryService)
         {
             _userQueryService = userQueryService;
-            Name = PropertyName.Get((User x) => x.UserName);
-            Message = "User name must be unique";
         }
 
         public string UserName { private get; set; }
 
-        public override bool Check()
+        public string ErrorMessage
+        {
+            get { return "User name must be unique"; }
+        }
+
+        public string Name
+        {
+            get { return PropertyName.Get((User x) => x.UserName); }
+        }
+
+        public bool Check()
         {
             return _userQueryService.CountByUserName(UserName) == 0;
         }
