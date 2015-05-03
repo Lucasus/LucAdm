@@ -9,7 +9,7 @@ namespace LucAdm.DataGen
         public static User GandalfTheAdmin = new User
         {
             UserName = "gandalf",
-            HashedPassword = "adminPwd",
+            HashedPassword = new HashProvider().GetPasswordHash("adminPwd"),
             Email = "admin@admin.com",
             Active = true
         };
@@ -18,7 +18,7 @@ namespace LucAdm.DataGen
         public static User Legolas = new User
         {
             UserName = "Legolas",
-            HashedPassword = "legolasPwd",
+            HashedPassword = new HashProvider().GetPasswordHash("legolasPwd"),
             Email = "legolas@legolas.com",
             Active = true
         };
@@ -27,7 +27,7 @@ namespace LucAdm.DataGen
         public static User Frodo = new User
         {
             UserName = "Frodo",
-            HashedPassword = "frodo",
+            HashedPassword = new HashProvider().GetPasswordHash("frodo12"),
             Email = "frodo@lucadm.com",
             Active = true
         };
@@ -40,6 +40,7 @@ namespace LucAdm.DataGen
                 {
                     UserName = "User" + i,
                     Email = "email@email" + i,
+                    HashedPassword = new HashProvider().GetPasswordHash("password" + i),
                     Active = i%2 == 0
                 });
             }

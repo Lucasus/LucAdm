@@ -14,11 +14,12 @@
             return this;
         }
 
-        public CreateUserCommandBuilder With(string userName = null, string password = null, string rePassword = null)
+        public CreateUserCommandBuilder With(string userName = null, string password = null, string rePassword = null, string email = null)
         {
             _instance.UserName = userName ?? _instance.UserName;
             _instance.Password = password ?? _instance.Password;
             _instance.RepeatedPassword = rePassword ?? _instance.RepeatedPassword;
+            _instance.Email = email ?? _instance.Email;
             return this;
         }
     }

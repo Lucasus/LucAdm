@@ -17,13 +17,14 @@
         {
             return command.Validate(new CreateUserCommandValidator())
                 .Check(new UserNameUnique(_userQueryService) { UserName = command.UserName })
+                .Check(new EmailUnique(_userQueryService) { Email = command.Email })
                 .IfValid(() => _unitOfWorkFactory.Do(work =>
                 {
                     var user = new User
                     {
                         Active = false,
                         Email = command.Email,
-                        HashedPassword = command.Password,
+                        HashedPassword = new HashProvider().GetPasswordHash(command.Password),
                         UserName = command.UserName
                     };
                     _userRepository.Add(user);

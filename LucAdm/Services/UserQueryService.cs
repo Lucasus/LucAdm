@@ -26,6 +26,11 @@ namespace LucAdm
             return _context.Users.Count(x => x.UserName == userName);
         }
 
+        public int CountByEmail(string email)
+        {
+            return _context.Users.Count(x => x.Email == email);
+        }
+
         public UsersDto Get(GetUsersQuery query)
         {
             var sortColumn = string.IsNullOrEmpty(query.SortColumn) 
