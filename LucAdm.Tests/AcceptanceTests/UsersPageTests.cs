@@ -97,7 +97,7 @@ namespace LucAdm.Tests
             var usersPage = _browser.Load(new UsersPage());
             var timeout = firstLoad ? 15 : 5;
             firstLoad = false;
-            usersPage.GetUsersList(timeout);
+            usersPage.GetUsersList(timeout: timeout);
             return usersPage;
         }
     }
