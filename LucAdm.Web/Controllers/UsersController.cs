@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace LucAdm.Web
@@ -16,14 +17,14 @@ namespace LucAdm.Web
             _userService = userService;
         }
 
-        public UsersDto Get([FromUri] GetUsersQuery query)
+        public async Task<UsersDto> GetAsync([FromUri] GetUsersQuery query)
         {
-            return _userQueryService.Get(query);
+            return await _userQueryService.GetAsync(query);
         }
 
-        public UserDto Get(int id)
+        public async Task<UserDto> GetAsync(int id)
         {
-            return _userQueryService.GetById(id);
+            return await _userQueryService.GetByIdAsync(id);
         }
 
         public OperationResponse<int> Post(CreateUserCommand command)

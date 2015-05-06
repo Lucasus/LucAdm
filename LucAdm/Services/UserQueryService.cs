@@ -4,6 +4,8 @@ using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace LucAdm
 {
@@ -16,9 +18,10 @@ namespace LucAdm
             _context = context;
         }
 
-        public UserDto GetById(Validated<int> id)
+        public async Task<UserDto> GetByIdAsync(Validated<int> id)
         {
-            return _context.Users.Find(id.Value).ToDto<UserDto>();
+            var user = await _context.Users.FindAsync(id.Value);
+            return user.ToDto<UserDto>();
         }
 
         public int CountByUserName(string userName)
@@ -31,7 +34,7 @@ namespace LucAdm
             return _context.Users.Count(x => x.Email == email);
         }
 
-        public UsersDto Get(GetUsersQuery query)
+        public async Task<UsersDto> GetAsync(GetUsersQuery query)
         {
             var sortColumn = string.IsNullOrEmpty(query.SortColumn) 
                 ? PropertyName.Get((User x) => x.Id) 
@@ -39,12 +42,12 @@ namespace LucAdm
 
             var sortType = query.SortType == "desc" ? " descending" : "";
 
-            var users = _context.Users.Where(SearchCriteria(query.SearchTerm))
+            var users = await _context.Users.Where(SearchCriteria(query.SearchTerm))
                 .OrderBy(sortColumn + sortType)
                 .Skip((query.Page - 1) * query.PageSize)
                 .Take(query.PageSize)
                 .Project().To<UserItemDto>()
-                .ToList();
+                .ToListAsync();                
 
             return new UsersDto()
             {

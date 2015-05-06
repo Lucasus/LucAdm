@@ -2,6 +2,7 @@
 using LucAdm.DataGen;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace LucAdm.Tests
@@ -9,11 +10,11 @@ namespace LucAdm.Tests
     public class UserQueryTests : IClassFixture<UsesDbFixture>
     {
         [NamedFact, Trait("Category", "Integration")]
-        public void UserQuery_Get_Should_Return_Correct_Users()
+        public async Task UserQuery_Get_Should_Return_Correct_Users()
         {
             var queryService = new UserQueryService(new PersistenceContext().ResetDbState());
 
-            var users = queryService.Get(new GetUsersQuery()
+            var users = await queryService.GetAsync(new GetUsersQuery()
             {
                 Page = 1,
                 PageSize = 5,
