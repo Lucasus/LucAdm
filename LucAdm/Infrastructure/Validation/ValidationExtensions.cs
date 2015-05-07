@@ -52,7 +52,7 @@ namespace LucAdm
         {
             if (validationResult.IsValid)
             {
-                await operation(validationResult);
+                await operation(validationResult).ConfigureAwait(false);
             }
             return new OperationResponse(validationResult);
         }

@@ -85,6 +85,7 @@ namespace LucAdm.Tests
             usersPage.FillUserForm(edit: true, email: newEmail);
             usersPage.ModalClickOK();
             usersPage.SearchFor(userName);
+
             var users = usersPage.GetUsersList(expectedCount: 1);
 
             users.Should().HaveCount(1);

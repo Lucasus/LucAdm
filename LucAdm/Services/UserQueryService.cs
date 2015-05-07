@@ -52,7 +52,7 @@ namespace LucAdm
             return new UsersDto()
             {
                 List = users,
-                Total = _context.Users.Count(SearchCriteria(query.SearchTerm))
+                Total = await _context.Users.CountAsync(SearchCriteria(query.SearchTerm))
             };
         }
 

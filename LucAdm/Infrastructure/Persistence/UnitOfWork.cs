@@ -23,7 +23,7 @@ namespace LucAdm
                 action(this);
                 if (!Canceled)
                 {
-                    await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync().ConfigureAwait(false);
                 }
             }   
             catch (Exception)
@@ -40,7 +40,7 @@ namespace LucAdm
                 var result = action(this);
                 if (!Canceled)
                 {
-                    await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync().ConfigureAwait(false);
                 }
                 return result;
             }
