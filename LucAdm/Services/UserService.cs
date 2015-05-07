@@ -1,4 +1,5 @@
-﻿namespace LucAdm
+﻿using System.Threading.Tasks;
+namespace LucAdm
 {
     public class UserService
     {
@@ -13,12 +14,12 @@
             _userRepository = userRepository;
         }
 
-        public OperationResponse<int> CreateUser(CreateUserCommand command)
+        public async Task<OperationResponse<int>> CreateUserAsync(CreateUserCommand command)
         {
-            return command.Validate(new CreateUserCommandValidator())
+            return await command.Validate(new CreateUserCommandValidator())
                 .Check(new UserNameUnique(_userQueryService, command.UserName))
                 .Check(new EmailUnique(_userQueryService, command.Email))
-                .IfValid(() => 
+                .IfValid(function: async () => 
             {
                 var user = new User
                 {
@@ -28,7 +29,7 @@
                     UserName = command.UserName
                 };
 
-                _unitOfWorkFactory.Do(work =>
+                await _unitOfWorkFactory.Do(work =>
                 {
                     _userRepository.Add(user);
                 });
@@ -37,10 +38,10 @@
             });
         }
 
-        public OperationResponse UpdateUser(UpdateUserCommand command)
+        public async Task<OperationResponse> UpdateUserAsync(UpdateUserCommand command)
         {
-            return command.Validate(new UpdateUserCommandValidator())
-                .IfValid(() => _unitOfWorkFactory.Do(() =>
+            return await command.Validate(new UpdateUserCommandValidator())
+                .IfValid( () => _unitOfWorkFactory.Do(() =>
             {
                 var user = _userRepository.GetById(command.Id);
                 user.Email = command.Email;
@@ -49,9 +50,10 @@
             }));
         }
 
-        public OperationResponse DeleteUser(Validated<int> id)
+        public async Task<OperationResponse> DeleteUserAsync(Validated<int> id)
         {
-            return id.Validate(new IdValidator()).IfValid(() => _unitOfWorkFactory.Do(work =>
+            return await id.Validate(new IdValidator())
+                .IfValid(() => _unitOfWorkFactory.Do(() =>
             {
                 _userRepository.Delete(id);
             }));

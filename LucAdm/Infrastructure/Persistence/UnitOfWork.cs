@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace LucAdm
 {
@@ -15,23 +16,31 @@ namespace LucAdm
 
         public bool Canceled { get; private set; }
 
-        public void Do(Action<UnitOfWork> action)
+        public async Task Do(Action<UnitOfWork> action)
         {
-            Do<object>((work) =>
+            try
             {
-                action(work);
-                return null;
-            });
+                action(this);
+                if (!Canceled)
+                {
+                    await _context.SaveChangesAsync();
+                }
+            }   
+            catch (Exception)
+            {
+                Canceled = true;
+                throw;
+            }
         }
 
-        public T Do<T>(Func<UnitOfWork, T> action)
+        public async Task<T> Do<T>(Func<UnitOfWork, T> action)
         {
             try
             {
                 var result = action(this);
                 if (!Canceled)
                 {
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
                 return result;
             }

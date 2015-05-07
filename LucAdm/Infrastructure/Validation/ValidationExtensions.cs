@@ -1,5 +1,6 @@
 using System;
 using FluentValidation;
+using System.Threading.Tasks;
 
 namespace LucAdm
 {
@@ -39,7 +40,7 @@ namespace LucAdm
         /// <summary>
         /// Executes operation if a validation result contains no errors and returns response with this validation result
         /// </summary>
-        public static OperationResponse IfValid(this ValidationResult validationResult, Action operation)
+        public static Task<OperationResponse> IfValid(this ValidationResult validationResult, Func<Task> operation)
         {
             return IfValid(validationResult, result => operation());
         }
@@ -47,11 +48,11 @@ namespace LucAdm
         /// <summary>
         /// Executes operation if a validation result contains no errors and returns response with this validation result
         /// </summary>
-        public static OperationResponse IfValid(this ValidationResult validationResult, Action<ValidationResult> operation)
+        public async static Task<OperationResponse> IfValid(this ValidationResult validationResult, Func<ValidationResult, Task> operation)
         {
             if (validationResult.IsValid)
             {
-                operation(validationResult);
+                await operation(validationResult);
             }
             return new OperationResponse(validationResult);
         }
@@ -59,41 +60,42 @@ namespace LucAdm
         /// <summary>
         /// Executes operation if a validation result contains no errors and returns response with this validation result
         /// </summary>
-        public static OperationResponse IfValid(this ValidationResult validationResult, Func<OperationResponse> operation)
+        public static Task<OperationResponse> IfValid(this ValidationResult validationResult, Func<Task<OperationResponse>> function)
         {
-            return IfValid(validationResult, result => operation());
+            return IfValid(validationResult, result => function());
         }
 
         /// <summary>
         /// Executes operation if a validation result contains no errors and returns response with this validation result
         /// </summary>
-        public static OperationResponse IfValid(this ValidationResult validationResult, Func<ValidationResult, OperationResponse> operation)
+        public static Task<OperationResponse> IfValid(this ValidationResult validationResult, Func<ValidationResult, Task<OperationResponse>> function)
+        {
+            if (validationResult.IsValid)
+            {
+                return function(validationResult);
+            }
+            return Task.FromResult(new OperationResponse(validationResult));
+        }
+
+        /// <summary>
+        /// Executes operation if a validation result contains no errors and returns response with this validation result
+        /// </summary>
+        public static Task<OperationResponse<TResult>> IfValid<TResult>(this ValidationResult validationResult, Func<Task<OperationResponse<TResult>>> function)
+        {
+            return IfValid(validationResult, result => function());
+        }
+
+        /// <summary>
+        /// Executes operation if a validation result contains no errors and returns response with this validation result
+        /// </summary>
+        public static Task<OperationResponse<TResult>> IfValid<TResult>(this ValidationResult validationResult, Func<ValidationResult, 
+            Task<OperationResponse<TResult>>> operation)
         {
             if (validationResult.IsValid)
             {
                 return operation(validationResult);
             }
-            return new OperationResponse(validationResult);
-        }
-
-        /// <summary>
-        /// Executes operation if a validation result contains no errors and returns response with this validation result
-        /// </summary>
-        public static OperationResponse<TResult> IfValid<TResult>(this ValidationResult validationResult, Func<OperationResponse<TResult>> operation)
-        {
-            return IfValid(validationResult, result => operation());
-        }
-
-        /// <summary>
-        /// Executes operation if a validation result contains no errors and returns response with this validation result
-        /// </summary>
-        public static OperationResponse<TResult> IfValid<TResult>(this ValidationResult validationResult, Func<ValidationResult, OperationResponse<TResult>> operation)
-        {
-            if (validationResult.IsValid)
-            {
-                return operation(validationResult);
-            }
-            return new OperationResponse<TResult>(default(TResult), validationResult);
+            return Task.FromResult(new OperationResponse<TResult>(default(TResult), validationResult));
         }
 
     }

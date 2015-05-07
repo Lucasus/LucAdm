@@ -36,7 +36,7 @@ namespace LucAdm.DataGen
         {
             if (environment == EnvironmentEnum.Dev || environment == EnvironmentEnum.Test)
             {
-                return Enumerable.Range(1, 10).Select(i => new User
+                return Enumerable.Range(1, environment == EnvironmentEnum.Dev ? 100 : 10).Select(i => new User
                 {
                     UserName = "User" + i,
                     Email = "email@email" + i,

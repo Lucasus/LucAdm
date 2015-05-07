@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -17,30 +18,30 @@ namespace LucAdm.Web
             _userService = userService;
         }
 
-        public async Task<UsersDto> GetAsync([FromUri] GetUsersQuery query)
+        public Task<UsersDto> GetAsync([FromUri] GetUsersQuery query)
         {
-            return await _userQueryService.GetAsync(query);
+            return _userQueryService.GetAsync(query);
         }
 
-        public async Task<UserDto> GetAsync(int id)
+        public Task<UserDto> GetAsync(int id)
         {
-            return await _userQueryService.GetByIdAsync(id);
+            return _userQueryService.GetByIdAsync(id);
         }
 
-        public OperationResponse<int> Post(CreateUserCommand command)
+        public Task<OperationResponse<int>> PostAsync(CreateUserCommand command)
         {
-            return _userService.CreateUser(command);
+            return _userService.CreateUserAsync(command);
         }
 
-        public HttpResponseMessage Put(UpdateUserCommand command)
+        public async Task<HttpResponseMessage> PutAsync(UpdateUserCommand command)
         {
-            _userService.UpdateUser(command);
+            await _userService.UpdateUserAsync(command);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        public HttpResponseMessage Delete(Validated<int> id)
+        public async Task<HttpResponseMessage> DeleteAsync(Validated<int> id)
         {
-            _userService.DeleteUser(id);
+            await _userService.DeleteUserAsync(id);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
