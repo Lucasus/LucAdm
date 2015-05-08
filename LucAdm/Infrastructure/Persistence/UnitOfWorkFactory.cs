@@ -21,33 +21,33 @@ namespace LucAdm
         /// <summary>
         /// Executes action as a unit of work
         /// </summary>
-        public Task Do<T>(Func<T> action)
+        public Task DoAsync<T>(Func<T> action)
         {
-            return Do(work => action());
+            return DoAsync(work => action());
         }
 
         /// <summary>
         /// Executes action as a unit of work
         /// </summary>
-        public Task Do(Action action)
+        public Task DoAsync(Action action)
         {
-            return Do(work => action());
+            return DoAsync(work => action());
         }
 
         /// <summary>
         /// Executes action as a unit of work
         /// </summary>
-        public Task Do(Action<UnitOfWork> action)
+        public Task DoAsync(Action<UnitOfWork> action)
         {
-            return Create().Do(action);
+            return Create().DoAsync(action);
         }
 
         /// <summary>
         /// Executes action as a unit of work
         /// </summary>
-        public Task<T> Do<T>(Func<UnitOfWork, T> action)
+        public Task<T> DoAsync<T>(Func<UnitOfWork, T> action)
         {
-            return Create().Do(action);
+            return Create().DoAsync(action);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 namespace LucAdm
 {
     public class UserNameUnique : IRule
@@ -15,9 +16,9 @@ namespace LucAdm
 
         public string Name { get { return PropertyName.Get((User x) => x.UserName); } }
 
-        public bool Check()
+        public async Task<bool> CheckAsync()
         {
-            return _userQueryService.CountByUserName(_userName) == 0;
+            return await _userQueryService.CountByUserNameAsync(_userName) == 0;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 namespace LucAdm
 {
     public class EmailUnique : IRule
@@ -15,9 +16,9 @@ namespace LucAdm
 
         public string Name { get { return PropertyName.Get((User x) => x.Email); } }
 
-        public bool Check()
+        public async Task<bool> CheckAsync()
         {
-            return _userQueryService.CountByEmail(_email) == 0;
+            return await _userQueryService.CountByEmailAsync(_email) == 0;
         }
     }
 }

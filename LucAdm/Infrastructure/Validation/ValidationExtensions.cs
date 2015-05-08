@@ -9,26 +9,27 @@ namespace LucAdm
         /// <summary>
         /// Validates command with validator and creates validation result with validation errors
         /// </summary>
-        public static ValidationResult Validate<TCommand>(this TCommand command, AbstractValidator<TCommand> validator)
+        public static Task<ValidationResult> Validate<TCommand>(this TCommand command, AbstractValidator<TCommand> validator)
         {
             var validationResult = new ValidationResult();
             foreach (var error in validator.Validate(command).Errors)
             {
                 validationResult.AddError(error.PropertyName, error.ErrorMessage);
             }
-            return validationResult;
+            return Task.FromResult(validationResult);
         }
        
         /// <summary>
         /// Checks rule but only if validation result is still valid, and adds rule validation errors to it
         /// </summary>
-        public static ValidationResult Check(this ValidationResult validationResult, params IRule[] rules)
+        public static async Task<ValidationResult> CheckAsync(this Task<ValidationResult> validationTask, params IRule[] rules)
         {
+            var validationResult = await validationTask.ConfigureAwait(false);
             if (validationResult.IsValid)
             {
                 foreach (var rule in rules)
                 {
-                    if (!rule.Check())
+                    if (!(await rule.CheckAsync().ConfigureAwait(false)))
                     {
                         validationResult.AddError(rule.Name, rule.ErrorMessage);
                     }
@@ -40,16 +41,17 @@ namespace LucAdm
         /// <summary>
         /// Executes operation if a validation result contains no errors and returns response with this validation result
         /// </summary>
-        public static Task<OperationResponse> IfValid(this ValidationResult validationResult, Func<Task> operation)
+        public static Task<OperationResponse> IfValidAsync(this Task<ValidationResult> validationTask, Func<Task> operation)
         {
-            return IfValid(validationResult, result => operation());
+            return IfValidAsync(validationTask, result => operation());
         }
 
         /// <summary>
         /// Executes operation if a validation result contains no errors and returns response with this validation result
         /// </summary>
-        public async static Task<OperationResponse> IfValid(this ValidationResult validationResult, Func<ValidationResult, Task> operation)
+        public async static Task<OperationResponse> IfValidAsync(this Task<ValidationResult> validationTask, Func<ValidationResult, Task> operation)
         {
+            var validationResult = await validationTask.ConfigureAwait(false);
             if (validationResult.IsValid)
             {
                 await operation(validationResult).ConfigureAwait(false);
@@ -60,42 +62,45 @@ namespace LucAdm
         /// <summary>
         /// Executes operation if a validation result contains no errors and returns response with this validation result
         /// </summary>
-        public static Task<OperationResponse> IfValid(this ValidationResult validationResult, Func<Task<OperationResponse>> function)
+        public static Task<OperationResponse> IfValidAsync(this Task<ValidationResult> validationTask, Func<Task<OperationResponse>> function)
         {
-            return IfValid(validationResult, result => function());
+            return IfValidAsync(validationTask, result => function());
         }
 
         /// <summary>
         /// Executes operation if a validation result contains no errors and returns response with this validation result
         /// </summary>
-        public static Task<OperationResponse> IfValid(this ValidationResult validationResult, Func<ValidationResult, Task<OperationResponse>> function)
+        public async static Task<OperationResponse> IfValidAsync(this Task<ValidationResult> validationTask, Func<ValidationResult, Task<OperationResponse>> function)
         {
+            var validationResult = await validationTask.ConfigureAwait(false);
             if (validationResult.IsValid)
             {
-                return function(validationResult);
+                return await function(validationResult).ConfigureAwait(false);
             }
-            return Task.FromResult(new OperationResponse(validationResult));
+            return new OperationResponse(validationResult);
         }
 
         /// <summary>
         /// Executes operation if a validation result contains no errors and returns response with this validation result
         /// </summary>
-        public static Task<OperationResponse<TResult>> IfValid<TResult>(this ValidationResult validationResult, Func<Task<OperationResponse<TResult>>> function)
+        public static Task<OperationResponse<TResult>> IfValidAsync<TResult>(this Task<ValidationResult> validationTask, 
+            Func<Task<OperationResponse<TResult>>> function)
         {
-            return IfValid(validationResult, result => function());
+            return IfValidAsync(validationTask, result => function());
         }
 
         /// <summary>
         /// Executes operation if a validation result contains no errors and returns response with this validation result
         /// </summary>
-        public static Task<OperationResponse<TResult>> IfValid<TResult>(this ValidationResult validationResult, Func<ValidationResult, 
+        public static async Task<OperationResponse<TResult>> IfValidAsync<TResult>(this Task<ValidationResult> validationTask, Func<ValidationResult, 
             Task<OperationResponse<TResult>>> operation)
         {
+            var validationResult = await validationTask.ConfigureAwait(false);
             if (validationResult.IsValid)
             {
-                return operation(validationResult);
+                return await operation(validationResult).ConfigureAwait(false);
             }
-            return Task.FromResult(new OperationResponse<TResult>(default(TResult), validationResult));
+            return new OperationResponse<TResult>(default(TResult), validationResult);
         }
 
     }

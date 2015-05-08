@@ -16,7 +16,7 @@ namespace LucAdm
 
         public bool Canceled { get; private set; }
 
-        public async Task Do(Action<UnitOfWork> action)
+        public async Task DoAsync(Action<UnitOfWork> action)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace LucAdm
             }
         }
 
-        public async Task<T> Do<T>(Func<UnitOfWork, T> action)
+        public async Task<T> DoAsync<T>(Func<UnitOfWork, T> action)
         {
             try
             {

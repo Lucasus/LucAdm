@@ -19,9 +19,9 @@ namespace LucAdm
         public Task<OperationResponse<int>> CreateUserAsync(CreateUserCommand command)
         {
             return  command.Validate(new CreateUserCommandValidator())
-                .Check(new UserNameUnique(_userQueryService, command.UserName))
-                .Check(new EmailUnique(_userQueryService, command.Email))
-                .IfValid(function: async () => 
+                .CheckAsync(new UserNameUnique(_userQueryService, command.UserName))
+                .CheckAsync(new EmailUnique(_userQueryService, command.Email))
+                .IfValidAsync(function: async () => 
             {
                 var user = new User
                 {
@@ -31,7 +31,7 @@ namespace LucAdm
                     UserName = command.UserName
                 };
 
-                await _unitOfWorkFactory.Do(work =>
+                await _unitOfWorkFactory.DoAsync(work =>
                 {
                     _userRepository.Add(user);
                 });
@@ -43,7 +43,7 @@ namespace LucAdm
         public Task<OperationResponse> UpdateUserAsync(UpdateUserCommand command)
         {
             return command.Validate(new UpdateUserCommandValidator())
-                .IfValid( () => _unitOfWorkFactory.Do(() =>
+                .IfValidAsync( () => _unitOfWorkFactory.DoAsync(() =>
             {
                 var user = _userRepository.GetById(command.Id);
                 user.Email = command.Email;
@@ -55,7 +55,7 @@ namespace LucAdm
         public Task<OperationResponse> DeleteUserAsync(Validated<int> id)
         {
             return id.Validate(new IdValidator())
-                .IfValid(() => _unitOfWorkFactory.Do(() =>
+                .IfValidAsync(() => _unitOfWorkFactory.DoAsync(() =>
             {
                 _userRepository.Delete(id);
             }));

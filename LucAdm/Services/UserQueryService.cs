@@ -24,14 +24,14 @@ namespace LucAdm
             return user.ToDto<UserDto>();
         }
 
-        public int CountByUserName(string userName)
+        public Task<int> CountByUserNameAsync(string userName)
         {
-            return _context.Users.Count(x => x.UserName == userName);
+            return _context.Users.CountAsync(x => x.UserName == userName);
         }
 
-        public int CountByEmail(string email)
+        public Task<int> CountByEmailAsync(string email)
         {
-            return _context.Users.Count(x => x.Email == email);
+            return _context.Users.CountAsync(x => x.Email == email);
         }
 
         public async Task<UsersDto> GetAsync(GetUsersQuery query)
