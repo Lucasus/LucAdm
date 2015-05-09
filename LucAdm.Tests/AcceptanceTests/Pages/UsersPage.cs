@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace LucAdm.Tests
 {
@@ -31,6 +32,7 @@ namespace LucAdm.Tests
         {
             Driver.OverrideValueFor("input[ng-model=\"users.searchTerm\"", searchTerm);
             Driver.ElementFor("button[ng-click=\"search()\"").Click();
+            Thread.Sleep(500);
         }
 
         public void AcceptRemove()
