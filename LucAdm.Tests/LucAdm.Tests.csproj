@@ -115,6 +115,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Infrastructure\Attributes\NamedTheoryAttribute.cs" />
+    <Compile Include="Infrastructure\Mocks\AsyncEnumeratorWrapper.cs" />
+    <Compile Include="Infrastructure\Mocks\AsyncEnumerableQuery.cs" />
+    <Compile Include="Infrastructure\Mocks\AsyncQueryProviderWrapper.cs" />
+    <Compile Include="Infrastructure\Mocks\FakeDbSet.cs" />
     <Compile Include="Infrastructure\Extensions\WebElementExtensions.cs" />
     <Compile Include="Infrastructure\ServiceFixture.cs" />
     <Compile Include="Infrastructure\Web\PageObject.cs" />

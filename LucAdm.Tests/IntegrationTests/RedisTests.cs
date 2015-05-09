@@ -1,12 +1,12 @@
-﻿using StackExchange.Redis;
+﻿using FluentAssertions;
+using StackExchange.Redis;
 using Xunit;
-using FluentAssertions;
 
 namespace LucAdm.Tests
 {
     public class RedisTests
     {
-        [NamedFact(Skip="Experiments")]
+        [NamedFact(Skip = "Experiments")]
         [Trait("Category", "Integration-Experimental")]
         public void Should_Correctly_Connect_To_Redis()
         {
@@ -14,5 +14,5 @@ namespace LucAdm.Tests
 
             redis.IsConnected.Should().BeTrue();
         }
-}
     }
+}

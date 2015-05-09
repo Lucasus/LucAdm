@@ -1,5 +1,6 @@
 ﻿using NSubstitute;
 using System.Collections.Generic;
+
 namespace LucAdm.Tests
 {
     public class PersistenceContextBuilder : ObjectBuilder<PersistenceContext>

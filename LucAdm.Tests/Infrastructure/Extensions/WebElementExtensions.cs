@@ -1,7 +1,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Linq;
 
 namespace LucAdm.Tests
 {
@@ -18,7 +17,7 @@ namespace LucAdm.Tests
 
         public static void OverrideValueFor(this IWebDriver driver, string cssSelector, string value, bool waitForExisting = false)
         {
-            if(waitForExisting)
+            if (waitForExisting)
             {
                 driver.WaitForValue(cssSelector);
             }
@@ -34,7 +33,6 @@ namespace LucAdm.Tests
             {
                 return !String.IsNullOrEmpty(element.GetAttribute("value"));
             });
-
         }
     }
 }

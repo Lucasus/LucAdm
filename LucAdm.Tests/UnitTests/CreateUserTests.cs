@@ -80,6 +80,5 @@ namespace LucAdm.Tests
 
             response.ValidationResult.Errors.Should().ContainKey(PropertyName.Get((CreateUserCommand x) => x.Email));
         }
-
     }
 }

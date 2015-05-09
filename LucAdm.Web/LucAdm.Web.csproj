@@ -115,9 +115,9 @@
     <Compile Include="Infrastructure\Converters\ValidatedPrimitiveConverter.cs" />
     <Compile Include="Infrastructure\CompositionRootConfig.cs" />
     <Compile Include="Infrastructure\RoutingConfig.cs" />
-    <Compile Include="Infrastructure\Windsor\ComponentsInstaller.cs" />
-    <Compile Include="Infrastructure\Windsor\EntityFrameworkFacility.cs" />
-    <Compile Include="Infrastructure\Windsor\WinsorControllerActivator.cs" />
+    <Compile Include="Infrastructure\DI\ComponentsInstaller.cs" />
+    <Compile Include="Infrastructure\DI\EntityFrameworkFacility.cs" />
+    <Compile Include="Infrastructure\DI\WinsorControllerActivator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

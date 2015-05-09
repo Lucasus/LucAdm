@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 namespace LucAdm.Tests
 {
     public abstract class ObjectBuilder<T>

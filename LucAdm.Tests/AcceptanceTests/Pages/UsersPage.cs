@@ -46,15 +46,15 @@ namespace LucAdm.Tests
         public void FillUserForm(bool edit, string userName = null, string email = null, string password = null)
         {
             Driver.WaitFor(userNameInputSelector());
-            if(userName != null)
+            if (userName != null)
             {
                 Driver.OverrideValueFor(userNameInputSelector(), userName);
             }
-            if(email != null)
+            if (email != null)
             {
                 Driver.OverrideValueFor("input[ng-model=\"user.email\"", email, edit);
             }
-            if(password != null)
+            if (password != null)
             {
                 Driver.OverrideValueFor("input[ng-model=\"user.password\"", password);
                 Driver.OverrideValueFor("input[ng-model=\"user.repeatedPassword\"", password);
