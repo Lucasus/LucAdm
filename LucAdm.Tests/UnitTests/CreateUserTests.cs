@@ -19,6 +19,7 @@ namespace LucAdm.Tests
 
             response.ValidationResult.Errors.Should().BeEmpty();
             userRepository.Received(1).Add(Arg.Is<User>(x => !string.IsNullOrEmpty(x.HashedPassword) && x.HashedPassword != command.Password));
+            true.Should().BeFalse();
         }
 
         [NamedFact, Trait("Category", "Unit")]
