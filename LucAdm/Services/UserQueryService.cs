@@ -24,14 +24,14 @@ namespace LucAdm
             return user.ToDto<UserDto>();
         }
 
-        public Task<int> CountByUserNameAsync(string userName)
+        public Task<bool> ExistsByUserNameAsync(string userName)
         {
-            return _context.Users.CountAsync(x => x.UserName == userName);
+            return _context.Users.AnyAsync(x => x.UserName == userName);
         }
 
-        public Task<int> CountByEmailAsync(string email)
+        public Task<bool> ExistsByEmailAsync(string email)
         {
-            return _context.Users.CountAsync(x => x.Email == email);
+            return _context.Users.AnyAsync(x => x.Email == email);
         }
 
         public async Task<UsersDto> GetAsync(GetUsersQuery query)
@@ -58,7 +58,9 @@ namespace LucAdm
 
         private Expression<Func<User, bool>> SearchCriteria(string searchTerm)
         {
-            return x => x.UserName.Contains(searchTerm) || string.IsNullOrEmpty(searchTerm);
+            return x => x.UserName.Contains(searchTerm) 
+                || x.Email.Contains(searchTerm)
+                || string.IsNullOrEmpty(searchTerm);
         }
     }
 }

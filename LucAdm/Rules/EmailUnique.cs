@@ -18,7 +18,7 @@ namespace LucAdm
 
         public async Task<bool> CheckAsync()
         {
-            return await _userQueryService.CountByEmailAsync(_email) == 0;
+            return (await _userQueryService.ExistsByEmailAsync(_email)) == false;
         }
     }
 }
